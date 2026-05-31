@@ -21,7 +21,7 @@ export default function Home() {
                 <img
                   src="/logo-gaia.png"
                   alt="GAIA Logo"
-                  className="h-16 w-16 rounded-full object-contain shadow-lg bg-white p-1"
+                  className="h-16 w-16 rounded-full bg-white object-contain p-1 shadow-lg"
                 />
                 <div className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white/50 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-cerrado-profundo">
                   <IconShieldCheck size={16} />

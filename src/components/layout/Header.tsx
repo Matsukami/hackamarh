@@ -11,7 +11,7 @@ export function Header() {
   const getLinkClass = (path: string) => {
     const cleanPath = path === '/avaliador/entrar' ? '/avaliador' : path;
     const isActive = pathname === path || (cleanPath !== '/' && pathname?.startsWith(cleanPath));
-    
+
     return `rounded px-2 py-1 transition-colors focus:outline-none ${
       isActive
         ? 'text-buriti-vivo font-bold'
@@ -41,34 +41,19 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-6 font-dm-sans text-sm font-medium lg:flex">
-          <Link
-            href="/editais"
-            className={getLinkClass('/editais')}
-          >
+          <Link href="/editais" className={getLinkClass('/editais')}>
             Mural de Editais
           </Link>
-          <Link
-            href="/painel"
-            className={getLinkClass('/painel')}
-          >
+          <Link href="/painel" className={getLinkClass('/painel')}>
             Painel do Proponente
           </Link>
-          <Link
-            href="/descomplicador"
-            className={getLinkClass('/descomplicador')}
-          >
+          <Link href="/descomplicador" className={getLinkClass('/descomplicador')}>
             Descomplicador
           </Link>
-          <Link
-            href="/avaliador/entrar"
-            className={getLinkClass('/avaliador/entrar')}
-          >
+          <Link href="/avaliador/entrar" className={getLinkClass('/avaliador/entrar')}>
             Portal do Avaliador
           </Link>
-          <Link
-            href="/transparencia"
-            className={getLinkClass('/transparencia')}
-          >
+          <Link href="/transparencia" className={getLinkClass('/transparencia')}>
             Portal de Transparência
           </Link>
         </nav>

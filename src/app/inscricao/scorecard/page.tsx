@@ -61,15 +61,17 @@ export default function ScorecardPage() {
 
         <CardContent className="relative z-10 p-8 sm:p-12">
           <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-wider text-gray-400 animate-in fade-in zoom-in duration-700">
+            <p className="animate-in fade-in zoom-in mb-2 text-sm font-bold uppercase tracking-wider text-gray-400 duration-700">
               Análise Preditiva de Proposta
             </p>
-            <h2 className="font-sora text-3xl font-bold text-white animate-in slide-in-from-bottom-3 duration-500 delay-100">Scorecard de Viabilidade</h2>
+            <h2 className="animate-in slide-in-from-bottom-3 font-sora text-3xl font-bold text-white delay-100 duration-500">
+              Scorecard de Viabilidade
+            </h2>
           </div>
 
           <div className="mb-12 flex flex-col items-center justify-center gap-12 md:flex-row">
             {/* Radial Chart */}
-            <div className="relative flex h-56 w-56 items-center justify-center animate-in zoom-in duration-1000">
+            <div className="animate-in zoom-in relative flex h-56 w-56 items-center justify-center duration-1000">
               <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
                   cx="50%"
@@ -91,7 +93,10 @@ export default function ScorecardPage() {
                 </RadialBarChart>
               </ResponsiveContainer>
               <div className="absolute flex flex-col items-center justify-center">
-                <span className="font-sora text-6xl font-bold transition-colors duration-500" style={{ color: currentColor }}>
+                <span
+                  className="font-sora text-6xl font-bold transition-colors duration-500"
+                  style={{ color: currentColor }}
+                >
                   {score}
                 </span>
                 <span className="text-sm font-bold text-gray-400">/ 100</span>
@@ -99,11 +104,21 @@ export default function ScorecardPage() {
             </div>
 
             {/* Score Interpretation */}
-            <div className="max-w-xs text-center md:text-left animate-in slide-in-from-right-8 duration-700 delay-500 fill-mode-backwards">
+            <div className="animate-in slide-in-from-right-8 fill-mode-backwards max-w-xs text-center delay-500 duration-700 md:text-left">
               <div className="mb-4 inline-flex items-center rounded-full border border-mata-alta bg-mata-alta/30 px-3 py-1">
-                <span className="mr-2 h-2 w-2 rounded-full transition-colors duration-500" style={{ backgroundColor: currentColor }}></span>
-                <span className="text-sm font-bold transition-colors duration-500" style={{ color: currentColor }}>
-                  {score >= 80 ? 'Alta Viabilidade' : score >= 60 ? 'Média Viabilidade' : 'Baixa Viabilidade'}
+                <span
+                  className="mr-2 h-2 w-2 rounded-full transition-colors duration-500"
+                  style={{ backgroundColor: currentColor }}
+                ></span>
+                <span
+                  className="text-sm font-bold transition-colors duration-500"
+                  style={{ color: currentColor }}
+                >
+                  {score >= 80
+                    ? 'Alta Viabilidade'
+                    : score >= 60
+                      ? 'Média Viabilidade'
+                      : 'Baixa Viabilidade'}
                 </span>
               </div>
               <p className="font-dm-sans text-base text-gray-300">

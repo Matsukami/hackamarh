@@ -47,8 +47,8 @@ export default function EditaisList({ initialEditais }: { initialEditais: any[] 
             onClick={() => setFiltro(cat)}
             className={`rounded-full px-4 py-2 text-sm font-bold transition-colors ${
               filtro === cat
-                ? 'bg-areia-jalapao border border-mata-alta text-mata-alta'
-                : 'bg-white border border-gray-200 text-gray-600 hover:border-mata-alta hover:text-mata-alta'
+                ? 'border border-mata-alta bg-areia-jalapao text-mata-alta'
+                : 'border border-gray-200 bg-white text-gray-600 hover:border-mata-alta hover:text-mata-alta'
             }`}
           >
             {cat}
@@ -85,7 +85,7 @@ export default function EditaisList({ initialEditais }: { initialEditais: any[] 
                     <span
                       className={`h-2 w-2 rounded-full ${
                         edital.status === 'Aberto'
-                          ? 'bg-cerrado-profundo animate-pulse'
+                          ? 'animate-pulse bg-cerrado-profundo'
                           : edital.status === 'Em breve'
                             ? 'bg-gray-400'
                             : 'bg-red-500'
@@ -95,7 +95,7 @@ export default function EditaisList({ initialEditais }: { initialEditais: any[] 
                   </span>
 
                   {isUrgente && (
-                    <span className="flex items-center gap-1 rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold text-red-600 animate-in zoom-in">
+                    <span className="animate-in zoom-in flex items-center gap-1 rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold text-red-600">
                       <IconFlame size={14} className="animate-pulse" />
                       Encerra em &lt; 7 dias!
                     </span>
@@ -107,8 +107,10 @@ export default function EditaisList({ initialEditais }: { initialEditais: any[] 
                     </span>
                   )}
                 </div>
-                <CardTitle className="mb-2 text-xl text-cerrado-profundo">{edital.titulo}</CardTitle>
-                <CardDescription className="text-gray-600 line-clamp-3">
+                <CardTitle className="mb-2 text-xl text-cerrado-profundo">
+                  {edital.titulo}
+                </CardTitle>
+                <CardDescription className="line-clamp-3 text-gray-600">
                   {edital.descricao}
                 </CardDescription>
               </CardHeader>
@@ -129,19 +131,19 @@ export default function EditaisList({ initialEditais }: { initialEditais: any[] 
                 </div>
               </CardContent>
 
-              <CardFooter className="bg-gray-50/50 pt-4 border-t border-gray-100">
+              <CardFooter className="border-t border-gray-100 bg-gray-50/50 pt-4">
                 {edital.status === 'Aberto' ? (
                   <Link href={`/inscricao?edital=${edital.id}`} className="w-full">
                     <Button
                       variant="primary"
-                      className={`w-full group ${
+                      className={`group w-full ${
                         isUrgente
-                          ? 'bg-red-600 hover:bg-red-700 text-white shadow-md shadow-red-200'
+                          ? 'bg-red-600 text-white shadow-md shadow-red-200 hover:bg-red-700'
                           : ''
                       }`}
                     >
                       <span>Iniciar inscrição</span>
-                      <span className="ml-2 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0">
+                      <span className="ml-2 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100">
                         &rarr;
                       </span>
                     </Button>
@@ -156,7 +158,7 @@ export default function EditaisList({ initialEditais }: { initialEditais: any[] 
           );
         })}
       </div>
-      
+
       {editaisFiltrados.length === 0 && (
         <div className="rounded-xl border border-dashed border-gray-300 p-12 text-center text-gray-500">
           Nenhum edital encontrado para esta categoria.

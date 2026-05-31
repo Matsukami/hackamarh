@@ -25,7 +25,7 @@ export default function InscricaoPage() {
     formState: { errors, isValid },
     watch,
   } = useForm<FormValues>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(FormSchema) as any,
     mode: 'onChange',
   });
 
@@ -103,7 +103,7 @@ export default function InscricaoPage() {
       return (
         <p className="mt-1 flex items-center gap-1 text-xs text-red-500">
           <IconAlertTriangle size={14} />
-          {errors[field]?.message}
+          {errors[field]?.message as string}
         </p>
       );
     }

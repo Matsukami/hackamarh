@@ -78,7 +78,8 @@ export default function EvidenciasPage() {
           Evidências de Execução
         </h1>
         <p className="font-dm-sans text-lg text-gray-600">
-          Envie fotos do campo para comprovar o avanço físico do projeto. As imagens passarão por validação automática.
+          Envie fotos do campo para comprovar o avanço físico do projeto. As imagens passarão por
+          validação automática.
         </p>
       </div>
 
@@ -104,7 +105,7 @@ export default function EvidenciasPage() {
                 htmlFor="file-upload"
                 className={`flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 text-center transition-all ${
                   dragActive
-                    ? 'border-mata-alta bg-mata-alta/5 scale-[1.02]'
+                    ? 'scale-[1.02] border-mata-alta bg-mata-alta/5'
                     : 'border-gray-300 bg-gray-50 hover:border-mata-alta hover:bg-gray-50/50'
                 }`}
                 onDragEnter={handleDrag}
@@ -112,7 +113,9 @@ export default function EvidenciasPage() {
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
               >
-                <div className={`mb-4 rounded-full p-4 ${dragActive ? 'bg-mata-alta text-white' : 'bg-white text-gray-400 shadow-sm'}`}>
+                <div
+                  className={`mb-4 rounded-full p-4 ${dragActive ? 'bg-mata-alta text-white' : 'bg-white text-gray-400 shadow-sm'}`}
+                >
                   <IconUpload size={32} />
                 </div>
                 <h3 className="mb-1 font-sora text-sm font-bold text-cerrado-profundo">
@@ -122,12 +125,13 @@ export default function EvidenciasPage() {
               </label>
             </form>
 
-            <div className="mt-6 rounded-lg bg-blue-50 p-4 border border-blue-100">
-              <h4 className="flex items-center gap-2 font-bold text-blue-800 text-sm mb-1">
+            <div className="mt-6 rounded-lg border border-blue-100 bg-blue-50 p-4">
+              <h4 className="mb-1 flex items-center gap-2 text-sm font-bold text-blue-800">
                 <IconBrain size={18} /> Validação Inteligente
               </h4>
-              <p className="text-xs text-blue-700 leading-relaxed">
-                Todas as imagens são analisadas automaticamente em busca de padrões de IA generativa e validadas contra o polígono GPS do seu projeto.
+              <p className="text-xs leading-relaxed text-blue-700">
+                Todas as imagens são analisadas automaticamente em busca de padrões de IA generativa
+                e validadas contra o polígono GPS do seu projeto.
               </p>
             </div>
           </CardContent>
@@ -148,7 +152,10 @@ export default function EvidenciasPage() {
           <CardContent className="p-6">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {fotos.map((foto) => (
-                <div key={foto.id} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md">
+                <div
+                  key={foto.id}
+                  className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md"
+                >
                   <div className="aspect-video w-full overflow-hidden bg-gray-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -157,12 +164,15 @@ export default function EvidenciasPage() {
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
-                  
+
                   <div className="p-4">
-                    <p className="mb-3 truncate text-sm font-bold text-cerrado-profundo" title={foto.nome}>
+                    <p
+                      className="mb-3 truncate text-sm font-bold text-cerrado-profundo"
+                      title={foto.nome}
+                    >
                       {foto.nome}
                     </p>
-                    
+
                     <div className="mb-4 space-y-2">
                       <div className="flex items-center gap-2 text-xs text-gray-600">
                         <IconCalendar size={14} className="text-gray-400" />
@@ -175,7 +185,9 @@ export default function EvidenciasPage() {
                     </div>
 
                     <div className="flex items-center justify-between border-t border-gray-100 pt-3">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Status</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                        Status
+                      </span>
                       {foto.status_ia === 'autentica' && (
                         <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-bold text-green-700 ring-1 ring-inset ring-green-600/20">
                           <IconCheck size={12} /> Autêntica
@@ -183,7 +195,8 @@ export default function EvidenciasPage() {
                       )}
                       {foto.status_ia === 'pendente' && (
                         <span className="inline-flex items-center gap-1 rounded-full bg-gray-50 px-2 py-1 text-xs font-bold text-gray-600 ring-1 ring-inset ring-gray-500/20">
-                          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gray-500"></span> Analisando
+                          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gray-500"></span>{' '}
+                          Analisando
                         </span>
                       )}
                       {foto.status_ia === 'suspeita' && (

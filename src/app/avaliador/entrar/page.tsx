@@ -61,11 +61,7 @@ export default function AvaliadorLoginPage() {
       <Card className="w-full max-w-md shadow-2xl">
         <CardHeader className="pb-2 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-white shadow-md">
-            <img
-              src="/logo-gaia.png"
-              alt="GAIA Logo"
-              className="h-14 w-14 object-contain"
-            />
+            <img src="/logo-gaia.png" alt="GAIA Logo" className="h-14 w-14 object-contain" />
           </div>
           <CardTitle>Portal do Avaliador</CardTitle>
           <CardDescription>Acesso restrito para equipe técnica JREDD+</CardDescription>

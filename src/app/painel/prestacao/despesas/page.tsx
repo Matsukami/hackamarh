@@ -152,7 +152,7 @@ export default function DespesasPage() {
 
             <Button
               variant="primary"
-              className="text-md mt-4 h-12 w-full bg-buriti-vivo font-bold text-cerrado-profundo hover:bg-buriti-vivo/90 shadow-sm"
+              className="text-md mt-4 h-12 w-full bg-buriti-vivo font-bold text-cerrado-profundo shadow-sm hover:bg-buriti-vivo/90"
             >
               Adicionar Lançamento
             </Button>
@@ -221,7 +221,7 @@ export default function DespesasPage() {
           {/* Submit Action */}
           <Card className="mt-6 border-0 border-t-4 border-t-mata-alta bg-areia-jalapao shadow-md">
             <CardContent className="flex flex-col items-center justify-center p-8 text-center">
-              <IconSend size={48} className="mb-4 text-mata-alta animate-bounce" />
+              <IconSend size={48} className="mb-4 animate-bounce text-mata-alta" />
               <h3 className="mb-2 font-sora text-xl font-bold text-cerrado-profundo">
                 Finalizar Competência
               </h3>

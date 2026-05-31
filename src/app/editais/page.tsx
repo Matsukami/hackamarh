@@ -51,8 +51,9 @@ export default async function EditaisPage() {
         <h1 className="mb-4 font-sora text-4xl font-bold text-cerrado-profundo">
           Mural de Editais
         </h1>
-        <p className="max-w-2xl font-dm-sans text-lg text-gray-700 mx-auto md:mx-0">
-          Explore as oportunidades ativas de financiamento para projetos de desenvolvimento ecológico e sustentável no estado do Tocantins.
+        <p className="mx-auto max-w-2xl font-dm-sans text-lg text-gray-700 md:mx-0">
+          Explore as oportunidades ativas de financiamento para projetos de desenvolvimento
+          ecológico e sustentável no estado do Tocantins.
         </p>
       </div>
 

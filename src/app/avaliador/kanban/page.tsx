@@ -177,7 +177,9 @@ export default function AvaliadorKanbanPage() {
     >
       {/* Header */}
       <div className="mb-3 flex items-start justify-between gap-2">
-        <span className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${p.categoriaColor}`}>
+        <span
+          className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${p.categoriaColor}`}
+        >
           {p.categoria}
         </span>
         <div className="flex items-center gap-2">
@@ -191,7 +193,7 @@ export default function AvaliadorKanbanPage() {
       </div>
 
       {/* Title */}
-      <h3 className="mb-3 text-sm font-bold leading-snug text-cerrado-profundo group-hover:text-mata-alta transition-colors">
+      <h3 className="mb-3 text-sm font-bold leading-snug text-cerrado-profundo transition-colors group-hover:text-mata-alta">
         {p.titulo}
       </h3>
 
@@ -209,8 +211,10 @@ export default function AvaliadorKanbanPage() {
               <span className="text-xs font-bold text-gray-700">{p.sugestaoFiscal.nome}</span>
             </div>
             <button
-              onClick={(e) => { e.stopPropagation(); }}
-              className="rounded-md bg-cerrado-profundo px-2.5 py-1 text-[10px] font-bold text-white hover:bg-mata-alta transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              className="rounded-md bg-cerrado-profundo px-2.5 py-1 text-[10px] font-bold text-white transition-colors hover:bg-mata-alta"
             >
               Atribuir
             </button>
@@ -229,7 +233,10 @@ export default function AvaliadorKanbanPage() {
             <span>{p.progresso}%</span>
           </div>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-100">
-            <div className="h-full rounded-full bg-cerrado-profundo transition-all" style={{ width: `${p.progresso}%` }} />
+            <div
+              className="h-full rounded-full bg-cerrado-profundo transition-all"
+              style={{ width: `${p.progresso}%` }}
+            />
           </div>
         </div>
       )}

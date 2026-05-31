@@ -53,17 +53,55 @@ const fotos = [
 ];
 
 const acoes = [
-  { id: '1.1', titulo: 'Plantio de Mudas Nativas', meta: '20.000 un.', realizado: '15.000 un.', percentual: 75, contratado: 70, statusContrato: 'Alinhado' },
-  { id: '1.2', titulo: 'Cercamento de APP', meta: '10 km', realizado: '4.5 km', percentual: 45, contratado: 60, statusContrato: 'Atrasado', justificativa: 'Chuvas atípicas impediram acesso de maquinário.' },
+  {
+    id: '1.1',
+    titulo: 'Plantio de Mudas Nativas',
+    meta: '20.000 un.',
+    realizado: '15.000 un.',
+    percentual: 75,
+    contratado: 70,
+    statusContrato: 'Alinhado',
+  },
+  {
+    id: '1.2',
+    titulo: 'Cercamento de APP',
+    meta: '10 km',
+    realizado: '4.5 km',
+    percentual: 45,
+    contratado: 60,
+    statusContrato: 'Atrasado',
+    justificativa: 'Chuvas atípicas impediram acesso de maquinário.',
+  },
 ];
 
 const despesas = [
-  { descricao: 'Aquisição de Mudas', fornecedor: 'Viveiro Central Ltda', valor: 'R$ 25.000,00', status: 'ok' },
-  { descricao: 'Serviço de Máquinas', fornecedor: 'Recibo não fiscal', valor: 'R$ 12.500,00', status: 'alerta' },
-  { descricao: 'Materiais Isolamento', fornecedor: 'Arame e Mourões', valor: 'R$ 7.700,00', status: 'ok' },
+  {
+    descricao: 'Aquisição de Mudas',
+    fornecedor: 'Viveiro Central Ltda',
+    valor: 'R$ 25.000,00',
+    status: 'ok',
+  },
+  {
+    descricao: 'Serviço de Máquinas',
+    fornecedor: 'Recibo não fiscal',
+    valor: 'R$ 12.500,00',
+    status: 'alerta',
+  },
+  {
+    descricao: 'Materiais Isolamento',
+    fornecedor: 'Arame e Mourões',
+    valor: 'R$ 7.700,00',
+    status: 'ok',
+  },
 ];
 
-function StatusBadge({ status, confianca }: { status: 'autentica' | 'suspeita' | 'sem_metadados'; confianca: number }) {
+function StatusBadge({
+  status,
+  confianca,
+}: {
+  status: 'autentica' | 'suspeita' | 'sem_metadados';
+  confianca: number;
+}) {
   const configs = {
     autentica: {
       bg: 'bg-buriti-vivo',
@@ -89,7 +127,9 @@ function StatusBadge({ status, confianca }: { status: 'autentica' | 'suspeita' |
   const Icon = c.icon;
 
   return (
-    <div className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold shadow-md ${c.bg} ${c.text}`}>
+    <div
+      className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold shadow-md ${c.bg} ${c.text}`}
+    >
       <Icon size={14} />
       <span>{c.label}</span>
       {confianca > 0 && <span className="opacity-70">({confianca}%)</span>}
@@ -117,7 +157,8 @@ export default function ValidacaoPrestacaoPage() {
               Validação de Conta: Parcela 03
             </h1>
             <p className="font-dm-sans text-sm text-gray-600">
-              Analise as evidências, o progresso físico e os comprovantes de despesa para aprovação da parcela.
+              Analise as evidências, o progresso físico e os comprovantes de despesa para aprovação
+              da parcela.
             </p>
           </div>
           <div className="flex shrink-0 gap-3">
@@ -143,7 +184,10 @@ export default function ValidacaoPrestacaoPage() {
           </h2>
           <div className="space-y-6">
             {fotos.map((foto) => (
-              <Card key={foto.id} className={`overflow-hidden border-gray-200 shadow-sm ${foto.status === 'suspeita' ? 'border-2 border-red-200' : ''}`}>
+              <Card
+                key={foto.id}
+                className={`overflow-hidden border-gray-200 shadow-sm ${foto.status === 'suspeita' ? 'border-2 border-red-200' : ''}`}
+              >
                 <div className="relative">
                   <img
                     src={foto.url}
@@ -157,10 +201,20 @@ export default function ValidacaoPrestacaoPage() {
                 <CardContent className="p-4">
                   <p className="mb-2 text-base font-bold text-cerrado-profundo">{foto.titulo}</p>
                   <div className="flex flex-wrap gap-x-6 gap-y-1">
-                    <div className={`flex items-center gap-1.5 text-sm ${foto.status === 'suspeita' ? 'font-bold text-red-600' : 'text-gray-600'}`}>
+                    <div
+                      className={`flex items-center gap-1.5 text-sm ${foto.status === 'suspeita' ? 'font-bold text-red-600' : 'text-gray-600'}`}
+                    >
                       <IconMapPin size={16} />
                       <span>{foto.coordenadas}</span>
-                      {foto.precisao && <span className="text-gray-400">({foto.status === 'suspeita' ? `Distante > ${foto.precisao}` : `Precisão: ${foto.precisao}`})</span>}
+                      {foto.precisao && (
+                        <span className="text-gray-400">
+                          (
+                          {foto.status === 'suspeita'
+                            ? `Distante > ${foto.precisao}`
+                            : `Precisão: ${foto.precisao}`}
+                          )
+                        </span>
+                      )}
                     </div>
                     <div className="flex items-center gap-1.5 text-sm text-gray-600">
                       <IconClock size={16} />
@@ -193,10 +247,14 @@ export default function ValidacaoPrestacaoPage() {
                 <div key={acao.id} className="p-5">
                   <div className="mb-3 flex items-end justify-between">
                     <div>
-                      <span className="block text-xs font-bold uppercase text-gray-400">Ação {acao.id}</span>
+                      <span className="block text-xs font-bold uppercase text-gray-400">
+                        Ação {acao.id}
+                      </span>
                       <p className="text-sm font-bold text-cerrado-profundo">{acao.titulo}</p>
                     </div>
-                    <span className={`text-xs font-bold ${acao.percentual >= 60 ? 'text-mata-alta' : 'text-ouro-tocantins'}`}>
+                    <span
+                      className={`text-xs font-bold ${acao.percentual >= 60 ? 'text-mata-alta' : 'text-ouro-tocantins'}`}
+                    >
                       {acao.realizado} / {acao.meta}
                     </span>
                   </div>
@@ -207,7 +265,9 @@ export default function ValidacaoPrestacaoPage() {
                     />
                   </div>
                   <div className="flex justify-between text-xs font-bold">
-                    <span className={acao.percentual >= 60 ? 'text-mata-alta' : 'text-ouro-tocantins'}>
+                    <span
+                      className={acao.percentual >= 60 ? 'text-mata-alta' : 'text-ouro-tocantins'}
+                    >
                       Declarado: {acao.percentual}%
                     </span>
                     <span className="text-gray-500">
@@ -262,7 +322,14 @@ export default function ValidacaoPrestacaoPage() {
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {despesas.map((d, idx) => (
-                  <tr key={idx} className={d.status === 'alerta' ? 'border-l-4 border-l-red-500 bg-red-50/30 hover:bg-red-50' : 'hover:bg-gray-50'}>
+                  <tr
+                    key={idx}
+                    className={
+                      d.status === 'alerta'
+                        ? 'border-l-4 border-l-red-500 bg-red-50/30 hover:bg-red-50'
+                        : 'hover:bg-gray-50'
+                    }
+                  >
                     <td className="p-4">
                       <p className="font-bold text-cerrado-profundo">{d.descricao}</p>
                       {d.status === 'alerta' ? (
@@ -275,7 +342,9 @@ export default function ValidacaoPrestacaoPage() {
                     </td>
                     <td className="p-4 text-right font-bold text-cerrado-profundo">{d.valor}</td>
                     <td className="p-4 text-center">
-                      <button className={`transition-colors ${d.status === 'alerta' ? 'text-red-600 hover:text-red-800' : 'text-mata-alta hover:text-cerrado-profundo'}`}>
+                      <button
+                        className={`transition-colors ${d.status === 'alerta' ? 'text-red-600 hover:text-red-800' : 'text-mata-alta hover:text-cerrado-profundo'}`}
+                      >
                         <IconEye size={20} className="mx-auto" />
                       </button>
                     </td>
@@ -306,23 +375,44 @@ export default function ValidacaoPrestacaoPage() {
 
       {/* Correction Modal */}
       {showCorrectionModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in">
-          <Card className="w-full max-w-md shadow-2xl animate-in zoom-in-95">
+        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <Card className="animate-in zoom-in-95 w-full max-w-md shadow-2xl">
             <CardContent className="p-6">
-              <h3 className="mb-4 font-sora text-lg font-bold text-cerrado-profundo">Solicitar Correção da Parcela</h3>
+              <h3 className="mb-4 font-sora text-lg font-bold text-cerrado-profundo">
+                Solicitar Correção da Parcela
+              </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="mb-1 block text-sm font-bold text-gray-700">Descrição da Pendência</label>
-                  <textarea placeholder="Descreva o que precisa ser corrigido na prestação de contas..." className="min-h-[100px] w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-mata-alta focus:outline-none" />
+                  <label className="mb-1 block text-sm font-bold text-gray-700">
+                    Descrição da Pendência
+                  </label>
+                  <textarea
+                    placeholder="Descreva o que precisa ser corrigido na prestação de contas..."
+                    className="min-h-[100px] w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-mata-alta focus:outline-none"
+                  />
                 </div>
                 <div className="flex items-center gap-2 rounded-lg border border-blue-100 bg-blue-50 p-3">
                   <IconClock size={16} className="text-blue-600" />
-                  <span className="text-sm text-blue-700">Prazo automático: <strong>+15 dias úteis</strong></span>
+                  <span className="text-sm text-blue-700">
+                    Prazo automático: <strong>+15 dias úteis</strong>
+                  </span>
                 </div>
               </div>
               <div className="mt-6 flex gap-3">
-                <Button variant="secondary" className="flex-1" onClick={() => setShowCorrectionModal(false)}>Cancelar</Button>
-                <Button variant="primary" className="flex-1" onClick={() => setShowCorrectionModal(false)}>Enviar Notificação</Button>
+                <Button
+                  variant="secondary"
+                  className="flex-1"
+                  onClick={() => setShowCorrectionModal(false)}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  variant="primary"
+                  className="flex-1"
+                  onClick={() => setShowCorrectionModal(false)}
+                >
+                  Enviar Notificação
+                </Button>
               </div>
             </CardContent>
           </Card>

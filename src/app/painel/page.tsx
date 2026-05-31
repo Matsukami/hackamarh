@@ -61,12 +61,12 @@ export default async function PainelPage() {
       </div>
 
       {/* Notification Banner */}
-      <div className="mb-8 flex items-start gap-4 rounded-xl border-l-4 border-l-red-600 border-y border-r border-red-200 bg-red-50 p-4 shadow-sm animate-in slide-in-from-top-4">
+      <div className="animate-in slide-in-from-top-4 mb-8 flex items-start gap-4 rounded-xl border-y border-l-4 border-r border-red-200 border-l-red-600 bg-red-50 p-4 shadow-sm">
         <div className="relative">
           <IconAlertTriangle size={24} className="mt-0.5 shrink-0 text-red-600" />
-          <span className="absolute -top-1 -right-1 flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+          <span className="absolute -right-1 -top-1 flex h-3 w-3">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500"></span>
           </span>
         </div>
         <div className="flex-grow">
@@ -123,8 +123,8 @@ export default async function PainelPage() {
           <CardContent className="flex flex-col gap-4">
             <Link href="/inscricao/scorecard">
               <Button
-                variant="outline"
-                className="text-md group h-14 w-full justify-start px-6 font-bold border-buriti-vivo text-buriti-vivo hover:bg-buriti-vivo/10"
+                variant="secondary"
+                className="text-md group h-14 w-full justify-start border-buriti-vivo px-6 font-bold text-buriti-vivo hover:bg-buriti-vivo/10"
               >
                 <div className="flex flex-grow items-center gap-3">
                   <IconChartLine size={20} />
@@ -176,24 +176,25 @@ export default async function PainelPage() {
             </h3>
           </div>
           <div className="p-6">
-            <div className="relative border-l-2 border-gray-200 ml-3 space-y-8">
-              
+            <div className="relative ml-3 space-y-8 border-l-2 border-gray-200">
               <div className="relative pl-6">
                 <span className="absolute -left-[9px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 ring-4 ring-white">
                   <span className="h-2 w-2 rounded-full bg-gray-400"></span>
                 </span>
-                <div className="flex justify-between items-start">
+                <div className="flex items-start justify-between">
                   <div>
                     <h4 className="font-bold text-cerrado-profundo">01 - Inicial</h4>
-                    <p className="text-xs text-gray-500 mt-1">Previsão: 15/11/2024</p>
-                    <p className="mt-2 text-sm text-gray-700 bg-gray-50 px-2 py-1 rounded border border-gray-100 w-fit">
-                      <span className="font-bold text-gray-500 text-xs uppercase tracking-wider block mb-0.5">Meta Física Vinculada</span>
+                    <p className="mt-1 text-xs text-gray-500">Previsão: 15/11/2024</p>
+                    <p className="mt-2 w-fit rounded border border-gray-100 bg-gray-50 px-2 py-1 text-sm text-gray-700">
+                      <span className="mb-0.5 block text-xs font-bold uppercase tracking-wider text-gray-500">
+                        Meta Física Vinculada
+                      </span>
                       Implantação de Viveiro (100%)
                     </p>
                   </div>
-                  <div className="text-right flex flex-col items-end">
+                  <div className="flex flex-col items-end text-right">
                     <p className="font-bold text-gray-700">R$ 50.000,00</p>
-                    <span className="inline-block mt-1 rounded bg-gray-100 px-2 py-0.5 text-[10px] font-bold text-gray-600 uppercase tracking-wider">
+                    <span className="mt-1 inline-block rounded bg-gray-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gray-600">
                       Bloqueada
                     </span>
                   </div>
@@ -204,24 +205,25 @@ export default async function PainelPage() {
                 <span className="absolute -left-[9px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 ring-4 ring-white">
                   <span className="h-2 w-2 rounded-full bg-gray-400"></span>
                 </span>
-                <div className="flex justify-between items-start">
+                <div className="flex items-start justify-between">
                   <div>
                     <h4 className="font-bold text-cerrado-profundo">02 - Execução</h4>
-                    <p className="text-xs text-gray-500 mt-1">Previsão: 15/02/2025</p>
-                    <p className="mt-2 text-sm text-gray-700 bg-gray-50 px-2 py-1 rounded border border-gray-100 w-fit">
-                      <span className="font-bold text-gray-500 text-xs uppercase tracking-wider block mb-0.5">Meta Física Vinculada</span>
+                    <p className="mt-1 text-xs text-gray-500">Previsão: 15/02/2025</p>
+                    <p className="mt-2 w-fit rounded border border-gray-100 bg-gray-50 px-2 py-1 text-sm text-gray-700">
+                      <span className="mb-0.5 block text-xs font-bold uppercase tracking-wider text-gray-500">
+                        Meta Física Vinculada
+                      </span>
                       Plantio de 10.000 Mudas Nativas
                     </p>
                   </div>
-                  <div className="text-right flex flex-col items-end">
+                  <div className="flex flex-col items-end text-right">
                     <p className="font-bold text-gray-700">R$ 120.000,00</p>
-                    <span className="inline-block mt-1 rounded bg-gray-100 px-2 py-0.5 text-[10px] font-bold text-gray-600 uppercase tracking-wider">
+                    <span className="mt-1 inline-block rounded bg-gray-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gray-600">
                       Bloqueada
                     </span>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </Card>
@@ -241,18 +243,17 @@ export default async function PainelPage() {
               </div>
               <div className="relative rounded-2xl rounded-tl-none border border-gray-200 bg-white p-4 shadow-sm">
                 <div className="mb-1 flex items-baseline justify-between gap-4">
-                  <span className="text-sm font-bold text-cerrado-profundo">
-                    Agente Fiscal
-                  </span>
+                  <span className="text-sm font-bold text-cerrado-profundo">Agente Fiscal</span>
                   <span className="text-[10px] uppercase text-gray-400">Ontem, 14:30</span>
                 </div>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  Identificamos que o número do CAR preenchido na seção 3 difere do documento anexado. Por favor, verifique e atualize no sistema.
+                <p className="text-sm leading-relaxed text-gray-700">
+                  Identificamos que o número do CAR preenchido na seção 3 difere do documento
+                  anexado. Por favor, verifique e atualize no sistema.
                 </p>
               </div>
             </div>
 
-            <div className="flex justify-center my-4">
+            <div className="my-4 flex justify-center">
               <div className="flex items-center gap-2 rounded-full border border-yellow-200 bg-yellow-50 px-3 py-1 text-xs font-bold text-yellow-700 shadow-sm">
                 Status alterado para &quot;Com Pendência&quot;
               </div>
@@ -268,7 +269,7 @@ export default async function PainelPage() {
                   <span className="text-[10px] uppercase text-gray-400">Hoje, 09:15</span>
                   <span className="text-sm font-bold text-cerrado-profundo">Você</span>
                 </div>
-                <p className="text-sm text-gray-800 leading-relaxed">
+                <p className="text-sm leading-relaxed text-gray-800">
                   Documento atualizado conforme solicitado.
                 </p>
               </div>
@@ -277,8 +278,14 @@ export default async function PainelPage() {
           {/* Reply Input */}
           <div className="border-t border-gray-200 bg-white p-4">
             <div className="flex gap-2">
-              <input type="text" placeholder="Digite sua resposta..." className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-mata-alta focus:outline-none focus:ring-1 focus:ring-mata-alta" />
-              <Button variant="primary" className="px-4 py-2 text-sm bg-mata-alta">Enviar</Button>
+              <input
+                type="text"
+                placeholder="Digite sua resposta..."
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-mata-alta focus:outline-none focus:ring-1 focus:ring-mata-alta"
+              />
+              <Button variant="primary" className="bg-mata-alta px-4 py-2 text-sm">
+                Enviar
+              </Button>
             </div>
           </div>
         </Card>

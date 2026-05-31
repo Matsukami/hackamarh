@@ -55,8 +55,18 @@ const proposta = {
     jovens: 34,
   },
   documentos: [
-    { nome: 'Projeto_Tecnico_Detalhado.pdf', data: '12/10/2024', tamanho: '4.2 MB', icon: IconFileTypePdf },
-    { nome: 'Planilha_Orcamentaria_v2.xlsx', data: '14/10/2024', tamanho: '1.1 MB', icon: IconFileSpreadsheet },
+    {
+      nome: 'Projeto_Tecnico_Detalhado.pdf',
+      data: '12/10/2024',
+      tamanho: '4.2 MB',
+      icon: IconFileTypePdf,
+    },
+    {
+      nome: 'Planilha_Orcamentaria_v2.xlsx',
+      data: '14/10/2024',
+      tamanho: '1.1 MB',
+      icon: IconFileSpreadsheet,
+    },
   ],
   score: {
     geral: 86,
@@ -89,7 +99,8 @@ const mensagensIniciais = [
     remetente: 'fiscal',
     nome: 'Fiscal — Dra. Ana Beatriz',
     iniciais: 'AB',
-    conteudo: 'Prezado proponente, identificamos que o número do CAR preenchido na seção 3 difere do documento anexado. Por favor, verifique e atualize no sistema.',
+    conteudo:
+      'Prezado proponente, identificamos que o número do CAR preenchido na seção 3 difere do documento anexado. Por favor, verifique e atualize no sistema.',
     timestamp: '28/05/2024 14:30',
     tipo: 'notificação',
   },
@@ -98,7 +109,8 @@ const mensagensIniciais = [
     remetente: 'proponente',
     nome: 'Instituto Cerrado Vivo',
     iniciais: 'IC',
-    conteudo: 'Documento atualizado conforme solicitado. O CAR correto é TO-12345678901234-1234567.',
+    conteudo:
+      'Documento atualizado conforme solicitado. O CAR correto é TO-12345678901234-1234567.',
     timestamp: '29/05/2024 09:15',
     tipo: 'resposta',
   },
@@ -107,7 +119,8 @@ const mensagensIniciais = [
     remetente: 'fiscal',
     nome: 'Fiscal — Dra. Ana Beatriz',
     iniciais: 'AB',
-    conteudo: 'Recebido, obrigada. Documentação em conformidade. Prosseguiremos com a análise técnica.',
+    conteudo:
+      'Recebido, obrigada. Documentação em conformidade. Prosseguiremos com a análise técnica.',
     timestamp: '29/05/2024 11:02',
     tipo: 'resposta',
   },
@@ -131,7 +144,13 @@ export default function PropostaAnalysisPage() {
         nome: 'Fiscal — Dra. Ana Beatriz',
         iniciais: 'AB',
         conteudo: novaMensagem,
-        timestamp: new Date().toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        timestamp: new Date().toLocaleString('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
         tipo: 'notificação',
       },
     ]);
@@ -182,20 +201,34 @@ export default function PropostaAnalysisPage() {
             </CardHeader>
             <CardContent className="grid grid-cols-2 gap-6 p-6">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Proponente</p>
-                <p className="text-sm font-bold text-cerrado-profundo">{proposta.identificacao.proponente}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  Proponente
+                </p>
+                <p className="text-sm font-bold text-cerrado-profundo">
+                  {proposta.identificacao.proponente}
+                </p>
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">CNPJ</p>
-                <p className="text-sm font-bold text-cerrado-profundo">{proposta.identificacao.cnpj}</p>
+                <p className="text-sm font-bold text-cerrado-profundo">
+                  {proposta.identificacao.cnpj}
+                </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Responsável Técnico</p>
-                <p className="text-sm font-bold text-cerrado-profundo">{proposta.identificacao.responsavel}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  Responsável Técnico
+                </p>
+                <p className="text-sm font-bold text-cerrado-profundo">
+                  {proposta.identificacao.responsavel}
+                </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Registro Profissional</p>
-                <p className="text-sm font-bold text-cerrado-profundo">{proposta.identificacao.registro}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  Registro Profissional
+                </p>
+                <p className="text-sm font-bold text-cerrado-profundo">
+                  {proposta.identificacao.registro}
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -211,16 +244,28 @@ export default function PropostaAnalysisPage() {
               <div className="flex gap-6">
                 <div className="flex-1 space-y-4">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Bioma</p>
-                    <span className="mt-1 inline-block rounded-md border border-gray-200 px-2 py-0.5 text-sm font-bold text-cerrado-profundo">{proposta.territorio.bioma}</span>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                      Bioma
+                    </p>
+                    <span className="mt-1 inline-block rounded-md border border-gray-200 px-2 py-0.5 text-sm font-bold text-cerrado-profundo">
+                      {proposta.territorio.bioma}
+                    </span>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Área Total</p>
-                    <p className="text-sm font-bold text-cerrado-profundo">{proposta.territorio.areaTotal}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                      Área Total
+                    </p>
+                    <p className="text-sm font-bold text-cerrado-profundo">
+                      {proposta.territorio.areaTotal}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Município/UF</p>
-                    <p className="text-sm font-bold text-cerrado-profundo">{proposta.territorio.municipio}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                      Município/UF
+                    </p>
+                    <p className="text-sm font-bold text-cerrado-profundo">
+                      {proposta.territorio.municipio}
+                    </p>
                   </div>
                 </div>
                 <div className="h-48 w-60 overflow-hidden rounded-lg border border-gray-200 bg-areia-jalapao">
@@ -243,12 +288,20 @@ export default function PropostaAnalysisPage() {
             </CardHeader>
             <CardContent className="space-y-4 p-6">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Objetivo Principal</p>
-                <p className="mt-1 rounded-lg border border-gray-100 bg-gray-50 p-3 text-sm leading-relaxed text-gray-700">{proposta.descritivo.objetivo}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  Objetivo Principal
+                </p>
+                <p className="mt-1 rounded-lg border border-gray-100 bg-gray-50 p-3 text-sm leading-relaxed text-gray-700">
+                  {proposta.descritivo.objetivo}
+                </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Metodologia</p>
-                <p className="mt-1 text-sm leading-relaxed text-gray-700">{proposta.descritivo.metodologia}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  Metodologia
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-gray-700">
+                  {proposta.descritivo.metodologia}
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -263,12 +316,20 @@ export default function PropostaAnalysisPage() {
             <CardContent className="p-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Beneficiários Diretos</p>
-                  <p className="mt-1 font-sora text-2xl font-bold text-cerrado-profundo">{proposta.social.beneficiarios}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                    Beneficiários Diretos
+                  </p>
+                  <p className="mt-1 font-sora text-2xl font-bold text-cerrado-profundo">
+                    {proposta.social.beneficiarios}
+                  </p>
                 </div>
                 <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Geração de Renda</p>
-                  <p className="mt-1 font-sora text-2xl font-bold text-cerrado-profundo">{proposta.social.geracaoRenda}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                    Geração de Renda
+                  </p>
+                  <p className="mt-1 font-sora text-2xl font-bold text-cerrado-profundo">
+                    {proposta.social.geracaoRenda}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -283,15 +344,20 @@ export default function PropostaAnalysisPage() {
             </CardHeader>
             <CardContent className="divide-y divide-gray-100 p-0">
               {proposta.documentos.map((doc, idx) => (
-                <div key={idx} className="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors">
+                <div
+                  key={idx}
+                  className="flex items-center justify-between px-6 py-4 transition-colors hover:bg-gray-50"
+                >
                   <div className="flex items-center gap-3">
                     <doc.icon size={24} className="text-red-600" />
                     <div>
                       <p className="text-sm font-bold text-cerrado-profundo">{doc.nome}</p>
-                      <p className="text-xs text-gray-500">Enviado em {doc.data} – {doc.tamanho}</p>
+                      <p className="text-xs text-gray-500">
+                        Enviado em {doc.data} – {doc.tamanho}
+                      </p>
                     </div>
                   </div>
-                  <button className="text-gray-400 hover:text-cerrado-profundo transition-colors">
+                  <button className="text-gray-400 transition-colors hover:text-cerrado-profundo">
                     <IconDownload size={20} />
                   </button>
                 </div>
@@ -313,18 +379,28 @@ export default function PropostaAnalysisPage() {
               {/* Messages */}
               <div className="max-h-[400px] space-y-4 overflow-y-auto bg-gray-50/50 p-6">
                 {mensagens.map((msg) => (
-                  <div key={msg.id} className={`flex ${msg.remetente === 'fiscal' ? 'justify-start' : 'flex-row-reverse'} items-start gap-3`}>
-                    <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white ${msg.remetente === 'fiscal' ? 'bg-cerrado-profundo' : 'bg-mata-alta'}`}>
+                  <div
+                    key={msg.id}
+                    className={`flex ${msg.remetente === 'fiscal' ? 'justify-start' : 'flex-row-reverse'} items-start gap-3`}
+                  >
+                    <div
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white ${msg.remetente === 'fiscal' ? 'bg-cerrado-profundo' : 'bg-mata-alta'}`}
+                    >
                       {msg.iniciais}
                     </div>
-                    <div className={`max-w-[80%] rounded-2xl p-3 shadow-sm ${msg.remetente === 'fiscal' ? 'rounded-tl-none border border-gray-200 bg-white' : 'rounded-tr-none border border-mata-alta/10 bg-mata-alta/5'}`}>
-                      <div className={`mb-1 flex items-baseline gap-3 ${msg.remetente !== 'fiscal' ? 'justify-end' : ''}`}>
+                    <div
+                      className={`max-w-[80%] rounded-2xl p-3 shadow-sm ${msg.remetente === 'fiscal' ? 'rounded-tl-none border border-gray-200 bg-white' : 'rounded-tr-none border border-mata-alta/10 bg-mata-alta/5'}`}
+                    >
+                      <div
+                        className={`mb-1 flex items-baseline gap-3 ${msg.remetente !== 'fiscal' ? 'justify-end' : ''}`}
+                      >
                         <span className="text-xs font-bold text-cerrado-profundo">{msg.nome}</span>
                         <span className="text-[10px] text-gray-400">{msg.timestamp}</span>
                       </div>
                       <p className="text-sm leading-relaxed text-gray-700">{msg.conteudo}</p>
                       <div className="mt-1 flex items-center gap-1 text-[9px] text-gray-400">
-                        <IconClock size={10} /> Registro imutável #{msg.id.toString().padStart(4, '0')}
+                        <IconClock size={10} /> Registro imutável #
+                        {msg.id.toString().padStart(4, '0')}
                       </div>
                     </div>
                   </div>
@@ -341,12 +417,17 @@ export default function PropostaAnalysisPage() {
                     placeholder="Enviar notificação oficial ao proponente..."
                     className="flex-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-mata-alta focus:outline-none focus:ring-1 focus:ring-mata-alta"
                   />
-                  <Button onClick={enviarMensagem} variant="primary" className="gap-2 bg-cerrado-profundo px-4">
+                  <Button
+                    onClick={enviarMensagem}
+                    variant="primary"
+                    className="gap-2 bg-cerrado-profundo px-4"
+                  >
                     <IconSend size={16} /> Enviar
                   </Button>
                 </div>
                 <p className="mt-2 text-[10px] text-gray-400">
-                  ⚠️ Todas as mensagens são registradas com timestamp imutável para fins de auditoria pública.
+                  ⚠️ Todas as mensagens são registradas com timestamp imutável para fins de
+                  auditoria pública.
                 </p>
               </div>
             </CardContent>
@@ -358,9 +439,13 @@ export default function PropostaAnalysisPage() {
           {/* Score Preditivo */}
           <Card className="border-gray-200 shadow-sm">
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-gray-500">Score Preditivo GAIA</h3>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-gray-500">
+                Score Preditivo GAIA
+              </h3>
               <div className="mb-6 flex items-end gap-3">
-                <span className={`font-sora text-5xl font-bold ${getScoreColor(proposta.score.geral)}`}>
+                <span
+                  className={`font-sora text-5xl font-bold ${getScoreColor(proposta.score.geral)}`}
+                >
                   {proposta.score.geral}
                 </span>
                 <span className="mb-1 text-lg text-gray-400">/100</span>
@@ -390,8 +475,12 @@ export default function PropostaAnalysisPage() {
           {/* Parecer Técnico */}
           <Card className="border-gray-200 shadow-sm">
             <CardContent className="p-6">
-              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-500">Parecer Técnico</h3>
-              <label className="mb-2 block text-sm font-bold text-cerrado-profundo">Justificativa da Decisão</label>
+              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-500">
+                Parecer Técnico
+              </h3>
+              <label className="mb-2 block text-sm font-bold text-cerrado-profundo">
+                Justificativa da Decisão
+              </label>
               <textarea
                 value={parecer}
                 onChange={(e) => setParecer(e.target.value)}
@@ -427,8 +516,10 @@ export default function PropostaAnalysisPage() {
           {/* Histórico de Ações */}
           <Card className="border-gray-200 shadow-sm">
             <CardContent className="p-6">
-              <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-gray-500">Histórico de Ações</h3>
-              <div className="relative border-l-2 border-gray-200 pl-6 space-y-5">
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-gray-500">
+                Histórico de Ações
+              </h3>
+              <div className="relative space-y-5 border-l-2 border-gray-200 pl-6">
                 {historicoAcoes.map((acao, idx) => (
                   <div key={idx} className="relative">
                     <div className="absolute -left-[31px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 ring-4 ring-white">
@@ -451,23 +542,51 @@ export default function PropostaAnalysisPage() {
 
       {/* Modals */}
       {showApproveModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in">
-          <Card className="w-full max-w-md shadow-2xl animate-in zoom-in-95">
+        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <Card className="animate-in zoom-in-95 w-full max-w-md shadow-2xl">
             <CardContent className="p-6">
-              <h3 className="mb-4 font-sora text-lg font-bold text-cerrado-profundo">Confirmar Aprovação</h3>
+              <h3 className="mb-4 font-sora text-lg font-bold text-cerrado-profundo">
+                Confirmar Aprovação
+              </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="mb-1 block text-sm font-bold text-gray-700">Valor Total do Contrato (R$)</label>
-                  <input type="number" defaultValue={170000} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-mata-alta focus:outline-none" />
+                  <label className="mb-1 block text-sm font-bold text-gray-700">
+                    Valor Total do Contrato (R$)
+                  </label>
+                  <input
+                    type="number"
+                    defaultValue={170000}
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-mata-alta focus:outline-none"
+                  />
                 </div>
                 <div>
-                  <label className="mb-1 block text-sm font-bold text-gray-700">Número de Parcelas</label>
-                  <input type="number" defaultValue={3} min={1} max={12} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-mata-alta focus:outline-none" />
+                  <label className="mb-1 block text-sm font-bold text-gray-700">
+                    Número de Parcelas
+                  </label>
+                  <input
+                    type="number"
+                    defaultValue={3}
+                    min={1}
+                    max={12}
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-mata-alta focus:outline-none"
+                  />
                 </div>
               </div>
               <div className="mt-6 flex gap-3">
-                <Button variant="secondary" className="flex-1" onClick={() => setShowApproveModal(false)}>Cancelar</Button>
-                <Button variant="primary" className="flex-1 bg-mata-alta" onClick={() => setShowApproveModal(false)}>Confirmar Aprovação</Button>
+                <Button
+                  variant="secondary"
+                  className="flex-1"
+                  onClick={() => setShowApproveModal(false)}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  variant="primary"
+                  className="flex-1 bg-mata-alta"
+                  onClick={() => setShowApproveModal(false)}
+                >
+                  Confirmar Aprovação
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -475,23 +594,44 @@ export default function PropostaAnalysisPage() {
       )}
 
       {showCorrectionModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in">
-          <Card className="w-full max-w-md shadow-2xl animate-in zoom-in-95">
+        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <Card className="animate-in zoom-in-95 w-full max-w-md shadow-2xl">
             <CardContent className="p-6">
-              <h3 className="mb-4 font-sora text-lg font-bold text-cerrado-profundo">Solicitar Correção</h3>
+              <h3 className="mb-4 font-sora text-lg font-bold text-cerrado-profundo">
+                Solicitar Correção
+              </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="mb-1 block text-sm font-bold text-gray-700">Descrição da Pendência</label>
-                  <textarea placeholder="Descreva o que precisa ser corrigido..." className="min-h-[100px] w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-mata-alta focus:outline-none" />
+                  <label className="mb-1 block text-sm font-bold text-gray-700">
+                    Descrição da Pendência
+                  </label>
+                  <textarea
+                    placeholder="Descreva o que precisa ser corrigido..."
+                    className="min-h-[100px] w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-mata-alta focus:outline-none"
+                  />
                 </div>
                 <div className="flex items-center gap-2 rounded-lg border border-blue-100 bg-blue-50 p-3">
                   <IconClock size={16} className="text-blue-600" />
-                  <span className="text-sm text-blue-700">Prazo automático: <strong>+15 dias úteis</strong></span>
+                  <span className="text-sm text-blue-700">
+                    Prazo automático: <strong>+15 dias úteis</strong>
+                  </span>
                 </div>
               </div>
               <div className="mt-6 flex gap-3">
-                <Button variant="secondary" className="flex-1" onClick={() => setShowCorrectionModal(false)}>Cancelar</Button>
-                <Button variant="primary" className="flex-1" onClick={() => setShowCorrectionModal(false)}>Enviar Notificação</Button>
+                <Button
+                  variant="secondary"
+                  className="flex-1"
+                  onClick={() => setShowCorrectionModal(false)}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  variant="primary"
+                  className="flex-1"
+                  onClick={() => setShowCorrectionModal(false)}
+                >
+                  Enviar Notificação
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -499,18 +639,37 @@ export default function PropostaAnalysisPage() {
       )}
 
       {showRejectModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in">
-          <Card className="w-full max-w-md shadow-2xl animate-in zoom-in-95">
+        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <Card className="animate-in zoom-in-95 w-full max-w-md shadow-2xl">
             <CardContent className="p-6">
               <h3 className="mb-2 font-sora text-lg font-bold text-red-600">Reprovar Proposta</h3>
-              <p className="mb-4 text-sm text-gray-600">Esta ação é irreversível e requer justificativa obrigatória.</p>
+              <p className="mb-4 text-sm text-gray-600">
+                Esta ação é irreversível e requer justificativa obrigatória.
+              </p>
               <div>
-                <label className="mb-1 block text-sm font-bold text-gray-700">Justificativa da Reprovação *</label>
-                <textarea placeholder="Campo obrigatório para auditoria..." className="min-h-[120px] w-full rounded-lg border border-red-200 p-3 text-sm focus:border-red-400 focus:outline-none focus:ring-1 focus:ring-red-200" />
+                <label className="mb-1 block text-sm font-bold text-gray-700">
+                  Justificativa da Reprovação *
+                </label>
+                <textarea
+                  placeholder="Campo obrigatório para auditoria..."
+                  className="min-h-[120px] w-full rounded-lg border border-red-200 p-3 text-sm focus:border-red-400 focus:outline-none focus:ring-1 focus:ring-red-200"
+                />
               </div>
               <div className="mt-6 flex gap-3">
-                <Button variant="secondary" className="flex-1" onClick={() => setShowRejectModal(false)}>Cancelar</Button>
-                <Button variant="secondary" className="flex-1 border-red-200 text-red-600 hover:bg-red-50" onClick={() => setShowRejectModal(false)}>Confirmar Reprovação</Button>
+                <Button
+                  variant="secondary"
+                  className="flex-1"
+                  onClick={() => setShowRejectModal(false)}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="flex-1 border-red-200 text-red-600 hover:bg-red-50"
+                  onClick={() => setShowRejectModal(false)}
+                >
+                  Confirmar Reprovação
+                </Button>
               </div>
             </CardContent>
           </Card>
