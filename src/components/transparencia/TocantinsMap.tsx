@@ -9,9 +9,22 @@ import { RegionPath } from './RegionPath';
 import { RegionTooltip } from './RegionTooltip';
 import { ProjectMarker } from './ProjectMarker';
 import { ProjectCard } from './ProjectCard';
+import { MapLegend } from './MapLegend';
 
 // Using the detailed IBGE malha containing 139 municipalities grouped by their 8 macro-regions
 import tocantinsMalha from '@/lib/geo/tocantins-malha.json';
+
+// Porcentagem fixa do orçamento alocado (mock para demonstração JREDD+)
+const REGION_BUDGET_PERCENTAGES: Record<string, string> = {
+  '17001': '12%', // Bico
+  '17002': '18%', // Araguaína
+  '17003': '15%', // Miracema
+  '17004': '22%', // Rio Formoso (Palmas)
+  '17005': '10%', // Gurupi
+  '17006': '9%',  // Porto Nacional
+  '17007': '8%',  // Jalapão
+  '17008': '6%',  // Dianópolis
+};
 
 export function TocantinsMap() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,11 +46,28 @@ export function TocantinsMap() {
 
   const features = tocantinsMalha.features as any[];
 
-  const { projection, pathGenerator, getFeatureBounds } = useGeoProjection({
+  const { projection, pathGenerator, getFeatureBounds, getFeatureCentroid } = useGeoProjection({
     width: dimensions.width,
     height: dimensions.height,
     features: features,
   });
+
+  // Calculate region centroids for text overlay
+  const regionCentroids = useMemo(() => {
+    const centroids: Record<string, [number, number]> = {};
+    const regionIds = Object.keys(TOCANTINS_REGIONS);
+    
+    regionIds.forEach(regionId => {
+      const regionFeatures = features.filter(f => f.properties.regionId === regionId);
+      if (regionFeatures.length > 0) {
+        centroids[regionId] = getFeatureCentroid({
+          type: 'FeatureCollection',
+          features: regionFeatures
+        });
+      }
+    });
+    return centroids;
+  }, [features, getFeatureCentroid]);
 
   // Calculate transform for zoom
   const [transform, setTransform] = useState('translate(0,0) scale(1)');
@@ -173,6 +203,29 @@ export function TocantinsMap() {
             );
           })}
 
+          {/* Region Overlays (Percentages) - Only visible when NO region is selected */}
+          {!selectedRegionId && Object.entries(regionCentroids).map(([regionId, [x, y]]) => {
+            // Apply small manual offsets if some centroids are visually off
+            let dx = 0;
+            let dy = 0;
+            if (regionId === '17001') dy = -10; // Bico up
+            if (regionId === '17007') dx = 10;  // Jalapão right
+
+            return (
+              <g key={`overlay-${regionId}`} className="pointer-events-none" transform={`translate(${x + dx}, ${y + dy})`}>
+                <rect x="-20" y="-12" width="40" height="24" rx="4" fill="rgba(255,255,255,0.9)" className="drop-shadow-sm" />
+                <text 
+                  textAnchor="middle" 
+                  alignmentBaseline="middle" 
+                  className="font-sora text-xs font-bold text-cerrado-profundo"
+                  y="1"
+                >
+                  {REGION_BUDGET_PERCENTAGES[regionId]}
+                </text>
+              </g>
+            );
+          })}
+
           {/* Project Markers (only visible when zoomed in) */}
           {selectedRegionId && regionProjects.map((project) => {
             const [x, y] = projection([project.longitude, project.latitude]) || [0, 0];
@@ -210,6 +263,9 @@ export function TocantinsMap() {
           onClose={() => setSelectedProject(null)} 
         />
       )}
+
+      {/* Map Legend */}
+      {!selectedRegionId && <MapLegend />}
     </div>
   );
 }
