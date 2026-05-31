@@ -14,7 +14,7 @@ export default function MapaInterativoPage() {
         </div>
       </div>
       <div className="flex-1 overflow-hidden rounded-xl border border-gray-200 shadow-md">
-        <TocantinsMap />
+        <TocantinsMap fullscreen />
       </div>
     </div>
   );

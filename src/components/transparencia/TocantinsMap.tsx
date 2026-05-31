@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { IconArrowLeft } from '@tabler/icons-react';
+import { IconArrowLeft, IconChartPie, IconChartPieOff } from '@tabler/icons-react';
 import { TOCANTINS_REGIONS, Region } from '@/lib/geo/tocantins-regions';
 import { MOCK_PROJECTS, MockProject } from '@/lib/geo/mock-projects';
 import { useGeoProjection } from '@/lib/geo/useGeoProjection';
@@ -26,7 +26,12 @@ const REGION_BUDGET_PERCENTAGES: Record<string, string> = {
   '17008': '6%', // Dianópolis
 };
 
-export function TocantinsMap() {
+interface TocantinsMapProps {
+  /** When true, legend is shown in full size and positioned to not cover the map */
+  fullscreen?: boolean;
+}
+
+export function TocantinsMap({ fullscreen = false }: TocantinsMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [hoveredFeature, setHoveredFeature] = useState<{
@@ -39,6 +44,7 @@ export function TocantinsMap() {
   } | null>(null);
   const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<MockProject | null>(null);
+  const [showPercentages, setShowPercentages] = useState(false);
 
   // Resize observer to keep SVG responsive
   useEffect(() => {
@@ -218,8 +224,9 @@ export function TocantinsMap() {
             );
           })}
 
-          {/* Region Overlays (Percentages) - Only visible when NO region is selected */}
-          {!selectedRegionId &&
+          {/* Region Overlays (Percentages) - Only visible when toggled ON and NO region is selected */}
+          {showPercentages &&
+            !selectedRegionId &&
             Object.entries(regionCentroids).map(([regionId, [x, y]]) => {
               // Apply small manual offsets if some centroids are visually off
               let dx = 0;
@@ -292,8 +299,33 @@ export function TocantinsMap() {
         <ProjectCard project={selectedProject} onClose={() => setSelectedProject(null)} />
       )}
 
+      {/* Toggle for percentage overlay */}
+      {!selectedRegionId && (
+        <button
+          onClick={() => setShowPercentages((prev) => !prev)}
+          title={showPercentages ? 'Ocultar % do orçamento' : 'Exibir % do orçamento'}
+          className={`absolute right-3 top-3 z-10 flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-bold shadow-sm backdrop-blur-md transition-all duration-200 ${
+            showPercentages
+              ? 'border-mata-alta/30 bg-mata-alta/10 text-mata-alta hover:bg-mata-alta/20'
+              : 'border-gray-200 bg-white/90 text-gray-500 hover:bg-gray-50 hover:text-cerrado-profundo'
+          }`}
+        >
+          {showPercentages ? (
+            <>
+              <IconChartPieOff size={14} />
+              <span className="hidden sm:inline">Ocultar %</span>
+            </>
+          ) : (
+            <>
+              <IconChartPie size={14} />
+              <span className="hidden sm:inline">Orçamento %</span>
+            </>
+          )}
+        </button>
+      )}
+
       {/* Map Legend */}
-      {!selectedRegionId && <MapLegend />}
+      {!selectedRegionId && <MapLegend compact={!fullscreen} />}
     </div>
   );
 }
