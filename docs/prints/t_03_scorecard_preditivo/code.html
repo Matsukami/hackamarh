@@ -1,0 +1,439 @@
+<!doctype html>
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GAIA - Scorecard Preditivo</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&amp;family=Sora:wght@400;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-secondary': '#ffffff',
+              'surface-tint': '#396756',
+              secondary: '#1a6b4a',
+              'outline-variant': '#c0c8c3',
+              'error-container': '#ffdad6',
+              surface: '#fef9f1',
+              'surface-container': '#f2ede5',
+              tertiary: '#1c2300',
+              'primary-fixed-dim': '#a0d1bc',
+              'surface-variant': '#e7e2da',
+              'on-tertiary-fixed-variant': '#3f4c00',
+              'on-error': '#ffffff',
+              'on-primary-container': '#79a894',
+              'inverse-primary': '#a0d1bc',
+              'secondary-fixed-dim': '#8ad6ae',
+              error: '#ba1a1a',
+              'surface-bright': '#fef9f1',
+              'inverse-surface': '#32302b',
+              'on-error-container': '#93000a',
+              primary: '#00261b',
+              'on-surface': '#1d1c17',
+              background: '#fef9f1',
+              'on-secondary-fixed': '#002113',
+              'surface-container-high': '#ece8e0',
+              'on-primary-fixed-variant': '#214f3f',
+              'primary-container': '#0b3d2e',
+              'surface-container-low': '#f8f3eb',
+              'primary-fixed': '#bcedd7',
+              'on-secondary-container': '#227150',
+              'surface-container-highest': '#e7e2da',
+              'on-tertiary-container': '#92a831',
+              'secondary-container': '#a5f3c9',
+              'on-primary': '#ffffff',
+              'on-tertiary-fixed': '#181e00',
+              'tertiary-fixed-dim': '#bad156',
+              'tertiary-fixed': '#d5ee6f',
+              'surface-dim': '#ded9d2',
+              'on-tertiary': '#ffffff',
+              'on-background': '#1d1c17',
+              'on-secondary-fixed-variant': '#005235',
+              'inverse-on-surface': '#f5f0e8',
+              'on-primary-fixed': '#002116',
+              'secondary-fixed': '#a5f3c9',
+              outline: '#717974',
+              'surface-container-lowest': '#ffffff',
+              'on-surface-variant': '#414944',
+              'tertiary-container': '#303a00',
+            },
+            borderRadius: {
+              DEFAULT: '0.125rem',
+              lg: '0.25rem',
+              xl: '0.5rem',
+              full: '0.75rem',
+            },
+            spacing: {
+              'margin-mobile': '16px',
+              unit: '8px',
+              'container-max': '1280px',
+              gutter: '24px',
+              'margin-desktop': '40px',
+            },
+            fontFamily: {
+              'display-lg': ['Sora'],
+              'body-md': ['DM Sans'],
+              'body-lg': ['DM Sans'],
+              'headline-sm': ['Sora'],
+              'label-md': ['DM Sans'],
+              'headline-lg': ['Sora'],
+              'headline-lg-mobile': ['Sora'],
+              'headline-md': ['Sora'],
+              'label-sm': ['DM Sans'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                {
+                  lineHeight: '56px',
+                  letterSpacing: '-0.02em',
+                  fontWeight: '700',
+                },
+              ],
+              'body-md': [
+                '15px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '400',
+                },
+              ],
+              'body-lg': [
+                '18px',
+                {
+                  lineHeight: '28px',
+                  fontWeight: '400',
+                },
+              ],
+              'headline-sm': [
+                '18px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-md': [
+                '13px',
+                {
+                  lineHeight: '18px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '600',
+                },
+              ],
+              'headline-lg': [
+                '32px',
+                {
+                  lineHeight: '40px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-lg-mobile': [
+                '28px',
+                {
+                  lineHeight: '36px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-md': [
+                '24px',
+                {
+                  lineHeight: '32px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-sm': [
+                '11px',
+                {
+                  lineHeight: '16px',
+                  fontWeight: '600',
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+
+      /* Custom animations for the scorecard */
+      @keyframes gaugeFill {
+        from {
+          stroke-dasharray: 0, 100;
+        }
+        to {
+          stroke-dasharray: 82, 100;
+        } /* Matches the 82% score */
+      }
+
+      .gauge-circle {
+        transition: stroke-dasharray 1.5s ease-out;
+      }
+
+      .glass-panel {
+        background: rgba(38, 38, 38, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface font-body-md flex min-h-screen flex-col">
+    <!-- Top Navigation -->
+    <header
+      class="bg-surface dark:bg-inverse-surface border-outline-variant dark:border-outline flat no shadows px-margin-desktop max-w-container-max docked full-width top-0 z-50 mx-auto flex h-20 w-full items-center justify-between border-b"
+    >
+      <div class="flex items-center gap-8">
+        <h1
+          class="text-headline-md font-headline-md text-primary dark:text-primary-fixed font-bold"
+        >
+          GAIA
+        </h1>
+        <nav class="hidden gap-6 md:flex">
+          <a
+            class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed font-label-md text-label-md py-2"
+            href="#"
+            >Mural de Editais</a
+          >
+          <a
+            class="text-primary dark:text-primary-fixed font-label-md text-label-md border-primary dark:border-primary-fixed border-b-2 py-2 pb-1 font-bold"
+            href="#"
+            >Portal do Avaliador</a
+          >
+          <a
+            class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed font-label-md text-label-md py-2"
+            href="#"
+            >Portal de Transparência</a
+          >
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          class="text-label-md font-label-md text-primary border-primary hover:bg-surface-container-low rounded-lg border px-4 py-2 transition-colors"
+        >
+          Entrar
+        </button>
+        <button
+          class="text-label-md font-label-md bg-primary text-on-primary hover:bg-primary-container rounded-lg px-4 py-2 transition-colors"
+        >
+          Cadastrar
+        </button>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main
+      class="max-w-container-max px-margin-mobile md:px-margin-desktop mx-auto flex w-full flex-grow flex-col items-center py-12"
+    >
+      <!-- Scorecard Container -->
+      <div
+        class="glass-panel relative w-full max-w-3xl overflow-hidden rounded-xl text-white shadow-xl"
+      >
+        <!-- Background Accent -->
+        <div
+          class="bg-primary absolute right-0 top-0 -mr-32 -mt-32 h-64 w-64 rounded-full opacity-20 blur-3xl"
+        ></div>
+        <div class="relative z-10 p-8">
+          <div class="mb-8 text-center">
+            <p class="text-label-sm font-label-sm text-surface-dim mb-2 uppercase tracking-wider">
+              Análise Preditiva de Proposta
+            </p>
+            <h2 class="text-headline-lg font-headline-lg text-white">Scorecard de Viabilidade</h2>
+          </div>
+          <!-- Main Score Display -->
+          <div class="mb-12 flex flex-col items-center justify-center gap-12 md:flex-row">
+            <!-- Gauge -->
+            <div class="relative flex h-48 w-48 items-center justify-center">
+              <svg class="h-full w-full -rotate-90 transform" viewbox="0 0 36 36">
+                <!-- Background track -->
+                <path
+                  class="text-surface-variant/20"
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                ></path>
+                <!-- Progress track -->
+                <path
+                  class="text-tertiary-fixed gauge-circle"
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-dasharray="82, 100"
+                  stroke-linecap="round"
+                  stroke-width="3"
+                ></path>
+              </svg>
+              <div class="absolute flex flex-col items-center justify-center">
+                <span class="text-display-lg font-display-lg text-tertiary-fixed">82</span>
+                <span class="text-label-sm font-label-sm text-surface-dim">/ 100</span>
+              </div>
+            </div>
+            <!-- Score Interpretation -->
+            <div class="max-w-xs text-center md:text-left">
+              <div
+                class="bg-secondary/20 border-secondary mb-4 inline-flex items-center rounded-full border px-3 py-1"
+              >
+                <span class="bg-secondary mr-2 h-2 w-2 rounded-full"></span>
+                <span class="text-label-md font-label-md text-secondary-fixed"
+                  >Alta Viabilidade</span
+                >
+              </div>
+              <p class="text-body-md font-body-md text-surface-dim">
+                A proposta demonstra um forte alinhamento com os critérios do Fundo Climático.
+                Pequenos ajustes na seção de impacto podem elevar a pontuação.
+              </p>
+            </div>
+          </div>
+          <!-- Score Breakdown -->
+          <div class="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <!-- Metric 1: Elegibilidade -->
+            <div class="bg-inverse-surface/50 border-outline/20 rounded-lg border p-4">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-label-md font-label-md flex items-center gap-2">
+                  <span class="material-symbols-outlined text-surface-variant text-sm"
+                    >check_circle</span
+                  >
+                  Elegibilidade
+                </span>
+                <span class="text-label-md font-label-md text-white">100%</span>
+              </div>
+              <div class="bg-surface-variant/20 h-1.5 w-full rounded-full">
+                <div class="bg-secondary h-1.5 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- Metric 2: Completude -->
+            <div class="bg-inverse-surface/50 border-outline/20 rounded-lg border p-4">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-label-md font-label-md flex items-center gap-2">
+                  <span class="material-symbols-outlined text-surface-variant text-sm"
+                    >done_all</span
+                  >
+                  Completude
+                </span>
+                <span class="text-label-md font-label-md text-white">95%</span>
+              </div>
+              <div class="bg-surface-variant/20 h-1.5 w-full rounded-full">
+                <div class="bg-secondary h-1.5 rounded-full" style="width: 95%"></div>
+              </div>
+            </div>
+            <!-- Metric 3: Impacto -->
+            <div class="bg-inverse-surface/50 border-outline/20 rounded-lg border p-4">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-label-md font-label-md flex items-center gap-2">
+                  <span class="material-symbols-outlined text-surface-variant text-sm"
+                    >monitoring</span
+                  >
+                  Impacto Estimado
+                </span>
+                <span class="text-label-md font-label-md text-tertiary-fixed-dim">65%</span>
+              </div>
+              <div class="bg-surface-variant/20 h-1.5 w-full rounded-full">
+                <div class="bg-tertiary-fixed-dim h-1.5 rounded-full" style="width: 65%"></div>
+              </div>
+              <p class="text-label-sm font-label-sm text-surface-variant mt-2">
+                Requer detalhamento das métricas de CO2.
+              </p>
+            </div>
+            <!-- Metric 4: Alinhamento -->
+            <div class="bg-inverse-surface/50 border-outline/20 rounded-lg border p-4">
+              <div class="mb-2 flex items-center justify-between">
+                <span class="text-label-md font-label-md flex items-center gap-2">
+                  <span class="material-symbols-outlined text-surface-variant text-sm">eco</span>
+                  Alinhamento Estratégico
+                </span>
+                <span class="text-label-md font-label-md text-white">88%</span>
+              </div>
+              <div class="bg-surface-variant/20 h-1.5 w-full rounded-full">
+                <div class="bg-secondary h-1.5 rounded-full" style="width: 88%"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Actions -->
+          <div
+            class="border-outline/20 mt-8 flex flex-col justify-end gap-4 border-t pt-8 sm:flex-row"
+          >
+            <button
+              class="border-outline text-surface-dim hover:bg-surface-variant/10 text-label-md font-label-md flex items-center justify-center gap-2 rounded-lg border px-6 py-3 transition-colors"
+            >
+              <span class="material-symbols-outlined text-sm">edit</span>
+              Voltar e Melhorar
+            </button>
+            <button
+              class="bg-primary text-on-primary hover:bg-primary-container text-label-md font-label-md flex items-center justify-center gap-2 rounded-lg px-6 py-3 transition-colors"
+            >
+              Confirmar Submissão
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-highest dark:bg-inverse-surface border-outline-variant dark:border-outline flat no shadows px-margin-desktop gap-gutter max-w-container-max mx-auto mt-auto grid w-full grid-cols-1 border-t py-12 md:grid-cols-4"
+    >
+      <div class="col-span-1 md:col-span-2">
+        <p
+          class="text-headline-sm font-headline-sm text-primary dark:text-primary-fixed mb-4 font-bold"
+        >
+          GAIA
+        </p>
+        <p class="text-body-md font-body-md text-on-surface dark:text-inverse-on-surface">
+          © 2024 GAIA Fundo Climático. Programa JREDD+ Tocantins.
+        </p>
+      </div>
+      <div class="col-span-1 flex justify-end gap-6 md:col-span-2">
+        <a
+          class="text-on-surface-variant dark:text-surface-variant hover:text-primary text-label-sm font-label-sm transition-colors"
+          href="#"
+          >Sobre o JREDD+</a
+        >
+        <a
+          class="text-on-surface-variant dark:text-surface-variant hover:text-primary text-label-sm font-label-sm transition-colors"
+          href="#"
+          >Transparência</a
+        >
+        <a
+          class="text-on-surface-variant dark:text-surface-variant hover:text-primary text-label-sm font-label-sm transition-colors"
+          href="#"
+          >Contato</a
+        >
+        <a
+          class="text-on-surface-variant dark:text-surface-variant hover:text-primary text-label-sm font-label-sm transition-colors"
+          href="#"
+          >Privacidade</a
+        >
+      </div>
+    </footer>
+    <script>
+      // Trigger gauge animation on load
+      document.addEventListener('DOMContentLoaded', () => {
+        const gauge = document.querySelector('.gauge-circle');
+        if (gauge) {
+          // Force a reflow
+          void gauge.offsetWidth;
+          gauge.style.strokeDasharray = '82, 100';
+        }
+      });
+    </script>
+  </body>
+</html>

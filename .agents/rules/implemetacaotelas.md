@@ -12,4 +12,3 @@ Antes de implementar, modificar ou revisar **qualquer tela ou fluxo de navegaç�
 
 **Arquivo:** `JREDD_MVP_Especificacao_Telas.docx`
 **Descrição:** Especificação completa de funcionalidades, requisitos técnicos e fluxos de uso de todas as telas do MVP — Hackathon 2026.
-

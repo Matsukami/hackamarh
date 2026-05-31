@@ -1,0 +1,546 @@
+<!doctype html>
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GAIA Proponent Portal - Painel do Proponente</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Sora:wght@400;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-secondary': '#ffffff',
+              'surface-tint': '#396756',
+              secondary: '#1a6b4a',
+              'outline-variant': '#c0c8c3',
+              'error-container': '#ffdad6',
+              surface: '#fef9f1',
+              'surface-container': '#f2ede5',
+              tertiary: '#1c2300',
+              'primary-fixed-dim': '#a0d1bc',
+              'surface-variant': '#e7e2da',
+              'on-tertiary-fixed-variant': '#3f4c00',
+              'on-error': '#ffffff',
+              'on-primary-container': '#79a894',
+              'inverse-primary': '#a0d1bc',
+              'secondary-fixed-dim': '#8ad6ae',
+              error: '#ba1a1a',
+              'surface-bright': '#fef9f1',
+              'inverse-surface': '#32302b',
+              'on-error-container': '#93000a',
+              primary: '#00261b',
+              'on-surface': '#1d1c17',
+              background: '#fef9f1',
+              'on-secondary-fixed': '#002113',
+              'surface-container-high': '#ece8e0',
+              'on-primary-fixed-variant': '#214f3f',
+              'primary-container': '#0b3d2e',
+              'surface-container-low': '#f8f3eb',
+              'primary-fixed': '#bcedd7',
+              'on-secondary-container': '#227150',
+              'surface-container-highest': '#e7e2da',
+              'on-tertiary-container': '#92a831',
+              'secondary-container': '#a5f3c9',
+              'on-primary': '#ffffff',
+              'on-tertiary-fixed': '#181e00',
+              'tertiary-fixed-dim': '#bad156',
+              'tertiary-fixed': '#d5ee6f',
+              'surface-dim': '#ded9d2',
+              'on-tertiary': '#ffffff',
+              'on-background': '#1d1c17',
+              'on-secondary-fixed-variant': '#005235',
+              'inverse-on-surface': '#f5f0e8',
+              'on-primary-fixed': '#002116',
+              'secondary-fixed': '#a5f3c9',
+              outline: '#717974',
+              'surface-container-lowest': '#ffffff',
+              'on-surface-variant': '#414944',
+              'tertiary-container': '#303a00',
+            },
+            borderRadius: {
+              DEFAULT: '0.125rem',
+              lg: '0.25rem',
+              xl: '0.5rem',
+              full: '0.75rem',
+            },
+            spacing: {
+              'margin-mobile': '16px',
+              unit: '8px',
+              'container-max': '1280px',
+              gutter: '24px',
+              'margin-desktop': '40px',
+            },
+            fontFamily: {
+              'display-lg': ['Sora'],
+              'body-md': ['DM Sans'],
+              'body-lg': ['DM Sans'],
+              'headline-sm': ['Sora'],
+              'label-md': ['DM Sans'],
+              'headline-lg': ['Sora'],
+              'headline-lg-mobile': ['Sora'],
+              'headline-md': ['Sora'],
+              'label-sm': ['DM Sans'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                {
+                  lineHeight: '56px',
+                  letterSpacing: '-0.02em',
+                  fontWeight: '700',
+                },
+              ],
+              'body-md': [
+                '15px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '400',
+                },
+              ],
+              'body-lg': [
+                '18px',
+                {
+                  lineHeight: '28px',
+                  fontWeight: '400',
+                },
+              ],
+              'headline-sm': [
+                '18px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-md': [
+                '13px',
+                {
+                  lineHeight: '18px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '600',
+                },
+              ],
+              'headline-lg': [
+                '32px',
+                {
+                  lineHeight: '40px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-lg-mobile': [
+                '28px',
+                {
+                  lineHeight: '36px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-md': [
+                '24px',
+                {
+                  lineHeight: '32px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-sm': [
+                '11px',
+                {
+                  lineHeight: '16px',
+                  fontWeight: '600',
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-inverse-on-surface text-on-surface font-body-md text-body-md flex min-h-screen flex-col antialiased"
+  >
+    <!-- TopNavBar -->
+    <header
+      class="bg-surface dark:bg-surface-dim border-outline-variant dark:border-outline sticky top-0 z-50 border-b"
+    >
+      <div
+        class="px-margin-desktop max-w-container-max mx-auto flex w-full items-center justify-between py-4"
+      >
+        <!-- Brand Logo -->
+        <div class="flex items-center gap-2">
+          <span
+            class="material-symbols-outlined text-primary text-3xl"
+            style="font-variation-settings: 'FILL' 1"
+            >spa</span
+          >
+          <span
+            class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed-dim font-bold"
+            >GAIA Proponent Portal</span
+          >
+        </div>
+        <!-- Navigation Links (Desktop) -->
+        <nav class="hidden h-full items-center gap-8 md:flex">
+          <a
+            class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest flex h-full items-center rounded-lg px-3 py-2 transition-colors"
+            href="#"
+            >Mural de Editais</a
+          >
+          <!-- This page is likely the Proponent Portal dashboard, but the available links don't perfectly match "Painel do Proponente". "Avaliador Portal" is for evaluators. We'll leave both as inactive for the sake of the JSON, or assume 'Mural de Editais' is the closest if forced, but neither strictly match. Let's keep them generic inactive since this is a specific detail page. -->
+          <a
+            class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest flex h-full items-center rounded-lg px-3 py-2 transition-colors"
+            href="#"
+            >Avaliador Portal</a
+          >
+        </nav>
+        <!-- Right Actions -->
+        <div class="flex items-center gap-4">
+          <div class="relative hidden md:flex">
+            <span
+              class="material-symbols-outlined text-outline absolute left-3 top-1/2 -translate-y-1/2"
+              >search</span
+            >
+            <input
+              class="bg-surface-container-low border-outline-variant text-body-md focus:ring-primary rounded-full border py-2 pl-10 pr-4 transition-all focus:border-transparent focus:outline-none focus:ring-2"
+              placeholder="Buscar..."
+              type="text"
+            />
+          </div>
+          <button
+            aria-label="notifications"
+            class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-full p-2 transition-all duration-100 hover:scale-95"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <button
+            aria-label="help_outline"
+            class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-full p-2 transition-all duration-100 hover:scale-95"
+          >
+            <span class="material-symbols-outlined">help_outline</span>
+          </button>
+          <div
+            class="bg-surface-container-highest border-outline-variant ml-2 h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border"
+          >
+            <img
+              alt="Proponent Profile"
+              class="h-full w-full object-cover"
+              data-alt="A professional headshot of a middle-aged man with short dark hair and a neat beard, wearing a tailored blue blazer over a crisp white shirt. He has a warm, confident smile. The background is a softly blurred, modern office setting with natural light coming from large windows. The lighting highlights his features smoothly, creating a trustworthy and corporate yet approachable mood."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsv37OkTaBjabPp6mZiwUw1HyT-x_DW4SUDD2w_rC9bGfZwdN6wqS1oqdKh7uFTbzxfSc6U2VsPa5oplDwhUVdGjaCRZmn__B8-IJ8qUxLdnmHaxloAV9LQ3IOb8ECZHP7Ag0pmBNdsMW5T6I5kUnq1rN4HkEbDkfXryHQv0oMb9HXTqHACiMeNinmUnoTN7oQ4onck9P03AonuvMSqo_WVLytWtJ4ECTAMBpE73TRAYObewBaDZogRv2qJOWgZfQF8HaADyYcXzfp"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main
+      class="max-w-container-max px-margin-mobile md:px-margin-desktop mx-auto flex w-full flex-grow flex-col gap-8 py-8 md:py-12"
+    >
+      <!-- Header Section & Project Selector -->
+      <div class="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+        <div>
+          <h1 class="font-display-lg text-display-lg text-on-background mb-2">
+            Painel do Proponente
+          </h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant">
+            Acompanhe o status e a execução dos seus projetos.
+          </p>
+        </div>
+        <div class="w-full min-w-[300px] md:w-auto">
+          <label class="sr-only" for="project-select">Selecione o Projeto</label>
+          <div class="relative">
+            <select
+              class="bg-surface border-outline font-label-md text-label-md text-on-surface focus:ring-primary w-full cursor-pointer appearance-none rounded-lg border py-3 pl-4 pr-10 shadow-sm focus:border-transparent focus:outline-none focus:ring-2"
+              id="project-select"
+            >
+              <option>Projeto Reflorestamento Nascentes (PRN-2024)</option>
+              <option>Implementação Agroflorestal (IA-2023)</option>
+            </select>
+            <span
+              class="material-symbols-outlined text-outline pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
+              >expand_more</span
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Notification Banner -->
+      <div
+        class="bg-error-container border-error/20 animate-pulse-slow flex items-start gap-4 rounded-xl border p-4 shadow-sm"
+      >
+        <span
+          class="material-symbols-outlined text-error mt-0.5"
+          style="font-variation-settings: 'FILL' 1"
+          >warning</span
+        >
+        <div class="flex-grow">
+          <h3 class="font-headline-sm text-headline-sm text-on-error-container">
+            Pendência: Aguarda o número do CAR
+          </h3>
+          <p class="font-body-md text-body-md text-on-error-container mt-1">
+            Por favor, atualize o Cadastro Ambiental Rural para dar continuidade à análise da sua
+            proposta.
+          </p>
+        </div>
+        <div
+          class="bg-surface-container-lowest border-error/10 flex flex-col items-end whitespace-nowrap rounded-lg border px-3 py-1.5"
+        >
+          <span class="font-label-sm text-label-sm text-error uppercase tracking-wider">Prazo</span>
+          <span class="font-headline-sm text-headline-sm text-error font-bold">15 dias</span>
+        </div>
+      </div>
+      <!-- Project Status & Quick Actions Bento Grid -->
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <!-- Main Status Card -->
+        <div
+          class="bg-surface-container-lowest border-primary/10 relative flex flex-col justify-center overflow-hidden rounded-xl border p-6 shadow-sm md:p-8 lg:col-span-2"
+        >
+          <!-- Decorative background pattern -->
+          <div
+            class="bg-secondary-container/30 pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full blur-3xl"
+          ></div>
+          <span
+            class="font-label-sm text-label-sm text-on-surface-variant z-10 mb-2 uppercase tracking-widest"
+            >Status Atual</span
+          >
+          <div class="z-10 flex items-center gap-4">
+            <span
+              class="h-4 w-4 rounded-full bg-[#fbbc04] shadow-[0_0_12px_rgba(251,188,4,0.5)]"
+            ></span>
+            <h2 class="font-display-lg text-display-lg text-primary m-0 leading-tight">
+              Sua proposta está em análise
+            </h2>
+          </div>
+          <p class="font-body-lg text-body-lg text-on-surface-variant z-10 mt-4 max-w-2xl">
+            Nossa equipe técnica está avaliando a documentação enviada. Fique atento às notificações
+            para possíveis ajustes ou solicitações de evidências.
+          </p>
+          <div class="z-10 mt-8 flex gap-4">
+            <div class="bg-surface-container flex items-center gap-2 rounded-lg px-4 py-2">
+              <span class="material-symbols-outlined text-outline text-sm">calendar_today</span>
+              <span class="font-label-md text-label-md text-on-surface">Enviado: 12/10/2024</span>
+            </div>
+            <div class="bg-surface-container flex items-center gap-2 rounded-lg px-4 py-2">
+              <span class="material-symbols-outlined text-outline text-sm">fingerprint</span>
+              <span class="font-label-md text-label-md text-on-surface">ID: PRN-2024-089</span>
+            </div>
+          </div>
+        </div>
+        <!-- Quick Actions -->
+        <div
+          class="bg-surface-container-lowest border-outline-variant/50 flex flex-col gap-4 rounded-xl border p-6 shadow-sm"
+        >
+          <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Ações Rápidas</h3>
+          <button
+            class="bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md group flex w-full items-center justify-between rounded-lg px-6 py-4 transition-all hover:shadow-[0_4px_12px_rgba(0,82,53,0.15)]"
+          >
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+                >upload_file</span
+              >
+              <span>Enviar Evidências (T-05)</span>
+            </div>
+            <span
+              class="material-symbols-outlined opacity-50 transition-all group-hover:translate-x-1 group-hover:opacity-100"
+              >arrow_forward</span
+            >
+          </button>
+          <button
+            class="bg-surface-container-highest hover:bg-surface-variant text-on-surface font-label-md text-label-md border-outline-variant/50 group flex w-full items-center justify-between rounded-lg border px-6 py-4 transition-all"
+          >
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+                >receipt_long</span
+              >
+              <span>Lançar Despesas (T-06)</span>
+            </div>
+            <span
+              class="material-symbols-outlined opacity-50 transition-all group-hover:translate-x-1 group-hover:opacity-100"
+              >arrow_forward</span
+            >
+          </button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <!-- Installment Schedule -->
+        <div
+          class="bg-surface-container-lowest border-outline-variant/50 flex flex-col overflow-hidden rounded-xl border shadow-sm"
+        >
+          <div class="border-outline-variant/50 bg-surface-container-low border-b p-6">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined">payments</span>
+              Cronograma de Parcelas
+            </h3>
+          </div>
+          <div class="overflow-x-auto p-0">
+            <table class="w-full border-collapse text-left">
+              <thead>
+                <tr
+                  class="bg-surface text-on-surface-variant font-label-sm text-label-sm border-outline-variant/50 border-b uppercase tracking-wider"
+                >
+                  <th class="p-4 font-semibold">Parcela</th>
+                  <th class="p-4 font-semibold">Data Prevista</th>
+                  <th class="p-4 font-semibold">Valor</th>
+                  <th class="p-4 font-semibold">Status</th>
+                </tr>
+              </thead>
+              <tbody class="font-body-md text-body-md divide-outline-variant/30 divide-y">
+                <tr class="hover:bg-surface-container-lowest transition-colors">
+                  <td class="p-4 font-medium">01 - Inicial</td>
+                  <td class="text-on-surface-variant p-4">15/11/2024</td>
+                  <td class="p-4">R$ 50.000,00</td>
+                  <td class="p-4">
+                    <span
+                      class="bg-surface-container border-outline-variant text-on-surface-variant font-label-sm text-label-sm inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1"
+                    >
+                      <span class="bg-outline h-1.5 w-1.5 rounded-full"></span> Bloqueada
+                    </span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-lowest transition-colors">
+                  <td class="p-4 font-medium">02 - Execução</td>
+                  <td class="text-on-surface-variant p-4">15/02/2025</td>
+                  <td class="p-4">R$ 120.000,00</td>
+                  <td class="p-4">
+                    <span
+                      class="bg-surface-container border-outline-variant text-on-surface-variant font-label-sm text-label-sm inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1"
+                    >
+                      <span class="bg-outline h-1.5 w-1.5 rounded-full"></span> Bloqueada
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Communication History -->
+        <div
+          class="bg-surface-container-lowest border-outline-variant/50 flex h-[400px] flex-col rounded-xl border shadow-sm"
+        >
+          <div class="border-outline-variant/50 flex items-center justify-between border-b p-6">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined">forum</span>
+              Histórico de Comunicação
+            </h3>
+          </div>
+          <div
+            class="bg-surface-container-lowest flex flex-grow flex-col gap-6 overflow-y-auto p-6"
+          >
+            <!-- Message from Fiscal Agent -->
+            <div class="flex items-start gap-4">
+              <div
+                class="bg-primary-container text-on-primary-container font-label-md flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+              >
+                AF
+              </div>
+              <div
+                class="bg-surface-container-low border-outline-variant/30 relative rounded-2xl rounded-tl-none border p-4"
+              >
+                <div class="mb-1 flex items-baseline justify-between gap-4">
+                  <span class="font-label-md text-label-md text-on-surface"
+                    >Agente Fiscal (Sistema)</span
+                  >
+                  <span class="font-label-sm text-label-sm text-on-surface-variant"
+                    >Ontem, 14:30</span
+                  >
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Identificamos que o número do CAR preenchido na seção 3 difere do documento
+                  anexado. Por favor, verifique e atualize no sistema.
+                </p>
+              </div>
+            </div>
+            <!-- System Event -->
+            <div class="flex justify-center">
+              <div
+                class="bg-surface-container font-label-sm text-label-sm text-on-surface-variant border-outline-variant/50 flex items-center gap-2 rounded-full border px-3 py-1"
+              >
+                <span class="material-symbols-outlined text-[14px]">update</span>
+                Status alterado para "Em Análise"
+              </div>
+            </div>
+            <!-- Message from Proponent -->
+            <div class="flex flex-row-reverse items-start gap-4">
+              <div
+                class="bg-surface-container-highest border-outline-variant flex h-8 w-8 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border"
+              >
+                <img
+                  alt="Proponent"
+                  class="h-full w-full object-cover"
+                  data-alt="A professional headshot of a middle-aged man with short dark hair and a neat beard, wearing a tailored blue blazer over a crisp white shirt. He has a warm, confident smile. The background is a softly blurred, modern office setting with natural light coming from large windows. The lighting highlights his features smoothly, creating a trustworthy and corporate yet approachable mood."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS0NhOZLmV_9qBLDjBL6_1j2hzPgeYr4b-NBoSiPzBdnHAw2a3jyP8FLs12wGHmwb0ErYugp3Bx41fWs3-Fsus-0jSefGzGz62QWWLdhK1JWobJCANP0u6w0vchf6H0a3lDCpFUFPZnB18a5h5LiQYWQc_h0lLwWZGdJ7Du3ieWRtYEefLgSIuZ3LNQZWQnhQ5_SVTQlAKHhOykvEOY92z0eueoSE_6k2vq_NtqLat-TZP5NnRUKoDv_sJ36bwLY56xv-ZI0GnqqlQ"
+                />
+              </div>
+              <div
+                class="bg-surface border-outline-variant relative rounded-2xl rounded-tr-none border p-4 text-right"
+              >
+                <div class="mb-1 flex items-baseline justify-end gap-4">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant"
+                    >12/10/2024, 09:15</span
+                  >
+                  <span class="font-label-md text-label-md text-on-surface">Você</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Proposta enviada com todos os anexos obrigatórios.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-lowest dark:bg-surface-container-low border-outline-variant dark:border-outline mt-auto border-t"
+    >
+      <div
+        class="px-margin-desktop max-w-container-max mx-auto flex w-full flex-col items-center justify-between gap-4 py-8 md:flex-row"
+      >
+        <span
+          class="font-headline-sm text-headline-sm text-secondary dark:text-secondary-fixed-dim text-center md:text-left"
+        >
+          GAIA
+        </span>
+        <p
+          class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim text-center"
+        >
+          © 2024 GAIA - Fundo Climático do Estado do Tocantins. Todos os direitos reservados.
+        </p>
+        <nav class="flex flex-wrap justify-center gap-4">
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed focus:ring-primary rounded transition-colors focus:ring-2"
+            href="#"
+            >Termos de Uso</a
+          >
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed focus:ring-primary rounded transition-colors focus:ring-2"
+            href="#"
+            >Política de Privacidade</a
+          >
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed focus:ring-primary rounded transition-colors focus:ring-2"
+            href="#"
+            >Suporte Técnico</a
+          >
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
