@@ -44,17 +44,17 @@ Todo commit deve seguir o padrão **Conventional Commits**:
 
 ### Tipos permitidos
 
-| Tipo | Quando usar |
-|---|---|
-| `feat` | Nova funcionalidade para o usuário |
-| `fix` | Correção de bug |
+| Tipo       | Quando usar                              |
+| ---------- | ---------------------------------------- |
+| `feat`     | Nova funcionalidade para o usuário       |
+| `fix`      | Correção de bug                          |
 | `refactor` | Refatoração sem mudança de comportamento |
-| `style` | Ajustes de formatação, CSS, sem lógica |
-| `test` | Adição ou correção de testes |
-| `docs` | Documentação |
-| `chore` | Configuração, dependências, CI/CD |
-| `perf` | Melhoria de performance |
-| `revert` | Reversão de commit anterior |
+| `style`    | Ajustes de formatação, CSS, sem lógica   |
+| `test`     | Adição ou correção de testes             |
+| `docs`     | Documentação                             |
+| `chore`    | Configuração, dependências, CI/CD        |
+| `perf`     | Melhoria de performance                  |
+| `revert`   | Reversão de commit anterior              |
 
 ### Exemplos corretos
 
@@ -80,7 +80,7 @@ fix(t12): correct benefit distribution chart when janela_financiamento is null
 
 - **Primeira linha:** máximo 72 caracteres, imperativo, sem ponto final
 - **Escopo:** nome curto da tela, módulo ou camada (`t02`, `kanban`, `auth`, `db`, `api`)
-- **Corpo:** separado por linha em branco — explica *por que* a mudança foi necessária, não o que mudou (o diff já mostra o quê)
+- **Corpo:** separado por linha em branco — explica _por que_ a mudança foi necessária, não o que mudou (o diff já mostra o quê)
 - **Nunca** usar mensagens vagas: `fix bug`, `update`, `wip`, `teste`, `ajuste`
 
 ---

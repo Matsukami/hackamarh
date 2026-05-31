@@ -1,0 +1,602 @@
+<!doctype html>
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard de Repartição de Benefícios - Portal de Transparência GAIA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&amp;family=Sora:wght@600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-secondary': '#ffffff',
+              'surface-tint': '#396756',
+              secondary: '#1a6b4a',
+              'outline-variant': '#c0c8c3',
+              'error-container': '#ffdad6',
+              surface: '#fef9f1',
+              'surface-container': '#f2ede5',
+              tertiary: '#1c2300',
+              'primary-fixed-dim': '#a0d1bc',
+              'surface-variant': '#e7e2da',
+              'on-tertiary-fixed-variant': '#3f4c00',
+              'on-error': '#ffffff',
+              'on-primary-container': '#79a894',
+              'inverse-primary': '#a0d1bc',
+              'secondary-fixed-dim': '#8ad6ae',
+              error: '#ba1a1a',
+              'surface-bright': '#fef9f1',
+              'inverse-surface': '#32302b',
+              'on-error-container': '#93000a',
+              primary: '#00261b',
+              'on-surface': '#1d1c17',
+              background: '#fef9f1',
+              'on-secondary-fixed': '#002113',
+              'surface-container-high': '#ece8e0',
+              'on-primary-fixed-variant': '#214f3f',
+              'primary-container': '#0b3d2e',
+              'surface-container-low': '#f8f3eb',
+              'primary-fixed': '#bcedd7',
+              'on-secondary-container': '#227150',
+              'surface-container-highest': '#e7e2da',
+              'on-tertiary-container': '#92a831',
+              'secondary-container': '#a5f3c9',
+              'on-primary': '#ffffff',
+              'on-tertiary-fixed': '#181e00',
+              'tertiary-fixed-dim': '#bad156',
+              'tertiary-fixed': '#d5ee6f',
+              'surface-dim': '#ded9d2',
+              'on-tertiary': '#ffffff',
+              'on-background': '#1d1c17',
+              'on-secondary-fixed-variant': '#005235',
+              'inverse-on-surface': '#f5f0e8',
+              'on-primary-fixed': '#002116',
+              'secondary-fixed': '#a5f3c9',
+              outline: '#717974',
+              'surface-container-lowest': '#ffffff',
+              'on-surface-variant': '#414944',
+              'tertiary-container': '#303a00',
+            },
+            borderRadius: {
+              DEFAULT: '0.125rem',
+              lg: '0.25rem',
+              xl: '0.5rem',
+              full: '0.75rem',
+            },
+            spacing: {
+              'margin-mobile': '16px',
+              unit: '8px',
+              'container-max': '1280px',
+              gutter: '24px',
+              'margin-desktop': '40px',
+            },
+            fontFamily: {
+              'display-lg': ['Sora'],
+              'body-md': ['DM Sans'],
+              'body-lg': ['DM Sans'],
+              'headline-sm': ['Sora'],
+              'label-md': ['DM Sans'],
+              'headline-lg': ['Sora'],
+              'headline-lg-mobile': ['Sora'],
+              'headline-md': ['Sora'],
+              'label-sm': ['DM Sans'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                {
+                  lineHeight: '56px',
+                  letterSpacing: '-0.02em',
+                  fontWeight: '700',
+                },
+              ],
+              'body-md': [
+                '15px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '400',
+                },
+              ],
+              'body-lg': [
+                '18px',
+                {
+                  lineHeight: '28px',
+                  fontWeight: '400',
+                },
+              ],
+              'headline-sm': [
+                '18px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-md': [
+                '13px',
+                {
+                  lineHeight: '18px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '600',
+                },
+              ],
+              'headline-lg': [
+                '32px',
+                {
+                  lineHeight: '40px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-lg-mobile': [
+                '28px',
+                {
+                  lineHeight: '36px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-md': [
+                '24px',
+                {
+                  lineHeight: '32px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-sm': [
+                '11px',
+                {
+                  lineHeight: '16px',
+                  fontWeight: '600',
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .material-symbols-outlined[data-weight='fill'] {
+        font-variation-settings: 'FILL' 1;
+      }
+    </style>
+  </head>
+  <body class="text-on-background font-body-md bg-background antialiased">
+    <!-- TopNavBar -->
+    <nav
+      class="bg-surface dark:bg-inverse-surface border-outline-variant dark:border-outline flat no shadows docked full-width top-0 z-50 border-b"
+    >
+      <div
+        class="px-margin-desktop max-w-container-max mx-auto flex h-20 w-full items-center justify-between"
+      >
+        <div class="flex items-center gap-8">
+          <span
+            class="text-headline-md font-headline-md text-primary dark:text-primary-fixed font-bold"
+            >GAIA</span
+          >
+          <div class="hidden gap-6 md:flex">
+            <a
+              class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed text-label-md font-label-md transition-colors"
+              href="#"
+              >Mural de Editais</a
+            >
+            <a
+              class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed text-label-md font-label-md transition-colors"
+              href="#"
+              >Portal do Avaliador</a
+            >
+            <a
+              class="text-primary dark:text-primary-fixed border-primary dark:border-primary-fixed text-label-md font-label-md hover:bg-surface-container-low dark:hover:bg-on-surface-variant scale-95 border-b-2 pb-1 font-bold transition-colors duration-150"
+              href="#"
+              >Portal de Transparência</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="text-primary dark:text-primary-fixed text-label-md font-label-md hover:bg-surface-container-low dark:hover:bg-on-surface-variant rounded px-4 py-2 transition-colors"
+          >
+            Entrar
+          </button>
+          <button
+            class="bg-primary text-on-primary text-label-md font-label-md hover:bg-primary-container hover:text-on-primary-container rounded px-4 py-2 transition-colors"
+          >
+            Cadastrar
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="max-w-container-max px-margin-desktop mx-auto space-y-12 py-12">
+      <!-- Header & Actions -->
+      <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <h1 class="text-headline-lg font-headline-lg text-primary mb-2">
+            Dashboard de Repartição de Benefícios
+          </h1>
+          <p class="text-body-lg font-body-lg text-on-surface-variant max-w-3xl">
+            Visão geral da alocação de recursos e impacto direto nas comunidades locais do estado do
+            Tocantins.
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <a
+            class="text-primary hover:text-primary-container text-label-md font-label-md flex items-center gap-2 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined" data-icon="map">map</span>
+            Ver no mapa
+          </a>
+          <button
+            class="border-outline text-primary hover:bg-surface-variant text-label-md font-label-md flex items-center gap-2 rounded-full border px-6 py-2 transition-all"
+          >
+            <span class="material-symbols-outlined" data-icon="download">download</span>
+            Exportar CSV
+          </button>
+        </div>
+      </div>
+      <!-- High-level Metric Cards (Hero) -->
+      <div class="gap-gutter grid grid-cols-1 md:grid-cols-3">
+        <!-- Card 1 -->
+        <div
+          class="bg-surface-container-lowest border-outline-variant relative overflow-hidden rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md"
+        >
+          <div class="bg-primary/5 absolute right-0 top-0 h-24 w-24 rounded-bl-full"></div>
+          <div class="relative z-10 mb-4 flex items-start justify-between">
+            <h3 class="text-headline-sm font-headline-sm text-on-surface-variant">
+              Total de Beneficiários
+            </h3>
+            <span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+          </div>
+          <p class="text-display-lg font-display-lg text-primary relative z-10 mb-2">14.285</p>
+          <div
+            class="text-label-sm font-label-sm text-secondary relative z-10 flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-sm" data-icon="trending_up"
+              >trending_up</span
+            >
+            <span>+12% no último trimestre</span>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div
+          class="bg-surface-container-lowest border-outline-variant relative overflow-hidden rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md"
+        >
+          <div class="bg-secondary/5 absolute right-0 top-0 h-24 w-24 rounded-bl-full"></div>
+          <div class="relative z-10 mb-4 flex items-start justify-between">
+            <h3 class="text-headline-sm font-headline-sm text-on-surface-variant">
+              Mulheres Beneficiadas
+            </h3>
+            <span class="material-symbols-outlined text-secondary" data-icon="woman">woman</span>
+          </div>
+          <p class="text-display-lg font-display-lg text-primary relative z-10 mb-2">7.850</p>
+          <div
+            class="text-label-sm font-label-sm text-on-surface-variant relative z-10 flex items-center gap-2"
+          >
+            <span>55% do total</span>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div
+          class="bg-surface-container-lowest border-outline-variant relative overflow-hidden rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md"
+        >
+          <div class="bg-tertiary/5 absolute right-0 top-0 h-24 w-24 rounded-bl-full"></div>
+          <div class="relative z-10 mb-4 flex items-start justify-between">
+            <h3 class="text-headline-sm font-headline-sm text-on-surface-variant">
+              Jovens Beneficiados
+            </h3>
+            <span class="material-symbols-outlined text-tertiary" data-icon="school">school</span>
+          </div>
+          <p class="text-display-lg font-display-lg text-primary relative z-10 mb-2">3.420</p>
+          <div
+            class="text-label-sm font-label-sm text-on-surface-variant relative z-10 flex items-center gap-2"
+          >
+            <span>24% do total (15 a 29 anos)</span>
+          </div>
+        </div>
+      </div>
+      <!-- Main Section: Resource Distribution -->
+      <section
+        class="bg-surface-container-lowest border-outline-variant rounded-xl border p-8 shadow-sm"
+      >
+        <h2
+          class="text-headline-md font-headline-md text-primary border-surface-variant mb-8 border-b pb-4"
+        >
+          Distribuição de Recursos por Janela Legal
+        </h2>
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <!-- Donut Chart Placeholder (SVG representation) -->
+          <div
+            class="relative mx-auto flex aspect-square w-full max-w-[400px] items-center justify-center"
+          >
+            <svg class="h-full w-full -rotate-90 transform" viewbox="0 0 100 100">
+              <circle
+                cx="50"
+                cy="50"
+                fill="transparent"
+                r="40"
+                stroke="#e7e2da"
+                stroke-width="20"
+              ></circle>
+              <!-- Terras Indígenas (35%) -->
+              <circle
+                class="transition-all duration-1000 ease-out"
+                cx="50"
+                cy="50"
+                fill="transparent"
+                r="40"
+                stroke="#00261b"
+                stroke-dasharray="251.2"
+                stroke-dashoffset="163.28"
+                stroke-width="20"
+              ></circle>
+              <!-- Quilombolas (25%) -->
+              <circle
+                cx="50"
+                cy="50"
+                fill="transparent"
+                r="40"
+                stroke="#1a6b4a"
+                stroke-dasharray="251.2"
+                stroke-dashoffset="188.4"
+                stroke-dashoffset-start="251.2"
+                stroke-width="20"
+                transform="rotate(126, 50, 50)"
+              ></circle>
+              <!-- Agricultores Familiares (30%) -->
+              <circle
+                cx="50"
+                cy="50"
+                fill="transparent"
+                r="40"
+                stroke="#1c2300"
+                stroke-dasharray="251.2"
+                stroke-dashoffset="175.84"
+                stroke-width="20"
+                transform="rotate(216, 50, 50)"
+              ></circle>
+              <!-- Fortalecimento Institucional (10%) -->
+              <circle
+                cx="50"
+                cy="50"
+                fill="transparent"
+                r="40"
+                stroke="#a0d1bc"
+                stroke-dasharray="251.2"
+                stroke-dashoffset="226.08"
+                stroke-width="20"
+                transform="rotate(324, 50, 50)"
+              ></circle>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span class="text-label-sm font-label-sm text-on-surface-variant"
+                >Total Distribuído</span
+              >
+              <span class="text-headline-md font-headline-md text-primary mt-1">R$ 45.2M</span>
+            </div>
+          </div>
+          <!-- Legend & Values -->
+          <div class="space-y-6">
+            <div
+              class="hover:bg-surface-container-low border-primary bg-surface-container-lowest flex items-center justify-between rounded-lg border-l-4 p-4 transition-colors"
+            >
+              <div>
+                <p class="text-label-md font-label-md text-on-surface">Terras Indígenas</p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">
+                  Comunidades originárias
+                </p>
+              </div>
+              <div class="text-right">
+                <p class="text-body-md font-body-md text-primary font-semibold">R$ 15.820.000</p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">35%</p>
+              </div>
+            </div>
+            <div
+              class="hover:bg-surface-container-low border-tertiary bg-surface-container-lowest flex items-center justify-between rounded-lg border-l-4 p-4 transition-colors"
+            >
+              <div>
+                <p class="text-label-md font-label-md text-on-surface">Agricultores Familiares</p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">
+                  Produção sustentável
+                </p>
+              </div>
+              <div class="text-right">
+                <p class="text-body-md font-body-md text-primary font-semibold">R$ 13.560.000</p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">30%</p>
+              </div>
+            </div>
+            <div
+              class="hover:bg-surface-container-low border-secondary bg-surface-container-lowest flex items-center justify-between rounded-lg border-l-4 p-4 transition-colors"
+            >
+              <div>
+                <p class="text-label-md font-label-md text-on-surface">Quilombolas</p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">
+                  Comunidades tradicionais
+                </p>
+              </div>
+              <div class="text-right">
+                <p class="text-body-md font-body-md text-primary font-semibold">R$ 11.300.000</p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">25%</p>
+              </div>
+            </div>
+            <div
+              class="hover:bg-surface-container-low border-primary-fixed-dim bg-surface-container-lowest flex items-center justify-between rounded-lg border-l-4 p-4 transition-colors"
+            >
+              <div>
+                <p class="text-label-md font-label-md text-on-surface">
+                  Fortalecimento Institucional
+                </p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">
+                  Capacitação e infraestrutura
+                </p>
+              </div>
+              <div class="text-right">
+                <p class="text-body-md font-body-md text-primary font-semibold">R$ 4.520.000</p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">10%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Ecological Performance -->
+      <section
+        class="bg-surface-container-lowest border-outline-variant rounded-xl border p-8 shadow-sm"
+      >
+        <div class="border-surface-variant mb-8 flex items-center justify-between border-b pb-4">
+          <h2 class="text-headline-md font-headline-md text-primary">
+            Performance Ecológica: Focos de Calor
+          </h2>
+          <span
+            class="bg-surface-container text-label-sm font-label-sm text-on-surface-variant flex items-center gap-1 rounded-full px-3 py-1"
+          >
+            <span class="material-symbols-outlined text-[14px]" data-icon="info">info</span>
+            Dados baseados no INPE
+          </span>
+        </div>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+          <div class="space-y-6 md:col-span-1">
+            <div class="bg-surface-container-low rounded-lg p-4">
+              <h4 class="text-label-sm font-label-sm text-on-surface-variant mb-1">
+                Redução Geral
+              </h4>
+              <p class="text-headline-md font-headline-md text-primary">-28%</p>
+              <p class="text-label-sm font-label-sm text-on-surface-variant mt-2">
+                Comparado ao mesmo período do ano anterior
+              </p>
+            </div>
+            <div class="bg-surface-container-low rounded-lg p-4">
+              <h4 class="text-label-sm font-label-sm text-on-surface-variant mb-1">
+                Área Monitorada
+              </h4>
+              <p class="text-headline-md font-headline-md text-primary">2.4M ha</p>
+              <p class="text-label-sm font-label-sm text-on-surface-variant mt-2">
+                Territórios com projetos ativos
+              </p>
+            </div>
+          </div>
+          <!-- Bar Chart Placeholder (CSS based) -->
+          <div
+            class="border-outline-variant relative flex h-64 w-full items-end justify-between border-b border-l pb-2 pl-4 pt-4 md:col-span-3"
+          >
+            <!-- Y-axis labels -->
+            <div
+              class="text-label-sm font-label-sm text-on-surface-variant absolute left-0 top-0 -ml-8 flex h-full flex-col justify-between py-2"
+            >
+              <span>1000</span>
+              <span>750</span>
+              <span>500</span>
+              <span>250</span>
+              <span>0</span>
+            </div>
+            <!-- Bars -->
+            <div class="group flex w-1/6 flex-col items-center">
+              <div class="flex h-48 w-full items-end justify-center gap-1">
+                <div class="bg-surface-variant h-[80%] w-4 rounded-t-sm transition-all"></div>
+                <div class="bg-primary h-[60%] w-4 rounded-t-sm transition-all"></div>
+              </div>
+              <span class="text-label-sm font-label-sm text-on-surface mt-2">Jan</span>
+            </div>
+            <div class="group flex w-1/6 flex-col items-center">
+              <div class="flex h-48 w-full items-end justify-center gap-1">
+                <div class="bg-surface-variant h-[70%] w-4 rounded-t-sm transition-all"></div>
+                <div class="bg-primary h-[50%] w-4 rounded-t-sm transition-all"></div>
+              </div>
+              <span class="text-label-sm font-label-sm text-on-surface mt-2">Fev</span>
+            </div>
+            <div class="group flex w-1/6 flex-col items-center">
+              <div class="flex h-48 w-full items-end justify-center gap-1">
+                <div class="bg-surface-variant h-[60%] w-4 rounded-t-sm transition-all"></div>
+                <div class="bg-primary h-[40%] w-4 rounded-t-sm transition-all"></div>
+              </div>
+              <span class="text-label-sm font-label-sm text-on-surface mt-2">Mar</span>
+            </div>
+            <div class="group flex w-1/6 flex-col items-center">
+              <div class="flex h-48 w-full items-end justify-center gap-1">
+                <div class="bg-surface-variant h-[40%] w-4 rounded-t-sm transition-all"></div>
+                <div class="bg-primary h-[25%] w-4 rounded-t-sm transition-all"></div>
+              </div>
+              <span class="text-label-sm font-label-sm text-on-surface mt-2">Abr</span>
+            </div>
+            <div class="group flex w-1/6 flex-col items-center">
+              <div class="flex h-48 w-full items-end justify-center gap-1">
+                <div class="bg-surface-variant h-[90%] w-4 rounded-t-sm transition-all"></div>
+                <div class="bg-primary h-[70%] w-4 rounded-t-sm transition-all"></div>
+              </div>
+              <span class="text-label-sm font-label-sm text-on-surface mt-2">Mai</span>
+            </div>
+            <!-- Legend -->
+            <div
+              class="bg-surface-container-lowest border-outline-variant text-label-sm font-label-sm absolute right-4 top-4 flex gap-4 rounded border p-2 shadow-sm"
+            >
+              <div class="flex items-center gap-2">
+                <div class="bg-surface-variant h-3 w-3 rounded-sm"></div>
+                <span class="text-on-surface-variant">Ano Anterior</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="bg-primary h-3 w-3 rounded-sm"></div>
+                <span class="text-on-surface-variant">Ano Atual</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-highest dark:bg-inverse-surface border-outline-variant dark:border-outline flat no shadows full-width mt-12 border-t"
+    >
+      <div
+        class="px-margin-desktop gap-gutter max-w-container-max mx-auto grid w-full grid-cols-1 py-12 md:grid-cols-4"
+      >
+        <div class="col-span-1 md:col-span-2">
+          <span
+            class="text-headline-sm font-headline-sm text-primary dark:text-primary-fixed mb-4 block font-bold"
+            >GAIA</span
+          >
+          <p class="text-body-md font-body-md text-on-surface dark:text-inverse-on-surface mb-4">
+            © 2024 GAIA Fundo Climático. Programa JREDD+ Tocantins.
+          </p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <a
+            class="text-label-sm font-label-sm text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:text-primary transition-colors"
+            href="#"
+            >Sobre o JREDD+</a
+          >
+          <a
+            class="text-label-sm font-label-sm text-primary dark:text-primary-fixed underline transition-colors"
+            href="#"
+            >Transparência</a
+          >
+        </div>
+        <div class="flex flex-col gap-2">
+          <a
+            class="text-label-sm font-label-sm text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:text-primary transition-colors"
+            href="#"
+            >Contato</a
+          >
+          <a
+            class="text-label-sm font-label-sm text-on-surface-variant dark:text-surface-variant hover:text-on-surface hover:text-primary transition-colors"
+            href="#"
+            >Privacidade</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

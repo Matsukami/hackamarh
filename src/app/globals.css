@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #f5f0e8; /* Areia do Jalapão */
+    --foreground: #0b3d2e; /* Cerrado Profundo */
+  }
+
+  body {
+    @apply bg-areia-jalapao font-dm-sans text-cerrado-profundo antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sora tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

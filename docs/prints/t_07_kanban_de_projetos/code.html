@@ -1,0 +1,717 @@
+<!doctype html>
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GAIA - Kanban de Projetos</title>
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts: DM Sans & Sora -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&amp;family=Sora:wght@400;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-secondary': '#ffffff',
+              'surface-tint': '#396756',
+              secondary: '#1a6b4a',
+              'outline-variant': '#c0c8c3',
+              'error-container': '#ffdad6',
+              surface: '#fef9f1',
+              'surface-container': '#f2ede5',
+              tertiary: '#1c2300',
+              'primary-fixed-dim': '#a0d1bc',
+              'surface-variant': '#e7e2da',
+              'on-tertiary-fixed-variant': '#3f4c00',
+              'on-error': '#ffffff',
+              'on-primary-container': '#79a894',
+              'inverse-primary': '#a0d1bc',
+              'secondary-fixed-dim': '#8ad6ae',
+              error: '#ba1a1a',
+              'surface-bright': '#fef9f1',
+              'inverse-surface': '#32302b',
+              'on-error-container': '#93000a',
+              primary: '#00261b',
+              'on-surface': '#1d1c17',
+              background: '#fef9f1',
+              'on-secondary-fixed': '#002113',
+              'surface-container-high': '#ece8e0',
+              'on-primary-fixed-variant': '#214f3f',
+              'primary-container': '#0b3d2e',
+              'surface-container-low': '#f8f3eb',
+              'primary-fixed': '#bcedd7',
+              'on-secondary-container': '#227150',
+              'surface-container-highest': '#e7e2da',
+              'on-tertiary-container': '#92a831',
+              'secondary-container': '#a5f3c9',
+              'on-primary': '#ffffff',
+              'on-tertiary-fixed': '#181e00',
+              'tertiary-fixed-dim': '#bad156',
+              'tertiary-fixed': '#d5ee6f',
+              'surface-dim': '#ded9d2',
+              'on-tertiary': '#ffffff',
+              'on-background': '#1d1c17',
+              'on-secondary-fixed-variant': '#005235',
+              'inverse-on-surface': '#f5f0e8',
+              'on-primary-fixed': '#002116',
+              'secondary-fixed': '#a5f3c9',
+              outline: '#717974',
+              'surface-container-lowest': '#ffffff',
+              'on-surface-variant': '#414944',
+              'tertiary-container': '#303a00',
+            },
+            borderRadius: {
+              DEFAULT: '0.125rem',
+              lg: '0.25rem',
+              xl: '0.5rem',
+              full: '0.75rem',
+            },
+            spacing: {
+              'density-compact': '8px',
+              'density-standard': '16px',
+              gutter: '16px',
+              unit: '4px',
+              'margin-mobile': '16px',
+              'margin-desktop': '32px',
+              'container-max': '1280px',
+            },
+            fontFamily: {
+              'display-lg': ['Sora'],
+              'body-md': ['DM Sans'],
+              'body-lg': ['DM Sans'],
+              'headline-sm': ['Sora'],
+              'label-md': ['DM Sans'],
+              'headline-lg': ['Sora'],
+              'headline-lg-mobile': ['Sora'],
+              'headline-md': ['Sora'],
+              'label-sm': ['DM Sans'],
+              'body-sm': ['DM Sans'],
+              'label-bold': ['DM Sans'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                {
+                  lineHeight: '56px',
+                  letterSpacing: '-0.02em',
+                  fontWeight: '700',
+                },
+              ],
+              'body-md': [
+                '14px',
+                {
+                  lineHeight: '20px',
+                  fontWeight: '400',
+                },
+              ],
+              'body-lg': [
+                '16px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '400',
+                },
+              ],
+              'headline-sm': [
+                '18px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-md': [
+                '13px',
+                {
+                  lineHeight: '18px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '600',
+                },
+              ],
+              'headline-lg': [
+                '32px',
+                {
+                  lineHeight: '40px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-lg-mobile': [
+                '28px',
+                {
+                  lineHeight: '36px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-md': [
+                '24px',
+                {
+                  lineHeight: '32px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-sm': [
+                '11px',
+                {
+                  lineHeight: '16px',
+                  fontWeight: '500',
+                },
+              ],
+              'body-sm': [
+                '13px',
+                {
+                  lineHeight: '18px',
+                  fontWeight: '400',
+                },
+              ],
+              'label-bold': [
+                '11px',
+                {
+                  lineHeight: '16px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '700',
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .material-symbols-outlined[data-weight='fill'] {
+        font-variation-settings:
+          'FILL' 1,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+
+      /* Custom Scrollbar for Kanban */
+      .kanban-scroll::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+      }
+      .kanban-scroll::-webkit-scrollbar-track {
+        background: theme('colors.surface-container');
+      }
+      .kanban-scroll::-webkit-scrollbar-thumb {
+        background: theme('colors.outline-variant');
+        border-radius: 4px;
+      }
+      .kanban-scroll::-webkit-scrollbar-thumb:hover {
+        background: theme('colors.outline');
+      }
+    </style>
+  </head>
+  <body
+    class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed flex min-h-screen flex-col"
+  >
+    <!-- Shared Component: TopNavBar -->
+    <header
+      class="bg-primary-container text-on-primary font-body-md text-body-md border-outline-variant px-margin-desktop relative z-50 flex h-16 w-full shrink-0 items-center justify-between border-b"
+    >
+      <!-- Logo/Brand -->
+      <div
+        class="text-headline-sm font-headline-sm text-on-primary flex items-center gap-2 uppercase tracking-tight"
+      >
+        <span class="material-symbols-outlined" data-weight="fill">eco</span>
+        GAIA - Portal do Avaliador
+      </div>
+      <!-- Search Bar (on_left context from JSON, moved to center/left of actions) -->
+      <div class="flex items-center gap-6">
+        <div class="relative hidden md:block">
+          <span
+            class="material-symbols-outlined text-outline absolute left-2 top-1/2 -translate-y-1/2 text-sm"
+            >search</span
+          >
+          <input
+            class="bg-surface border-outline-variant text-body-sm text-on-surface font-body-sm focus:ring-primary focus:border-primary placeholder:text-outline w-64 rounded border py-1.5 pl-8 pr-4"
+            placeholder="Buscar projetos..."
+            type="text"
+          />
+        </div>
+        <!-- Actions -->
+        <button
+          class="hover:bg-primary/20 text-on-primary flex items-center justify-center rounded-full p-2 transition-colors"
+        >
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button
+          class="hover:bg-primary/20 text-on-primary flex items-center justify-center rounded-full p-2 transition-colors"
+        >
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+        <!-- Profile -->
+        <div
+          class="bg-primary-fixed border-outline-variant h-8 w-8 cursor-pointer overflow-hidden rounded-full border"
+        >
+          <!-- Using placeholder, no data-alt needed per instructions -->
+          <img
+            alt="Foto do perfil do avaliador"
+            class="h-full w-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuClRnH19v0DiF51yh20g88QjwaQ_v9rWuZjWhjW-PI_hxhE4yWFkmp7SJ5NwCiRW80GYYHwgKrNAHDTVNTCh72oLpxBo_KCyzd-rYWQBYgt-jxstcJbNoq9bN7xyg9uS7NpQQHEzRRC-hxS_OJV9BbwxS84e2GqKrX0QqI9vYKs7LWOgXD-NASkcL36HYYQJ9lXLLI9Amx65F5JX4NdRSFoMhNOjlHpQc0xmOsxEHiMRkO55niKfN_BQD_cK33f4ne0yrNi0EvFDWaE"
+          />
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Area: Fluid-Fixed Hybrid Layout Concept -->
+    <div class="flex flex-1 overflow-hidden">
+      <!-- Sidebar Placeholder (Fixed 280px as per style guidance for backoffice context) -->
+      <aside
+        class="border-outline-variant bg-surface py-margin-desktop px-density-standard hidden w-[280px] shrink-0 flex-col border-r lg:flex"
+      >
+        <nav class="flex flex-col gap-1">
+          <a
+            class="bg-primary-container text-on-primary flex items-center gap-3 rounded-lg px-3 py-2 font-bold"
+            href="#"
+          >
+            <span class="material-symbols-outlined" data-weight="fill">dashboard</span>
+            <span class="font-body-sm text-body-sm">Kanban de Projetos</span>
+          </a>
+          <a
+            class="hover:bg-surface-container-highest text-on-surface-variant flex items-center gap-3 rounded-lg px-3 py-2 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">folder_open</span>
+            <span class="font-body-sm text-body-sm">Meus Relatórios</span>
+          </a>
+          <a
+            class="hover:bg-surface-container-highest text-on-surface-variant flex items-center gap-3 rounded-lg px-3 py-2 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-body-sm text-body-sm">Especialistas</span>
+          </a>
+        </nav>
+      </aside>
+      <!-- Main Workspace -->
+      <main class="flex min-w-0 flex-1 flex-col bg-background">
+        <!-- Header & Filters (Compact Density, Sturdy Inputs) -->
+        <div
+          class="px-margin-desktop py-density-standard border-outline-variant bg-surface-container-lowest shrink-0 border-b"
+        >
+          <div class="mb-4 flex items-center justify-between">
+            <h1 class="font-headline-md text-headline-md text-on-background">
+              Monitoramento de Editais
+            </h1>
+            <button
+              class="bg-primary-container text-on-primary font-body-sm text-body-sm hover:bg-primary flex items-center gap-2 rounded px-4 py-2 font-bold shadow-sm transition-colors"
+            >
+              <span class="material-symbols-outlined text-sm">add</span>
+              Novo Filtro
+            </button>
+          </div>
+          <div class="flex flex-wrap items-end gap-4">
+            <!-- Sturdy Input Style -->
+            <div class="relative min-w-[200px] flex-1">
+              <label
+                class="bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant absolute -top-2 left-2 z-10 px-1"
+                >Edital</label
+              >
+              <select
+                class="bg-surface-container-lowest border-outline-variant font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-primary w-full appearance-none rounded border px-3 py-2 focus:ring-1"
+              >
+                <option>Todos os Editais (2024)</option>
+                <option>Conservação Cerrado</option>
+                <option>Restauração Ecológica</option>
+              </select>
+              <span
+                class="material-symbols-outlined text-outline pointer-events-none absolute right-2 top-1/2 -translate-y-1/2"
+                >expand_more</span
+              >
+            </div>
+            <div class="relative min-w-[150px] flex-1">
+              <label
+                class="bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant absolute -top-2 left-2 z-10 px-1"
+                >Categoria</label
+              >
+              <select
+                class="bg-surface-container-lowest border-outline-variant font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-primary w-full appearance-none rounded border px-3 py-2 focus:ring-1"
+              >
+                <option>Todas</option>
+                <option>Pesquisa</option>
+                <option>Implementação</option>
+              </select>
+              <span
+                class="material-symbols-outlined text-outline pointer-events-none absolute right-2 top-1/2 -translate-y-1/2"
+                >expand_more</span
+              >
+            </div>
+            <div class="relative min-w-[150px] flex-1">
+              <label
+                class="bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant absolute -top-2 left-2 z-10 px-1"
+                >Fiscal</label
+              >
+              <input
+                class="bg-surface-container-lowest border-outline-variant font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-primary w-full rounded border px-3 py-2 focus:ring-1"
+                placeholder="Nome do fiscal..."
+                type="text"
+              />
+            </div>
+            <div class="relative min-w-[150px] flex-1">
+              <label
+                class="bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant absolute -top-2 left-2 z-10 px-1"
+                >Data Limite</label
+              >
+              <input
+                class="bg-surface-container-lowest border-outline-variant font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-primary w-full rounded border px-3 py-2 focus:ring-1"
+                type="date"
+              />
+            </div>
+            <button
+              class="bg-surface-container-low border-outline-variant text-on-surface font-body-sm text-body-sm hover:bg-surface-container flex h-[38px] items-center justify-center rounded border px-4 py-2 transition-colors"
+            >
+              <span class="material-symbols-outlined text-sm">filter_list_off</span>
+            </button>
+          </div>
+        </div>
+        <!-- Kanban Board Area -->
+        <div
+          class="kanban-scroll bg-surface-container p-gutter flex-1 overflow-x-auto overflow-y-hidden"
+        >
+          <div class="flex h-full min-w-max items-start gap-4 pb-4">
+            <!-- Column 1: Recebidos -->
+            <div
+              class="bg-surface-container-low border-outline-variant/50 flex max-h-full w-[320px] shrink-0 flex-col rounded-lg border"
+            >
+              <div
+                class="border-outline-variant/30 bg-surface-container-low sticky top-0 z-10 flex items-center justify-between rounded-t-lg border-b p-3"
+              >
+                <h2
+                  class="font-label-bold text-label-bold text-on-surface-variant flex items-center gap-2 uppercase tracking-wider"
+                >
+                  <span class="bg-outline h-2 w-2 rounded-full"></span>
+                  Recebidos
+                  <span
+                    class="bg-surface-container-high text-on-surface rounded px-1.5 py-0.5 text-[10px]"
+                    >3</span
+                  >
+                </h2>
+                <button class="text-outline hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined text-sm">more_horiz</span>
+                </button>
+              </div>
+              <div class="kanban-scroll flex flex-1 flex-col gap-2 overflow-y-auto p-2">
+                <!-- Card: AI Suggestion -->
+                <div
+                  class="bg-surface-container-lowest border-outline-variant p-density-compact group flex cursor-pointer flex-col gap-3 rounded border shadow-sm transition-transform hover:-translate-y-0.5"
+                >
+                  <div class="flex items-start justify-between gap-2">
+                    <span
+                      class="font-label-sm text-label-sm text-secondary bg-secondary/10 rounded px-2 py-0.5 uppercase"
+                      >Conservação</span
+                    >
+                    <span class="text-on-surface-variant font-label-sm text-[10px]">#PRJ-092</span>
+                  </div>
+                  <h3 class="font-body-md text-body-md text-on-surface font-bold leading-snug">
+                    Restauração de Nascentes Bacia Tocantins
+                  </h3>
+                  <!-- AI Suggestion Block -->
+                  <div
+                    class="bg-primary-container/10 border-primary-container/20 mt-1 flex flex-col gap-1 rounded border p-2"
+                  >
+                    <div class="text-primary flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                      <span class="font-label-sm text-[10px] uppercase tracking-wider"
+                        >Sugestão de Atribuição (IA)</span
+                      >
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-2">
+                        <div
+                          class="bg-surface-tint text-on-primary font-label-bold flex h-5 w-5 items-center justify-center rounded-full text-[10px]"
+                        >
+                          MC
+                        </div>
+                        <span class="font-body-sm text-body-sm text-on-surface">Mariana Costa</span>
+                      </div>
+                      <button
+                        class="text-primary hover:bg-primary-container/20 bg-primary-container/10 rounded px-2 py-1 text-[10px] font-bold"
+                      >
+                        Atribuir
+                      </button>
+                    </div>
+                    <div
+                      class="font-label-sm text-on-surface-variant mt-1 flex items-center gap-1 text-[10px]"
+                    >
+                      <span class="material-symbols-outlined text-secondary text-[12px]"
+                        >check_circle</span
+                      >
+                      98% compatibilidade
+                    </div>
+                  </div>
+                  <div
+                    class="border-outline-variant mt-2 flex items-end justify-between border-t pt-2"
+                  >
+                    <div class="text-outline flex items-center gap-1">
+                      <span class="material-symbols-outlined text-sm">calendar_today</span>
+                      <span class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Entrada: Hoje</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Column 2: Em Análise -->
+            <div
+              class="bg-surface-container-low border-outline-variant/50 flex max-h-full w-[320px] shrink-0 flex-col rounded-lg border"
+            >
+              <div
+                class="border-outline-variant/30 bg-surface-container-low sticky top-0 z-10 flex items-center justify-between rounded-t-lg border-b p-3"
+              >
+                <h2
+                  class="font-label-bold text-label-bold text-on-surface-variant flex items-center gap-2 uppercase tracking-wider"
+                >
+                  <span class="bg-secondary h-2 w-2 rounded-full"></span>
+                  Em Análise
+                  <span
+                    class="bg-surface-container-high text-on-surface rounded px-1.5 py-0.5 text-[10px]"
+                    >2</span
+                  >
+                </h2>
+                <button class="text-outline hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined text-sm">more_horiz</span>
+                </button>
+              </div>
+              <div class="kanban-scroll flex flex-1 flex-col gap-2 overflow-y-auto p-2">
+                <!-- Dense Card -->
+                <div
+                  class="bg-surface-container-lowest border-outline-variant p-density-compact group relative flex cursor-pointer flex-col gap-2 overflow-hidden rounded border shadow-sm transition-transform hover:-translate-y-0.5"
+                >
+                  <div class="bg-secondary absolute bottom-0 left-0 top-0 w-1"></div>
+                  <div class="flex items-start justify-between gap-2 pl-2">
+                    <span
+                      class="font-label-sm text-label-sm text-tertiary bg-tertiary/10 rounded px-2 py-0.5 uppercase"
+                      >Pesquisa</span
+                    >
+                    <span class="text-on-surface-variant font-label-sm text-[10px]">#PRJ-084</span>
+                  </div>
+                  <h3 class="font-body-md text-body-md text-on-surface pl-2 font-bold leading-snug">
+                    Levantamento Florístico Jalapão Leste
+                  </h3>
+                  <div class="mt-2 flex flex-col gap-1 pl-2">
+                    <div
+                      class="font-label-sm text-on-surface-variant flex justify-between text-[10px]"
+                    >
+                      <span>Progresso da Análise</span>
+                      <span>65%</span>
+                    </div>
+                    <div class="bg-surface-container-highest h-1.5 w-full rounded-full">
+                      <div class="bg-tertiary h-1.5 rounded-full" style="width: 65%"></div>
+                    </div>
+                  </div>
+                  <div
+                    class="border-outline-variant mt-2 flex items-end justify-between border-t pl-2 pt-2"
+                  >
+                    <div class="text-on-surface-variant flex items-center gap-1">
+                      <div
+                        class="bg-primary text-on-primary flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold"
+                      >
+                        RL
+                      </div>
+                      <span class="font-label-sm text-label-sm">Roberto L.</span>
+                    </div>
+                    <div class="font-label-sm text-label-sm text-on-surface-variant">
+                      Prazo: 12 Out
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Column 3: Com Pendência -->
+            <div
+              class="bg-surface-container-low border-outline-variant/50 flex max-h-full w-[320px] shrink-0 flex-col rounded-lg border"
+            >
+              <div
+                class="border-outline-variant/30 bg-surface-container-low sticky top-0 z-10 flex items-center justify-between rounded-t-lg border-b p-3"
+              >
+                <h2
+                  class="font-label-bold text-label-bold text-on-surface-variant flex items-center gap-2 uppercase tracking-wider"
+                >
+                  <span class="h-2 w-2 rounded-full bg-[#E8A020]"></span>
+                  <!-- Ouro do Tocantins reference -->
+                  Com Pendência
+                  <span
+                    class="bg-surface-container-high text-on-surface rounded px-1.5 py-0.5 text-[10px]"
+                    >1</span
+                  >
+                </h2>
+                <button class="text-outline hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined text-sm">more_horiz</span>
+                </button>
+              </div>
+              <div class="kanban-scroll flex flex-1 flex-col gap-2 overflow-y-auto p-2">
+                <!-- Card with Expiring Deadline -->
+                <div
+                  class="bg-surface-container-lowest border-error/50 p-density-compact group flex cursor-pointer flex-col gap-2 rounded border shadow-sm transition-transform hover:-translate-y-0.5"
+                >
+                  <div class="flex items-start justify-between gap-2">
+                    <span
+                      class="font-label-sm text-label-sm text-secondary bg-secondary/10 rounded px-2 py-0.5 uppercase"
+                      >Implementação</span
+                    >
+                    <div
+                      class="bg-error-container text-on-error-container font-label-bold flex animate-pulse items-center gap-1 rounded px-2 py-0.5 text-[10px]"
+                    >
+                      <span class="material-symbols-outlined text-[12px]">timer</span> 2h Restantes
+                    </div>
+                  </div>
+                  <h3 class="font-body-md text-body-md text-on-surface font-bold leading-snug">
+                    Capacitação Agroflorestal Comunidade Kalunga
+                  </h3>
+                  <div class="mt-1 rounded border border-[#E8A020]/30 bg-[#E8A020]/10 p-1.5">
+                    <p class="font-label-sm flex gap-1 text-[10px] text-[#9A6B15]">
+                      <span class="material-symbols-outlined text-[12px]">warning</span> Aguardando
+                      certidão negativa de débitos.
+                    </p>
+                  </div>
+                  <div
+                    class="border-outline-variant mt-2 flex items-end justify-between border-t pt-2"
+                  >
+                    <div class="text-on-surface-variant flex items-center gap-1">
+                      <div
+                        class="bg-primary text-on-primary flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold"
+                      >
+                        AS
+                      </div>
+                      <span class="font-label-sm text-label-sm">Ana Silva</span>
+                    </div>
+                    <span class="text-error font-label-sm text-[10px] font-bold">Vence Hoje</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Column 4: Aprovados -->
+            <div
+              class="bg-surface-container-low border-outline-variant/50 flex max-h-full w-[320px] shrink-0 flex-col rounded-lg border"
+            >
+              <div
+                class="border-outline-variant/30 bg-surface-container-low sticky top-0 z-10 flex items-center justify-between rounded-t-lg border-b p-3"
+              >
+                <h2
+                  class="font-label-bold text-label-bold text-on-surface-variant flex items-center gap-2 uppercase tracking-wider"
+                >
+                  <span class="bg-secondary h-2 w-2 rounded-full"></span>
+                  Aprovados
+                  <span
+                    class="bg-surface-container-high text-on-surface rounded px-1.5 py-0.5 text-[10px]"
+                    >4</span
+                  >
+                </h2>
+                <button class="text-outline hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined text-sm">more_horiz</span>
+                </button>
+              </div>
+              <div class="kanban-scroll flex flex-1 flex-col gap-2 overflow-y-auto p-2">
+                <!-- Placeholder empty state style or minimal card -->
+                <div
+                  class="bg-surface-container-lowest border-outline-variant p-density-compact flex flex-col gap-2 rounded border opacity-80 shadow-sm"
+                >
+                  <div class="flex items-start justify-between gap-2">
+                    <span
+                      class="font-label-sm text-label-sm text-secondary bg-secondary/10 rounded px-2 py-0.5 uppercase"
+                      >Conservação</span
+                    >
+                  </div>
+                  <h3 class="font-body-md text-body-md text-on-surface font-bold leading-snug">
+                    Monitoramento Fauna Silvestre
+                  </h3>
+                  <div
+                    class="border-outline-variant mt-2 flex items-end justify-between border-t pt-2"
+                  >
+                    <div class="text-secondary flex items-center gap-1">
+                      <span class="material-symbols-outlined text-sm">check_circle</span>
+                      <span class="font-label-sm text-label-sm font-bold">Nota: 9.8</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Column 5: Encerrados -->
+            <div
+              class="bg-surface-container-low border-outline-variant/50 flex max-h-full w-[320px] shrink-0 flex-col rounded-lg border opacity-70"
+            >
+              <div
+                class="border-outline-variant/30 bg-surface-container-low sticky top-0 z-10 flex items-center justify-between rounded-t-lg border-b p-3"
+              >
+                <h2
+                  class="font-label-bold text-label-bold text-on-surface-variant flex items-center gap-2 uppercase tracking-wider"
+                >
+                  <span class="bg-outline h-2 w-2 rounded-full"></span>
+                  Encerrados
+                  <span
+                    class="bg-surface-container-high text-on-surface rounded px-1.5 py-0.5 text-[10px]"
+                    >12</span
+                  >
+                </h2>
+                <button class="text-outline hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined text-sm">more_horiz</span>
+                </button>
+              </div>
+              <div class="kanban-scroll flex flex-1 flex-col gap-2 overflow-y-auto p-2">
+                <!-- Empty / Archieved state styling -->
+                <div class="text-outline font-body-sm text-body-sm p-4 text-center">
+                  Projetos arquivados após 30 dias.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Shared Component: Footer -->
+    <footer
+      class="bg-surface-dim dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface font-label-sm text-label-sm border-outline-variant dark:border-outline py-density-standard px-margin-desktop relative z-10 flex w-full shrink-0 flex-col items-center justify-between border-t md:flex-row"
+    >
+      <div class="mb-4 md:mb-0">
+        <span class="font-label-bold text-label-bold mb-1 block uppercase">GAIA</span>
+        <span>© 2024 GAIA - Cerrado Sustentável. Todos os direitos reservados.</span>
+      </div>
+      <nav class="flex flex-wrap justify-center gap-4 md:gap-6">
+        <a
+          class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors"
+          href="#"
+          >Termos de Uso</a
+        >
+        <a
+          class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors"
+          href="#"
+          >Privacidade</a
+        >
+        <a
+          class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors"
+          href="#"
+          >Suporte Técnico</a
+        >
+        <a
+          class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors"
+          href="#"
+          >Institucional</a
+        >
+      </nav>
+    </footer>
+  </body>
+</html>

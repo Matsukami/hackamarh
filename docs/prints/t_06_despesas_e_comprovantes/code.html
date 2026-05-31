@@ -1,0 +1,624 @@
+<!doctype html>
+
+<html class="light" lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GAIA Proponent Portal - Prestação de Contas</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Sora:wght@400;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-secondary': '#ffffff',
+              'surface-tint': '#396756',
+              secondary: '#1a6b4a',
+              'outline-variant': '#c0c8c3',
+              'error-container': '#ffdad6',
+              surface: '#fef9f1',
+              'surface-container': '#f2ede5',
+              tertiary: '#1c2300',
+              'primary-fixed-dim': '#a0d1bc',
+              'surface-variant': '#e7e2da',
+              'on-tertiary-fixed-variant': '#3f4c00',
+              'on-error': '#ffffff',
+              'on-primary-container': '#79a894',
+              'inverse-primary': '#a0d1bc',
+              'secondary-fixed-dim': '#8ad6ae',
+              error: '#ba1a1a',
+              'surface-bright': '#fef9f1',
+              'inverse-surface': '#32302b',
+              'on-error-container': '#93000a',
+              primary: '#00261b',
+              'on-surface': '#1d1c17',
+              background: '#fef9f1',
+              'on-secondary-fixed': '#002113',
+              'surface-container-high': '#ece8e0',
+              'on-primary-fixed-variant': '#214f3f',
+              'primary-container': '#0b3d2e',
+              'surface-container-low': '#f8f3eb',
+              'primary-fixed': '#bcedd7',
+              'on-secondary-container': '#227150',
+              'surface-container-highest': '#e7e2da',
+              'on-tertiary-container': '#92a831',
+              'secondary-container': '#a5f3c9',
+              'on-primary': '#ffffff',
+              'on-tertiary-fixed': '#181e00',
+              'tertiary-fixed-dim': '#bad156',
+              'tertiary-fixed': '#d5ee6f',
+              'surface-dim': '#ded9d2',
+              'on-tertiary': '#ffffff',
+              'on-background': '#1d1c17',
+              'on-secondary-fixed-variant': '#005235',
+              'inverse-on-surface': '#f5f0e8',
+              'on-primary-fixed': '#002116',
+              'secondary-fixed': '#a5f3c9',
+              outline: '#717974',
+              'surface-container-lowest': '#ffffff',
+              'on-surface-variant': '#414944',
+              'tertiary-container': '#303a00',
+            },
+            borderRadius: {
+              DEFAULT: '0.125rem',
+              lg: '0.25rem',
+              xl: '0.5rem',
+              full: '0.75rem',
+            },
+            spacing: {
+              'margin-mobile': '16px',
+              unit: '8px',
+              'container-max': '1280px',
+              gutter: '24px',
+              'margin-desktop': '40px',
+            },
+            fontFamily: {
+              'display-lg': ['Sora'],
+              'body-md': ['DM Sans'],
+              'body-lg': ['DM Sans'],
+              'headline-sm': ['Sora'],
+              'label-md': ['DM Sans'],
+              'headline-lg': ['Sora'],
+              'headline-lg-mobile': ['Sora'],
+              'headline-md': ['Sora'],
+              'label-sm': ['DM Sans'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                {
+                  lineHeight: '56px',
+                  letterSpacing: '-0.02em',
+                  fontWeight: '700',
+                },
+              ],
+              'body-md': [
+                '15px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '400',
+                },
+              ],
+              'body-lg': [
+                '18px',
+                {
+                  lineHeight: '28px',
+                  fontWeight: '400',
+                },
+              ],
+              'headline-sm': [
+                '18px',
+                {
+                  lineHeight: '24px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-md': [
+                '13px',
+                {
+                  lineHeight: '18px',
+                  letterSpacing: '0.05em',
+                  fontWeight: '600',
+                },
+              ],
+              'headline-lg': [
+                '32px',
+                {
+                  lineHeight: '40px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-lg-mobile': [
+                '28px',
+                {
+                  lineHeight: '36px',
+                  fontWeight: '700',
+                },
+              ],
+              'headline-md': [
+                '24px',
+                {
+                  lineHeight: '32px',
+                  fontWeight: '600',
+                },
+              ],
+              'label-sm': [
+                '11px',
+                {
+                  lineHeight: '16px',
+                  fontWeight: '600',
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: theme('colors.inverse-on-surface');
+        color: theme('colors.on-background');
+      }
+
+      .glass-card {
+        background: theme('colors.surface-container-lowest');
+        border: 1px solid rgba(11, 61, 46, 0.1);
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.05),
+          0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s ease;
+      }
+
+      .glass-card:hover {
+        box-shadow:
+          0 10px 15px -3px rgba(11, 61, 46, 0.1),
+          0 4px 6px -2px rgba(11, 61, 46, 0.05);
+        transform: translateY(-2px);
+      }
+
+      /* Custom Scrollbar for horizontal lists */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-body-md flex min-h-screen flex-col">
+    <!-- TopNavBar -->
+    <header
+      class="bg-surface dark:bg-surface-dim border-outline-variant dark:border-outline docked full-width top-0 z-50 border-b"
+    >
+      <div
+        class="px-margin-desktop max-w-container-max mx-auto flex w-full items-center justify-between py-4"
+      >
+        <div
+          class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed-dim font-bold"
+        >
+          GAIA Proponent Portal
+        </div>
+        <!-- Navigation Links (Web only) -->
+        <nav class="hidden gap-8 md:flex">
+          <a
+            class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim font-label-md text-label-md transition-colors"
+            href="#"
+          >
+            Mural de Editais
+          </a>
+          <a
+            class="text-primary dark:text-primary-fixed-dim border-primary dark:border-primary-fixed-dim font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest border-b-2 pb-1 font-bold transition-all"
+            href="#"
+          >
+            Avaliador Portal
+          </a>
+        </nav>
+        <div class="flex items-center gap-4">
+          <button
+            class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full p-2 transition-colors"
+            title="notifications"
+          >
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0"
+              >notifications</span
+            >
+          </button>
+          <button
+            class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full p-2 transition-colors"
+            title="help_outline"
+          >
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0"
+              >help_outline</span
+            >
+          </button>
+          <div
+            class="bg-primary-container text-on-primary-container border-surface flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 font-bold"
+          >
+            <img
+              alt="Proponent Profile"
+              class="h-full w-full object-cover"
+              data-alt="A professional headshot of a middle-aged man with short brown hair and a slight smile, wearing a dark blue button-down shirt. The background is a blurred, bright office environment, conveying a sense of corporate professionalism and approachability. Lighting is natural and soft, highlighting the subject's features clearly. The overall mood is confident and reliable."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU1rQDQsY5IH4gr975P3muOVqw0kgjuhxJXsi-6Ho7pLTeFfMVRpLifRssUTQP2A1GTXCSyFOQxJu5mNRQ9gTKFqT7rKlc6kVE0354_ZbkY_f-qZDSP2zxJBawEl58gihEFfPkeWT0MoVA0R4TWhB4EQJ1nITxfJIIRI-Is0fjHT3Q8sKgykLW9x6eiHwaYoYZhV8MX79yyjZufoT74QkjeneUTTMRVffdxsHQCCyhXN7NRxayEz_UFosXqYQ7t1jyGPzLyPtDEH2l"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main
+      class="max-w-container-max px-margin-mobile md:px-margin-desktop mx-auto flex w-full flex-grow flex-col gap-8 py-8"
+    >
+      <!-- Page Header & Context -->
+      <section class="flex flex-col gap-2">
+        <h1 class="font-display-lg text-display-lg text-primary">Prestação de Contas</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">
+          Lançamento de Despesas e Comprovantes — Projeto Restauração Cerrado Lote 04
+        </p>
+      </section>
+      <!-- Budget Summary (Bento Grid Style) -->
+      <section class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="glass-card flex flex-col gap-2 rounded-xl p-6">
+          <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider"
+            >Valor Liberado</span
+          >
+          <span class="font-headline-lg text-headline-lg text-primary">R$ 250.000,00</span>
+          <div class="bg-surface-container mt-2 h-2 w-full overflow-hidden rounded-full">
+            <div class="bg-primary h-full w-full rounded-full"></div>
+          </div>
+        </div>
+        <div class="glass-card flex flex-col gap-2 rounded-xl p-6">
+          <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider"
+            >Total Lançado</span
+          >
+          <span class="font-headline-lg text-headline-lg text-secondary">R$ 185.450,00</span>
+          <div class="bg-surface-container mt-2 flex h-2 w-full overflow-hidden rounded-full">
+            <div class="bg-secondary h-full w-[74%] rounded-l-full"></div>
+          </div>
+        </div>
+        <div
+          class="glass-card flex flex-col gap-2 rounded-xl border border-[#E8A020] bg-[#E8A020]/10 p-6"
+        >
+          <div class="flex items-start justify-between">
+            <span class="font-label-md text-label-md uppercase tracking-wider text-[#E8A020]"
+              >Saldo Restante</span
+            >
+            <span
+              class="material-symbols-outlined text-[#E8A020]"
+              style="font-variation-settings: 'FILL' 1"
+              >warning</span
+            >
+          </div>
+          <span class="font-headline-lg text-headline-lg text-[#E8A020]">R$ 64.550,00</span>
+          <span class="font-label-sm text-label-sm mt-2 text-[#E8A020]"
+            >Atenção: Margem de Custeio próxima ao limite (85%)</span
+          >
+        </div>
+      </section>
+      <!-- Two Column Layout for Form and List -->
+      <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+        <!-- Expense Log Form -->
+        <section class="glass-card sticky top-24 rounded-xl p-6 lg:col-span-5">
+          <h2
+            class="font-headline-md text-headline-md text-primary border-outline-variant mb-6 flex items-center gap-2 border-b pb-4"
+          >
+            <span class="material-symbols-outlined">add_circle</span>
+            Novo Lançamento
+          </h2>
+          <form class="flex flex-col gap-5">
+            <!-- Description -->
+            <div class="flex flex-col gap-1">
+              <label class="font-label-md text-label-md text-on-surface" for="desc"
+                >Descrição da Despesa</label
+              >
+              <input
+                class="bg-surface border-outline-variant text-on-surface focus:border-primary focus:ring-primary font-body-md w-full rounded-lg border p-3 outline-none transition-all focus:ring-1"
+                id="desc"
+                placeholder="Ex: Aquisição de mudas nativas"
+                type="text"
+              />
+            </div>
+            <!-- Row: Value & Date -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1">
+                <label class="font-label-md text-label-md text-on-surface" for="value"
+                  >Valor (R$)</label
+                >
+                <input
+                  class="bg-surface border-outline-variant text-on-surface focus:border-primary focus:ring-primary font-body-md w-full rounded-lg border p-3 text-right outline-none transition-all focus:ring-1"
+                  id="value"
+                  placeholder="0,00"
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-1">
+                <label class="font-label-md text-label-md text-on-surface" for="date"
+                  >Data da Nota</label
+                >
+                <input
+                  class="bg-surface border-outline-variant text-on-surface focus:border-primary focus:ring-primary font-body-md w-full rounded-lg border p-3 outline-none transition-all focus:ring-1"
+                  id="date"
+                  type="date"
+                />
+              </div>
+            </div>
+            <!-- Category Dropdown -->
+            <div class="flex flex-col gap-1">
+              <label class="font-label-md text-label-md text-on-surface" for="category"
+                >Categoria de Gasto <span class="text-error">*</span></label
+              >
+              <select
+                class="bg-surface border-outline-variant text-on-surface focus:border-primary focus:ring-primary font-body-md w-full appearance-none rounded-lg border p-3 outline-none transition-all focus:ring-1"
+                id="category"
+              >
+                <option disabled="" selected="" value="">Selecione a rubrica...</option>
+                <option value="capital">Despesa de Capital (Equipamentos/Obras)</option>
+                <option value="custeio">Despesa de Custeio (Serviços/Insumos)</option>
+              </select>
+            </div>
+            <!-- File Upload -->
+            <div class="flex flex-col gap-1">
+              <label class="font-label-md text-label-md text-on-surface"
+                >Comprovante (NF/Recibo)</label
+              >
+              <div
+                class="border-outline-variant hover:bg-surface-container-low group flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-outline group-hover:text-primary mb-2 text-4xl transition-colors"
+                  >upload_file</span
+                >
+                <span class="font-label-md text-label-md text-primary"
+                  >Clique para anexar ou arraste o arquivo</span
+                >
+                <span class="font-label-sm text-label-sm text-on-surface-variant mt-1"
+                  >PDF, JPG ou PNG (Max 5MB)</span
+                >
+                <input accept=".pdf,.jpg,.png" class="hidden" type="file" />
+              </div>
+            </div>
+            <!-- Action Button -->
+            <button
+              class="bg-tertiary-container text-on-tertiary-container font-label-md text-label-md hover:bg-tertiary hover:text-on-tertiary mt-4 flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3 transition-colors"
+              type="button"
+            >
+              <span
+                class="material-symbols-outlined text-sm"
+                style="font-variation-settings: 'FILL' 1"
+                >save</span
+              >
+              Adicionar à Lista
+            </button>
+          </form>
+        </section>
+        <!-- Expense List Table -->
+        <section class="flex flex-col gap-4 lg:col-span-7">
+          <div class="mb-2 flex items-end justify-between">
+            <h2 class="font-headline-md text-headline-md text-primary">Itens Lançados</h2>
+            <span
+              class="font-label-md text-label-md text-on-surface-variant bg-surface-container-high rounded-full px-3 py-1"
+              >4 Itens</span
+            >
+          </div>
+          <div class="glass-card overflow-hidden rounded-xl">
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse text-left">
+                <thead>
+                  <tr
+                    class="bg-surface-container-low border-outline-variant text-on-surface-variant font-label-sm text-label-sm border-b uppercase"
+                  >
+                    <th class="w-12 p-4">St.</th>
+                    <th class="p-4">Descrição &amp; Data</th>
+                    <th class="p-4">Categoria</th>
+                    <th class="p-4 text-right">Valor</th>
+                    <th class="w-24 p-4 text-center">Ações</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-outline-variant/50 bg-surface divide-y">
+                  <!-- Item 1 -->
+                  <tr class="hover:bg-surface-container-lowest transition-colors">
+                    <td class="p-4">
+                      <div class="bg-secondary h-3 w-3 rounded-full" title="Validado"></div>
+                    </td>
+                    <td class="p-4">
+                      <p class="font-label-md text-label-md text-on-surface">
+                        Locação de Trator (Horas/Máquina)
+                      </p>
+                      <p class="font-label-sm text-label-sm text-on-surface-variant">
+                        12/05/2024 • NF 1045
+                      </p>
+                    </td>
+                    <td class="p-4">
+                      <span
+                        class="bg-surface-container-high text-on-surface-variant border-outline-variant inline-flex items-center rounded border px-2 py-1 text-xs font-medium"
+                        >Custeio</span
+                      >
+                    </td>
+                    <td class="font-label-md text-label-md text-on-surface p-4 text-right">
+                      R$ 15.000,00
+                    </td>
+                    <td class="flex justify-center gap-2 p-4">
+                      <button class="text-outline hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">visibility</span>
+                      </button>
+                      <button class="text-outline hover:text-error transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <!-- Item 2 -->
+                  <tr class="hover:bg-surface-container-lowest transition-colors">
+                    <td class="p-4">
+                      <div class="bg-secondary h-3 w-3 rounded-full" title="Validado"></div>
+                    </td>
+                    <td class="p-4">
+                      <p class="font-label-md text-label-md text-on-surface">
+                        Mudas Nativas do Cerrado (Lote 1)
+                      </p>
+                      <p class="font-label-sm text-label-sm text-on-surface-variant">
+                        05/05/2024 • Recibo S/N
+                      </p>
+                    </td>
+                    <td class="p-4">
+                      <span
+                        class="bg-surface-container-high text-on-surface-variant border-outline-variant inline-flex items-center rounded border px-2 py-1 text-xs font-medium"
+                        >Custeio</span
+                      >
+                    </td>
+                    <td class="font-label-md text-label-md text-on-surface p-4 text-right">
+                      R$ 42.300,00
+                    </td>
+                    <td class="flex justify-center gap-2 p-4">
+                      <button class="text-outline hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">visibility</span>
+                      </button>
+                      <button class="text-outline hover:text-error transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <!-- Item 3 -->
+                  <tr class="hover:bg-surface-container-lowest transition-colors">
+                    <td class="p-4">
+                      <div
+                        class="h-3 w-3 rounded-full bg-[#E8A020]"
+                        title="Pendente de Documento"
+                      ></div>
+                    </td>
+                    <td class="p-4">
+                      <p class="font-label-md text-label-md text-on-surface">
+                        Equipamentos de EPI (Equipe Campo)
+                      </p>
+                      <p class="font-label-sm text-label-sm text-on-surface-variant">
+                        28/04/2024 • NF 882
+                      </p>
+                    </td>
+                    <td class="p-4">
+                      <span
+                        class="bg-secondary-container text-on-secondary-container border-secondary-fixed inline-flex items-center rounded border px-2 py-1 text-xs font-medium"
+                        >Capital</span
+                      >
+                    </td>
+                    <td class="font-label-md text-label-md text-on-surface p-4 text-right">
+                      R$ 8.150,00
+                    </td>
+                    <td class="flex justify-center gap-2 p-4">
+                      <button
+                        class="text-[#E8A020] transition-colors hover:opacity-80"
+                        title="Falta Anexo"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">warning</span>
+                      </button>
+                      <button class="text-outline hover:text-error transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="bg-surface-container-low border-outline-variant flex items-center justify-between border-t p-4 text-sm"
+            >
+              <span class="text-on-surface-variant font-label-sm text-label-sm"
+                >Mostrando 3 de 45 lançamentos totais</span
+              >
+              <div class="flex gap-1">
+                <button
+                  class="bg-surface border-outline-variant text-outline hover:bg-surface-container-high rounded border p-1"
+                >
+                  <span class="material-symbols-outlined text-sm">chevron_left</span>
+                </button>
+                <button
+                  class="bg-surface border-outline-variant text-outline hover:bg-surface-container-high rounded border p-1"
+                >
+                  <span class="material-symbols-outlined text-sm">chevron_right</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Submission Action Card -->
+          <div
+            class="glass-card bg-surface-container border-t-primary mt-8 flex flex-col items-center justify-center gap-4 rounded-xl border-t-4 p-8 text-center"
+          >
+            <span
+              class="material-symbols-outlined text-primary text-4xl"
+              style="font-variation-settings: 'FILL' 1"
+              >send_and_archive</span
+            >
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">
+                Finalizar Competência
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mx-auto max-w-md">
+                Verifique se todos os lançamentos e comprovantes estão corretos antes de enviar ao
+                fiscal para análise.
+              </p>
+            </div>
+            <button
+              class="bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container group mt-2 flex items-center gap-2 rounded-lg px-8 py-3 shadow-sm transition-colors"
+            >
+              Enviar relatório ao fiscal
+              <span
+                class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-lowest dark:bg-surface-container-low border-outline-variant dark:border-outline full-width bottom-0 mt-auto border-t"
+    >
+      <div
+        class="px-margin-desktop max-w-container-max mx-auto flex w-full flex-col items-center justify-between gap-4 py-8 md:flex-row"
+      >
+        <div class="font-headline-sm text-headline-sm text-secondary dark:text-secondary-fixed-dim">
+          © 2024 GAIA - Fundo Climático do Estado do Tocantins. Todos os direitos reservados.
+        </div>
+        <nav class="flex gap-6">
+          <a
+            class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed focus:ring-primary font-body-md text-body-md transition-colors focus:ring-2"
+            href="#"
+          >
+            Termos de Uso
+          </a>
+          <a
+            class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed focus:ring-primary font-body-md text-body-md transition-colors focus:ring-2"
+            href="#"
+          >
+            Política de Privacidade
+          </a>
+          <a
+            class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed focus:ring-primary font-body-md text-body-md transition-colors focus:ring-2"
+            href="#"
+          >
+            Suporte Técnico
+          </a>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      // Simple client-side formatting for currency input
+      document.getElementById('value').addEventListener('blur', function (e) {
+        let val = parseFloat(e.target.value.replace(/[^0-9.-]+/g, ''));
+        if (!isNaN(val)) {
+          e.target.value = val.toLocaleString('pt-BR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
