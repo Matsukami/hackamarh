@@ -40,11 +40,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   }
 });
 
-async function main() {
-  const email = 'avaliador@tocantins.gov.br';
-  const password = 'AvaliadorJredd2026!'; // Credentials for demo
-  const name = 'Avaliador Demo GAIA';
-
+async function seedUser(email, password, name, role) {
   console.log(`Checking if user ${email} already exists...`);
 
   // Query our public.usuarios table
@@ -61,11 +57,11 @@ async function main() {
   let userId;
 
   if (existingUser) {
-    console.log(`User profile found in public.usuarios with ID: ${existingUser.id}`);
+    console.log(`User profile found in public.usuarios for ${email} with ID: ${existingUser.id}`);
     userId = existingUser.id;
   } else {
     // Attempt to create user in Auth
-    console.log('Creating user in auth.users...');
+    console.log(`Creating auth user for ${email}...`);
     const { data: authUser, error: authError } = await supabase.auth.admin.createUser({
       email,
       password,
@@ -79,7 +75,7 @@ async function main() {
         const { data: usersList, error: listError } = await supabase.auth.admin.listUsers();
         if (listError) {
           console.error('Error listing users:', listError);
-          process.exit(1);
+          return null;
         }
         const found = usersList.users.find(u => u.email === email);
         if (found) {
@@ -87,39 +83,62 @@ async function main() {
           console.log(`Found auth user ID: ${userId}`);
         } else {
           console.error('Could not find user ID despite duplicate email error.');
-          process.exit(1);
+          return null;
         }
       } else {
         console.error('Error creating auth user:', authError);
-        process.exit(1);
+        return null;
       }
     } else {
       userId = authUser.user.id;
-      console.log(`Auth user created successfully with ID: ${userId}`);
+      console.log(`Auth user created successfully for ${email} with ID: ${userId}`);
     }
 
     // Now insert profile in public.usuarios
-    console.log('Upserting user profile into public.usuarios...');
+    console.log(`Upserting user profile into public.usuarios for ${email}...`);
     const { error: dbError } = await supabase
       .from('usuarios')
       .upsert({
         id: userId,
         nome: name,
         email: email,
-        perfil: 'avaliador'
+        perfil: role
       }, { onConflict: 'id' });
 
     if (dbError) {
       console.error('Error inserting user profile:', dbError);
-      process.exit(1);
+      return null;
     }
-    console.log('User profile created/updated successfully in public.usuarios!');
+    console.log(`User profile created/updated successfully in public.usuarios for ${email}!`);
   }
+  return userId;
+}
+
+async function main() {
+  // 1. Seed Evaluator
+  await seedUser(
+    'avaliador@tocantins.gov.br',
+    'AvaliadorJredd2026!',
+    'Avaliador Demo GAIA',
+    'avaliador'
+  );
+
+  // 2. Seed Proponent
+  await seedUser(
+    'proponente@teste.com',
+    'ProponenteJredd2026!',
+    'Proponente Demo GAIA',
+    'proponente'
+  );
 
   console.log('\n=============================================');
-  console.log('CONTA DE AVALIADOR SEEDADA COM SUCESSO!');
-  console.log(`Email: ${email}`);
-  console.log(`Senha: ${password}`);
+  console.log('CONTAS DE TESTE SEEDADAS COM SUCESSO!');
+  console.log('--- AVALIADOR ---');
+  console.log('Email: avaliador@tocantins.gov.br');
+  console.log('Senha: AvaliadorJredd2026!');
+  console.log('--- PROPONENTE ---');
+  console.log('Email: proponente@teste.com');
+  console.log('Senha: ProponenteJredd2026!');
   console.log('=============================================\n');
 }
 
