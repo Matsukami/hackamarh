@@ -17,9 +17,16 @@ export default function Home() {
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div className="max-w-2xl">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white/50 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-cerrado-profundo">
-                <IconShieldCheck size={16} />
-                <span>Programa JREDD+ Tocantins</span>
+              <div className="mb-6 flex items-center gap-4">
+                <img
+                  src="/logo-gaia.png"
+                  alt="GAIA Logo"
+                  className="h-16 w-16 rounded-full object-contain shadow-lg bg-white p-1"
+                />
+                <div className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white/50 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-cerrado-profundo">
+                  <IconShieldCheck size={16} />
+                  <span>Programa JREDD+ Tocantins</span>
+                </div>
               </div>
               <h1 className="mb-6 font-sora text-4xl font-bold leading-tight text-cerrado-profundo md:text-5xl">
                 O ecossistema público do <span className="text-mata-alta">Fundo Climático</span> do

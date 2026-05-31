@@ -60,18 +60,12 @@ export default function AvaliadorLoginPage() {
     <div className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center bg-cerrado-profundo px-4 py-12 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md shadow-2xl">
         <CardHeader className="pb-2 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-sm bg-buriti-vivo">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6 text-cerrado-profundo"
-            >
-              <path d="M12 21v-6M9 15c-2.5 0-4-1.5-4-4s1.5-4 4-4v8zM15 15c2.5 0 4-1.5 4-4s-1.5-4-4-4v8zM12 7c-2.5 0-4-1.5-4-4s1.5-4 4-4 4 1.5 4 4-1.5 4-4 4z" />
-            </svg>
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-white shadow-md">
+            <img
+              src="/logo-gaia.png"
+              alt="GAIA Logo"
+              className="h-14 w-14 object-contain"
+            />
           </div>
           <CardTitle>Portal do Avaliador</CardTitle>
           <CardDescription>Acesso restrito para equipe técnica JREDD+</CardDescription>

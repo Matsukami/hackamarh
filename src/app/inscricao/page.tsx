@@ -1,30 +1,60 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { FormSchema, type FormValues } from './schema';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { IconCheck, IconAlertTriangle } from '@tabler/icons-react';
+import ConsultorIA from '@/components/chat/ConsultorIA';
 
 const STEPS = ['Identificação', 'Território', 'Descritivo', 'Indicadores', 'Documentação'];
 
 export default function InscricaoPage() {
   const [currentStep, setCurrentStep] = useState(0);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     trigger,
+    setValue,
     formState: { errors, isValid },
     watch,
   } = useForm<FormValues>({
-    // @ts-expect-error Type mismatch between react-hook-form and hookform/resolvers versions
     resolver: zodResolver(FormSchema),
     mode: 'onChange',
   });
+
+  const formData = watch();
+
+  // Load from local storage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('draft_proposta');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        Object.keys(parsed).forEach((key) => {
+          setValue(key as keyof FormValues, parsed[key]);
+        });
+      } catch (e) {
+        console.error('Failed to parse draft');
+      }
+    }
+  }, [setValue]);
+
+  // Auto-save to local storage on change
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (Object.keys(formData).length > 0) {
+        localStorage.setItem('draft_proposta', JSON.stringify(formData));
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [formData]);
 
   const nextStep = async () => {
     // Determine which fields to validate based on current step
@@ -62,9 +92,10 @@ export default function InscricaoPage() {
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   const onSubmit = (data: FormValues) => {
-    console.log('Submitting data:', data);
-    alert('Proposta submetida com sucesso! Scorecard será calculado a seguir.');
-    // TODO: Send data to Supabase and redirect to Painel
+    // Save to localStorage so scorecard can read it
+    localStorage.setItem('proposta_submitted', JSON.stringify(data));
+    localStorage.removeItem('draft_proposta');
+    router.push('/inscricao/scorecard');
   };
 
   const renderError = (field: keyof FormValues) => {
@@ -532,6 +563,7 @@ export default function InscricaoPage() {
           </form>
         </CardContent>
       </Card>
+      <ConsultorIA />
     </div>
   );
 }

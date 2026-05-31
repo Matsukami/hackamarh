@@ -71,6 +71,13 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mb-6 flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg">
+        <img
+          src="/logo-gaia.png"
+          alt="GAIA Logo"
+          className="h-16 w-16 object-contain"
+        />
+      </div>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle>{isLogin ? 'Entrar na Plataforma' : 'Criar Nova Conta'}</CardTitle>
