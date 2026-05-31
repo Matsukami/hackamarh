@@ -14,7 +14,8 @@ export default function TransparenciaHubPage() {
           Portal da Transparência — JREDD+
         </h1>
         <p className="max-w-3xl font-dm-sans text-lg text-gray-600">
-          Acompanhe em tempo real a alocação de recursos, a execução de projetos e os impactos sociais e ambientais no estado do Tocantins.
+          Acompanhe em tempo real a alocação de recursos, a execução de projetos e os impactos
+          sociais e ambientais no estado do Tocantins.
         </p>
       </div>
 
@@ -24,12 +25,12 @@ export default function TransparenciaHubPage() {
           <Card className="h-[600px] overflow-hidden border border-gray-200 shadow-md">
             <TocantinsMap />
           </Card>
-          
+
           <div className="mt-4 flex items-center justify-between">
             <p className="text-sm text-gray-500">
               * Clique em uma região para ampliar e ver os projetos.
             </p>
-            <Link 
+            <Link
               href="/transparencia/mapa"
               className="flex items-center gap-2 text-sm font-bold text-mata-alta transition-colors hover:text-cerrado-profundo"
             >
@@ -52,7 +53,11 @@ export default function TransparenciaHubPage() {
                   Distribuição de recursos por janela de financiamento e região.
                 </p>
                 <div className="flex items-center gap-2 text-sm font-bold text-mata-alta">
-                  Acessar painel <IconArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  Acessar painel{' '}
+                  <IconArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -70,7 +75,11 @@ export default function TransparenciaHubPage() {
                   Dados sobre mulheres, jovens e comunidades tradicionais.
                 </p>
                 <div className="flex items-center gap-2 text-sm font-bold text-buriti-vivo">
-                  Ver indicadores <IconArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  Ver indicadores{' '}
+                  <IconArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -88,7 +97,11 @@ export default function TransparenciaHubPage() {
                   Redução de focos de calor e áreas de conservação mantidas.
                 </p>
                 <div className="flex items-center gap-2 text-sm font-bold text-ouro-tocantins">
-                  Ver resultados <IconArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  Ver resultados{' '}
+                  <IconArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </div>
               </CardContent>
             </Card>

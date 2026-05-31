@@ -14,7 +14,8 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-001',
     titulo: 'Restauração de Nascentes do Ribeirão Taquaruçu',
-    descricao: 'Projeto de recuperação ambiental de 15 nascentes e APP ao longo da bacia do ribeirão, beneficiando 50 famílias.',
+    descricao:
+      'Projeto de recuperação ambiental de 15 nascentes e APP ao longo da bacia do ribeirão, beneficiando 50 famílias.',
     municipio: 'Palmas',
     regiao_id: '17004',
     status: 'Em Execução',
@@ -25,7 +26,8 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-002',
     titulo: 'Agrofloresta Indígena Xerente',
-    descricao: 'Implementação de sistemas agroflorestais em terras indígenas, promovendo segurança alimentar e conservação.',
+    descricao:
+      'Implementação de sistemas agroflorestais em terras indígenas, promovendo segurança alimentar e conservação.',
     municipio: 'Tocantínia',
     regiao_id: '17003',
     status: 'Em Execução',
@@ -36,7 +38,8 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-003',
     titulo: 'Manejo Sustentável do Capim Dourado',
-    descricao: 'Capacitação de artesãos e implantação de boas práticas de colheita na região do Jalapão.',
+    descricao:
+      'Capacitação de artesãos e implantação de boas práticas de colheita na região do Jalapão.',
     municipio: 'Mateiros',
     regiao_id: '17007',
     status: 'Concluído',
@@ -47,7 +50,8 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-004',
     titulo: 'Prevenção a Focos de Calor - Bico',
-    descricao: 'Monitoramento comunitário e formação de brigadistas voluntários no norte do estado.',
+    descricao:
+      'Monitoramento comunitário e formação de brigadistas voluntários no norte do estado.',
     municipio: 'Araguatins',
     regiao_id: '17001',
     status: 'Em Análise',
@@ -58,7 +62,8 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-005',
     titulo: 'Viveiro Comunitário Quilombola',
-    descricao: 'Produção de mudas nativas do Cerrado para recuperação de áreas degradadas na comunidade Mumbuca.',
+    descricao:
+      'Produção de mudas nativas do Cerrado para recuperação de áreas degradadas na comunidade Mumbuca.',
     municipio: 'Mateiros',
     regiao_id: '17007',
     status: 'Em Execução',
@@ -69,7 +74,8 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-006',
     titulo: 'Mulheres Extrativistas do Babaçu',
-    descricao: 'Fortalecimento da cadeia produtiva e infraestrutura para quebra de coco, empoderando 120 mulheres.',
+    descricao:
+      'Fortalecimento da cadeia produtiva e infraestrutura para quebra de coco, empoderando 120 mulheres.',
     municipio: 'Axixá do Tocantins',
     regiao_id: '17001',
     status: 'Em Execução',
@@ -91,7 +97,8 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-008',
     titulo: 'Biocombustíveis a partir de Resíduos',
-    descricao: 'Geração de energia limpa em comunidades isoladas usando biomassa residual da agricultura.',
+    descricao:
+      'Geração de energia limpa em comunidades isoladas usando biomassa residual da agricultura.',
     municipio: 'Porto Nacional',
     regiao_id: '17006',
     status: 'Em Análise',
@@ -102,7 +109,8 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-009',
     titulo: 'Expansão de Áreas de Preservação Permanentes',
-    descricao: 'Mapeamento e isolamento de novas APPs ao redor de nascentes importantes da região sudeste.',
+    descricao:
+      'Mapeamento e isolamento de novas APPs ao redor de nascentes importantes da região sudeste.',
     municipio: 'Dianópolis',
     regiao_id: '17008',
     status: 'Concluído',
@@ -113,12 +121,13 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: 'eco-2024-010',
     titulo: 'Consórcio Agroecológico Familiar',
-    descricao: 'Produção diversificada sem uso de defensivos químicos, conectando famílias a mercados locais.',
+    descricao:
+      'Produção diversificada sem uso de defensivos químicos, conectando famílias a mercados locais.',
     municipio: 'Araguaína',
     regiao_id: '17002',
     status: 'Em Execução',
     imagem_url: 'https://images.unsplash.com/photo-1592982537447-6f23b20909af?w=500&q=80',
     latitude: -7.19,
     longitude: -48.2,
-  }
+  },
 ];

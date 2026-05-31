@@ -21,15 +21,22 @@ const REGION_BUDGET_PERCENTAGES: Record<string, string> = {
   '17003': '15%', // Miracema
   '17004': '22%', // Rio Formoso (Palmas)
   '17005': '10%', // Gurupi
-  '17006': '9%',  // Porto Nacional
-  '17007': '8%',  // Jalapão
-  '17008': '6%',  // Dianópolis
+  '17006': '9%', // Porto Nacional
+  '17007': '8%', // Jalapão
+  '17008': '6%', // Dianópolis
 };
 
 export function TocantinsMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
-  const [hoveredFeature, setHoveredFeature] = useState<{ id: string; name: string; regionId: string; regionName: string; x: number; y: number } | null>(null);
+  const [hoveredFeature, setHoveredFeature] = useState<{
+    id: string;
+    name: string;
+    regionId: string;
+    regionName: string;
+    x: number;
+    y: number;
+  } | null>(null);
   const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<MockProject | null>(null);
 
@@ -56,13 +63,13 @@ export function TocantinsMap() {
   const regionCentroids = useMemo(() => {
     const centroids: Record<string, [number, number]> = {};
     const regionIds = Object.keys(TOCANTINS_REGIONS);
-    
-    regionIds.forEach(regionId => {
-      const regionFeatures = features.filter(f => f.properties.regionId === regionId);
+
+    regionIds.forEach((regionId) => {
+      const regionFeatures = features.filter((f) => f.properties.regionId === regionId);
       if (regionFeatures.length > 0) {
         centroids[regionId] = getFeatureCentroid({
           type: 'FeatureCollection',
-          features: regionFeatures
+          features: regionFeatures,
         });
       }
     });
@@ -75,24 +82,27 @@ export function TocantinsMap() {
   useEffect(() => {
     if (selectedRegionId) {
       // Find all municipalities that belong to the selected region
-      const regionFeatures = features.filter(f => f.properties.regionId === selectedRegionId);
-      
+      const regionFeatures = features.filter((f) => f.properties.regionId === selectedRegionId);
+
       if (regionFeatures.length > 0) {
         // Create a temporary FeatureCollection to get the bounding box of the entire region
         const bounds = getFeatureBounds({
           type: 'FeatureCollection',
-          features: regionFeatures
+          features: regionFeatures,
         });
-        
+
         const dx = bounds[1][0] - bounds[0][0];
         const dy = bounds[1][1] - bounds[0][1];
         const x = (bounds[0][0] + bounds[1][0]) / 2;
         const y = (bounds[0][1] + bounds[1][1]) / 2;
-        
+
         // Calculate scale to fit the region with padding
-        const scale = Math.max(1, Math.min(8, 0.75 / Math.max(dx / dimensions.width, dy / dimensions.height)));
+        const scale = Math.max(
+          1,
+          Math.min(8, 0.75 / Math.max(dx / dimensions.width, dy / dimensions.height)),
+        );
         const translate = [dimensions.width / 2 - scale * x, dimensions.height / 2 - scale * y];
-        
+
         setTransform(`translate(${translate[0]}px, ${translate[1]}px) scale(${scale})`);
       }
     } else {
@@ -112,35 +122,38 @@ export function TocantinsMap() {
   };
 
   const activeRegionData = selectedRegionId ? TOCANTINS_REGIONS[selectedRegionId] : null;
-  const regionProjects = selectedRegionId 
-    ? MOCK_PROJECTS.filter(p => p.regiao_id === selectedRegionId)
+  const regionProjects = selectedRegionId
+    ? MOCK_PROJECTS.filter((p) => p.regiao_id === selectedRegionId)
     : [];
 
   return (
-    <div 
-      ref={containerRef} 
-      className="relative h-full w-full overflow-hidden rounded-xl bg-[#F9F9F9] border border-gray-200"
+    <div
+      ref={containerRef}
+      className="relative h-full w-full overflow-hidden rounded-xl border border-gray-200 bg-[#F9F9F9]"
     >
       {/* Header controls when zoomed in */}
-      <div 
+      <div
         className={`absolute left-6 top-6 z-10 transition-opacity duration-300 ${
           selectedRegionId ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
         <button
           onClick={handleBackToState}
-          className="mb-3 flex items-center gap-2 rounded bg-white px-4 py-2 text-sm font-bold text-cerrado-profundo shadow-sm border border-gray-200 transition-colors hover:bg-gray-50"
+          className="mb-3 flex items-center gap-2 rounded border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-cerrado-profundo shadow-sm transition-colors hover:bg-gray-50"
         >
           <IconArrowLeft size={16} />
           Voltar
         </button>
-        
+
         {activeRegionData && (
-          <div className="rounded bg-white/95 p-4 shadow-sm border border-gray-200 backdrop-blur-md">
-            <h2 className="font-sora text-xl font-bold uppercase" style={{ color: activeRegionData.cor }}>
+          <div className="rounded border border-gray-200 bg-white/95 p-4 shadow-sm backdrop-blur-md">
+            <h2
+              className="font-sora text-xl font-bold uppercase"
+              style={{ color: activeRegionData.cor }}
+            >
               {activeRegionData.nome}
             </h2>
-            <p className="font-dm-sans text-sm text-gray-600 mt-1">
+            <p className="mt-1 font-dm-sans text-sm text-gray-600">
               {regionProjects.length} projetos em execução/concluídos
             </p>
           </div>
@@ -148,25 +161,25 @@ export function TocantinsMap() {
       </div>
 
       {/* The Map SVG */}
-      <svg 
-        width="100%" 
-        height="100%" 
+      <svg
+        width="100%"
+        height="100%"
         className="block"
         onClick={() => {
           if (selectedProject) setSelectedProject(null);
         }}
       >
-        <g 
-          style={{ 
-            transform, 
-            transition: 'transform 750ms cubic-bezier(0.34, 1.56, 0.64, 1)' 
+        <g
+          style={{
+            transform,
+            transition: 'transform 750ms cubic-bezier(0.34, 1.56, 0.64, 1)',
           }}
         >
           {features.map((feature) => {
             const id = feature.properties.id;
             const regionId = feature.properties.regionId;
             const regionData = TOCANTINS_REGIONS[regionId];
-            
+
             const d = pathGenerator(feature as any) || '';
             const isSelectedRegion = regionId === selectedRegionId;
             const isHovered = hoveredFeature?.id === id;
@@ -189,14 +202,16 @@ export function TocantinsMap() {
                       regionId,
                       regionName: feature.properties.regionName,
                       x: e.clientX,
-                      y: e.clientY
+                      y: e.clientY,
                     });
                   }
                 }}
                 onMouseLeave={() => setHoveredFeature(null)}
                 onMouseMove={(e) => {
                   if (!selectedRegionId && hoveredFeature?.id === id) {
-                    setHoveredFeature(prev => prev ? { ...prev, x: e.clientX, y: e.clientY } : null);
+                    setHoveredFeature((prev) =>
+                      prev ? { ...prev, x: e.clientX, y: e.clientY } : null,
+                    );
                   }
                 }}
               />
@@ -204,44 +219,58 @@ export function TocantinsMap() {
           })}
 
           {/* Region Overlays (Percentages) - Only visible when NO region is selected */}
-          {!selectedRegionId && Object.entries(regionCentroids).map(([regionId, [x, y]]) => {
-            // Apply small manual offsets if some centroids are visually off
-            let dx = 0;
-            let dy = 0;
-            if (regionId === '17001') dy = -10; // Bico up
-            if (regionId === '17007') dx = 10;  // Jalapão right
+          {!selectedRegionId &&
+            Object.entries(regionCentroids).map(([regionId, [x, y]]) => {
+              // Apply small manual offsets if some centroids are visually off
+              let dx = 0;
+              let dy = 0;
+              if (regionId === '17001') dy = -10; // Bico up
+              if (regionId === '17007') dx = 10; // Jalapão right
 
-            return (
-              <g key={`overlay-${regionId}`} className="pointer-events-none" transform={`translate(${x + dx}, ${y + dy})`}>
-                <rect x="-20" y="-12" width="40" height="24" rx="4" fill="rgba(255,255,255,0.9)" className="drop-shadow-sm" />
-                <text 
-                  textAnchor="middle" 
-                  alignmentBaseline="middle" 
-                  className="font-sora text-xs font-bold text-cerrado-profundo"
-                  y="1"
+              return (
+                <g
+                  key={`overlay-${regionId}`}
+                  className="pointer-events-none"
+                  transform={`translate(${x + dx}, ${y + dy})`}
                 >
-                  {REGION_BUDGET_PERCENTAGES[regionId]}
-                </text>
-              </g>
-            );
-          })}
+                  <rect
+                    x="-20"
+                    y="-12"
+                    width="40"
+                    height="24"
+                    rx="4"
+                    fill="rgba(255,255,255,0.9)"
+                    className="drop-shadow-sm"
+                  />
+                  <text
+                    textAnchor="middle"
+                    alignmentBaseline="middle"
+                    className="font-sora text-xs font-bold text-cerrado-profundo"
+                    y="1"
+                  >
+                    {REGION_BUDGET_PERCENTAGES[regionId]}
+                  </text>
+                </g>
+              );
+            })}
 
           {/* Project Markers (only visible when zoomed in) */}
-          {selectedRegionId && regionProjects.map((project) => {
-            const [x, y] = projection([project.longitude, project.latitude]) || [0, 0];
-            const isSelected = selectedProject?.id === project.id;
-            
-            return (
-              <ProjectMarker
-                key={project.id}
-                project={project}
-                x={x}
-                y={y}
-                isSelected={isSelected}
-                onClick={() => setSelectedProject(project)}
-              />
-            );
-          })}
+          {selectedRegionId &&
+            regionProjects.map((project) => {
+              const [x, y] = projection([project.longitude, project.latitude]) || [0, 0];
+              const isSelected = selectedProject?.id === project.id;
+
+              return (
+                <ProjectMarker
+                  key={project.id}
+                  project={project}
+                  x={x}
+                  y={y}
+                  isSelected={isSelected}
+                  onClick={() => setSelectedProject(project)}
+                />
+              );
+            })}
         </g>
       </svg>
 
@@ -252,16 +281,15 @@ export function TocantinsMap() {
           y={hoveredFeature.y}
           municipioNome={hoveredFeature.name}
           regiaoNome={hoveredFeature.regionName}
-          projectsCount={MOCK_PROJECTS.filter(p => p.regiao_id === hoveredFeature.regionId).length}
+          projectsCount={
+            MOCK_PROJECTS.filter((p) => p.regiao_id === hoveredFeature.regionId).length
+          }
         />
       )}
 
       {/* Project Detail Card */}
       {selectedProject && selectedRegionId && (
-        <ProjectCard 
-          project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
-        />
+        <ProjectCard project={selectedProject} onClose={() => setSelectedProject(null)} />
       )}
 
       {/* Map Legend */}

@@ -11,16 +11,16 @@ export function useGeoProjection({ width, height, features }: UseGeoProjectionPr
   return useMemo(() => {
     // 1. Create a Mercator projection
     const projection = geoMercator();
-    
+
     // 2. Create a path generator
     const pathGenerator = geoPath().projection(projection);
-    
+
     // 3. Fit the projection to our features (the state of Tocantins)
     const bounds = {
       type: 'FeatureCollection',
       features,
     } as any;
-    
+
     projection.fitSize([width, height], bounds);
 
     return {
