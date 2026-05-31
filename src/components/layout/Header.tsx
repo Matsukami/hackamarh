@@ -38,7 +38,7 @@ export function Header() {
             Mural de Editais
           </Link>
           <Link
-            href="/avaliador"
+            href="/avaliador/entrar"
             className="rounded px-2 py-1 transition-colors hover:text-buriti-vivo focus:text-buriti-vivo focus:outline-none"
           >
             Portal do Avaliador
