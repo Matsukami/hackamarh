@@ -14,16 +14,14 @@ export const FormSchema = z.object({
       'entidade_quilombola',
     ],
     {
-      errorMap: () => ({ message: 'Selecione um tipo jurídico.' }),
+      message: 'Selecione um tipo jurídico.',
     },
   ),
   categoria_beneficiario: z.enum(
     ['terra_indigena', 'quilombola', 'agricultor_familiar', 'fortalecimento_institucional'],
     {
-      errorMap: () => ({
-        message:
-          'HS-01: Selecione uma categoria de beneficiário para continuar. Este campo determina a janela legal de financiamento do projeto.',
-      }),
+      message:
+        'HS-01: Selecione uma categoria de beneficiário para continuar. Este campo determina a janela legal de financiamento do projeto.',
     },
   ),
   email: z.string().email('E-mail inválido.'),
@@ -42,9 +40,7 @@ export const FormSchema = z.object({
     ),
   latitude: z.coerce
     .number({
-      required_error:
-        'HS-04: Informe as coordenadas geográficas (latitude e longitude) da área do projeto.',
-      invalid_type_error: 'Latitude deve ser um número.',
+      message: 'Latitude deve ser um número.',
     })
     .min(
       -13.45,
@@ -56,9 +52,7 @@ export const FormSchema = z.object({
     ),
   longitude: z.coerce
     .number({
-      required_error:
-        'HS-04: Informe as coordenadas geográficas (latitude e longitude) da área do projeto.',
-      invalid_type_error: 'Longitude deve ser um número.',
+      message: 'Longitude deve ser um número.',
     })
     .min(
       -50.74,
@@ -78,7 +72,7 @@ export const FormSchema = z.object({
       'arrendamento',
     ],
     {
-      errorMap: () => ({ message: 'Selecione o tipo de posse da terra.' }),
+      message: 'Selecione o tipo de posse da terra.',
     },
   ),
 
@@ -94,26 +88,19 @@ export const FormSchema = z.object({
   // Etapa 4
   beneficiarias_mulheres: z.coerce
     .number({
-      required_error:
-        'HS-06: Os indicadores sociais são obrigatórios. Preencha o número de mulheres beneficiadas.',
-      invalid_type_error: 'Deve ser um número.',
+      message: 'Deve ser um número.',
     })
     .nonnegative('Valor deve ser zero ou maior.'),
   beneficiarios_jovens: z.coerce
     .number({
-      required_error:
-        'HS-06: Os indicadores sociais são obrigatórios. Preencha o número de jovens beneficiados.',
-      invalid_type_error: 'Deve ser um número.',
+      message: 'Deve ser um número.',
     })
     .nonnegative('Valor deve ser zero ou maior.'),
   mulheres_lideranca: z.coerce.number().nonnegative().optional().default(0),
   grupo_etnico: z.enum(
     ['indigena', 'quilombola', 'pardo', 'branco', 'preto', 'amarelo', 'nao_informado'],
     {
-      errorMap: () => ({
-        message:
-          'HS-06: Os indicadores sociais são obrigatórios. Preencha a autodeclaração étnica.',
-      }),
+      message: 'HS-06: Os indicadores sociais são obrigatórios. Preencha a autodeclaração étnica.',
     },
   ),
   comunidades_impactadas: z.coerce.number().positive().optional(),

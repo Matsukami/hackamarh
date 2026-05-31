@@ -21,6 +21,7 @@ export default function InscricaoPage() {
     formState: { errors, isValid },
     watch,
   } = useForm<FormValues>({
+    // @ts-expect-error Type mismatch between react-hook-form and hookform/resolvers versions
     resolver: zodResolver(FormSchema),
     mode: 'onChange',
   });
@@ -115,7 +116,7 @@ export default function InscricaoPage() {
 
       <Card className="shadow-lg">
         <CardContent className="p-6 sm:p-10">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-6">
             {/* ETAPA 1 */}
             {currentStep === 0 && (
               <div className="animate-in fade-in slide-in-from-bottom-4 space-y-4">

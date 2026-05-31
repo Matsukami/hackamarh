@@ -212,10 +212,9 @@ export default async function PainelPage() {
               </div>
             </div>
 
-            {/* System Event */}
             <div className="flex justify-center">
               <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-bold text-gray-500 shadow-sm">
-                Status alterado para "Em Análise"
+                Status alterado para &quot;Em Análise&quot;
               </div>
             </div>
 
