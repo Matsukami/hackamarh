@@ -38,6 +38,24 @@ export default function AvaliadorLoginPage() {
     }
   };
 
+  const handleBypassLogin = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: 'avaliador@tocantins.gov.br',
+        password: 'AvaliadorJredd2026!',
+      });
+      if (error) throw error;
+      router.push('/avaliador/kanban');
+    } catch (err: any) {
+      setError(err.message || 'Ocorreu um erro ao entrar com a conta de demonstração.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center bg-cerrado-profundo px-4 py-12 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md shadow-2xl">
@@ -87,6 +105,25 @@ export default function AvaliadorLoginPage() {
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Aguarde...' : 'Acessar Backoffice'}
+            </Button>
+
+            <div className="relative my-4 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200"></div>
+              </div>
+              <span className="relative bg-white px-2 text-xs font-bold uppercase tracking-wider text-gray-400">
+                Acesso Rápido
+              </span>
+            </div>
+
+            <Button
+              type="button"
+              variant="secondary"
+              className="w-full border-buriti-vivo/30 transition-all duration-300 hover:border-buriti-vivo hover:bg-buriti-vivo/5"
+              onClick={handleBypassLogin}
+              disabled={loading}
+            >
+              🚀 Entrar como Avaliador Demo
             </Button>
           </form>
         </CardContent>
