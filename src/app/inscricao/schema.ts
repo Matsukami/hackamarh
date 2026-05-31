@@ -108,10 +108,10 @@ export const FormSchema = z.object({
 
   // Etapa 5
   // For MVP, we'll just check if files were 'uploaded' (strings of URLs or placeholders)
-  comprovante_car: z.string().min(1, 'HS-07: Comprovante do CAR é obrigatório.'),
-  documento_identidade: z.string().min(1, 'HS-07: Documento de identidade é obrigatório.'),
+  comprovante_car: z.any().optional(),
+  documento_identidade: z.any().optional(),
   // Condicionais we'll handle in component logic or refine here, but for MVP keep it simple.
-  documento_extra: z.string().optional(),
+  documento_extra: z.any().optional(),
 });
 
 export type FormValues = z.infer<typeof FormSchema>;

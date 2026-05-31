@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +10,7 @@ import {
   IconReceipt,
   IconMessage,
   IconCash,
+  IconChartLine,
 } from '@tabler/icons-react';
 
 export const revalidate = 0;
@@ -59,8 +61,14 @@ export default async function PainelPage() {
       </div>
 
       {/* Notification Banner */}
-      <div className="mb-8 flex items-start gap-4 rounded-xl border border-red-200 bg-red-50 p-4">
-        <IconAlertTriangle size={24} className="mt-0.5 shrink-0 text-red-600" />
+      <div className="mb-8 flex items-start gap-4 rounded-xl border-l-4 border-l-red-600 border-y border-r border-red-200 bg-red-50 p-4 shadow-sm animate-in slide-in-from-top-4">
+        <div className="relative">
+          <IconAlertTriangle size={24} className="mt-0.5 shrink-0 text-red-600" />
+          <span className="absolute -top-1 -right-1 flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+          </span>
+        </div>
         <div className="flex-grow">
           <h3 className="text-lg font-bold text-red-800">Pendência: Aguarda o número do CAR</h3>
           <p className="text-red-700">
@@ -68,9 +76,9 @@ export default async function PainelPage() {
             proposta.
           </p>
         </div>
-        <div className="flex flex-col items-center rounded-lg border border-red-100 bg-white px-3 py-2">
+        <div className="flex flex-col items-center rounded-lg border border-red-200 bg-white px-4 py-2 shadow-sm">
           <span className="text-[10px] font-bold uppercase tracking-wider text-red-600">Prazo</span>
-          <span className="text-sm font-bold text-red-600">15 dias</span>
+          <span className="text-lg font-black text-red-600">15 dias</span>
         </div>
       </div>
 
@@ -113,30 +121,48 @@ export default async function PainelPage() {
             <CardTitle className="text-lg text-cerrado-profundo">Ações Rápidas</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
-            <Button
-              variant="primary"
-              className="text-md group h-14 w-full justify-start px-6 font-bold"
-            >
-              <div className="flex flex-grow items-center gap-3">
-                <IconUpload size={20} />
-                <span>Enviar Evidências (T-05)</span>
-              </div>
-              <span className="opacity-50 transition-all group-hover:translate-x-1 group-hover:opacity-100">
-                &rarr;
-              </span>
-            </Button>
-            <Button
-              variant="secondary"
-              className="text-md group h-14 w-full justify-start px-6 font-bold"
-            >
-              <div className="flex flex-grow items-center gap-3">
-                <IconReceipt size={20} />
-                <span>Lançar Despesas (T-06)</span>
-              </div>
-              <span className="opacity-50 transition-all group-hover:translate-x-1 group-hover:opacity-100">
-                &rarr;
-              </span>
-            </Button>
+            <Link href="/inscricao/scorecard">
+              <Button
+                variant="outline"
+                className="text-md group h-14 w-full justify-start px-6 font-bold border-buriti-vivo text-buriti-vivo hover:bg-buriti-vivo/10"
+              >
+                <div className="flex flex-grow items-center gap-3">
+                  <IconChartLine size={20} />
+                  <span>Ver Scorecard Preditivo (T-03)</span>
+                </div>
+                <span className="opacity-50 transition-all group-hover:translate-x-1 group-hover:opacity-100">
+                  &rarr;
+                </span>
+              </Button>
+            </Link>
+            <Link href="/painel/prestacao/evidencias">
+              <Button
+                variant="primary"
+                className="text-md group h-14 w-full justify-start px-6 font-bold"
+              >
+                <div className="flex flex-grow items-center gap-3">
+                  <IconUpload size={20} />
+                  <span>Enviar Evidências (T-05)</span>
+                </div>
+                <span className="opacity-50 transition-all group-hover:translate-x-1 group-hover:opacity-100">
+                  &rarr;
+                </span>
+              </Button>
+            </Link>
+            <Link href="/painel/prestacao/despesas">
+              <Button
+                variant="secondary"
+                className="text-md group h-14 w-full justify-start px-6 font-bold"
+              >
+                <div className="flex flex-grow items-center gap-3">
+                  <IconReceipt size={20} />
+                  <span>Lançar Despesas (T-06)</span>
+                </div>
+                <span className="opacity-50 transition-all group-hover:translate-x-1 group-hover:opacity-100">
+                  &rarr;
+                </span>
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>
@@ -146,92 +172,113 @@ export default async function PainelPage() {
         <Card className="border border-gray-200 shadow-sm">
           <div className="border-b border-gray-200 bg-gray-50 p-6">
             <h3 className="flex items-center gap-2 font-sora text-lg font-bold text-cerrado-profundo">
-              <IconCash size={20} /> Cronograma de Parcelas
+              <IconCash size={20} className="text-mata-alta" /> Cronograma de Parcelas
             </h3>
           </div>
-          <div className="overflow-x-auto p-0">
-            <table className="w-full border-collapse text-left">
-              <thead>
-                <tr className="border-b border-gray-200 bg-white text-xs font-bold uppercase tracking-wider text-gray-500">
-                  <th className="p-4">Parcela</th>
-                  <th className="p-4">Data Prevista</th>
-                  <th className="p-4">Valor</th>
-                  <th className="p-4">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100 text-sm text-gray-700">
-                <tr className="transition-colors hover:bg-gray-50">
-                  <td className="p-4 font-bold">01 - Inicial</td>
-                  <td className="p-4 text-gray-500">15/11/2024</td>
-                  <td className="p-4">R$ 50.000,00</td>
-                  <td className="p-4">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-600">
-                      <span className="h-1.5 w-1.5 rounded-full bg-gray-400"></span> Bloqueada
+          <div className="p-6">
+            <div className="relative border-l-2 border-gray-200 ml-3 space-y-8">
+              
+              <div className="relative pl-6">
+                <span className="absolute -left-[9px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 ring-4 ring-white">
+                  <span className="h-2 w-2 rounded-full bg-gray-400"></span>
+                </span>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="font-bold text-cerrado-profundo">01 - Inicial</h4>
+                    <p className="text-xs text-gray-500 mt-1">Previsão: 15/11/2024</p>
+                    <p className="mt-2 text-sm text-gray-700 bg-gray-50 px-2 py-1 rounded border border-gray-100 w-fit">
+                      <span className="font-bold text-gray-500 text-xs uppercase tracking-wider block mb-0.5">Meta Física Vinculada</span>
+                      Implantação de Viveiro (100%)
+                    </p>
+                  </div>
+                  <div className="text-right flex flex-col items-end">
+                    <p className="font-bold text-gray-700">R$ 50.000,00</p>
+                    <span className="inline-block mt-1 rounded bg-gray-100 px-2 py-0.5 text-[10px] font-bold text-gray-600 uppercase tracking-wider">
+                      Bloqueada
                     </span>
-                  </td>
-                </tr>
-                <tr className="transition-colors hover:bg-gray-50">
-                  <td className="p-4 font-bold">02 - Execução</td>
-                  <td className="p-4 text-gray-500">15/02/2025</td>
-                  <td className="p-4">R$ 120.000,00</td>
-                  <td className="p-4">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-100 px-2.5 py-1 text-xs font-bold text-gray-600">
-                      <span className="h-1.5 w-1.5 rounded-full bg-gray-400"></span> Bloqueada
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative pl-6">
+                <span className="absolute -left-[9px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 ring-4 ring-white">
+                  <span className="h-2 w-2 rounded-full bg-gray-400"></span>
+                </span>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="font-bold text-cerrado-profundo">02 - Execução</h4>
+                    <p className="text-xs text-gray-500 mt-1">Previsão: 15/02/2025</p>
+                    <p className="mt-2 text-sm text-gray-700 bg-gray-50 px-2 py-1 rounded border border-gray-100 w-fit">
+                      <span className="font-bold text-gray-500 text-xs uppercase tracking-wider block mb-0.5">Meta Física Vinculada</span>
+                      Plantio de 10.000 Mudas Nativas
+                    </p>
+                  </div>
+                  <div className="text-right flex flex-col items-end">
+                    <p className="font-bold text-gray-700">R$ 120.000,00</p>
+                    <span className="inline-block mt-1 rounded bg-gray-100 px-2 py-0.5 text-[10px] font-bold text-gray-600 uppercase tracking-wider">
+                      Bloqueada
                     </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </Card>
 
         {/* Communication History */}
-        <Card className="flex h-[400px] flex-col border border-gray-200 shadow-sm">
+        <Card className="flex h-[450px] flex-col border border-gray-200 shadow-sm">
           <div className="flex-shrink-0 border-b border-gray-200 bg-gray-50 p-6">
             <h3 className="flex items-center gap-2 font-sora text-lg font-bold text-cerrado-profundo">
-              <IconMessage size={20} /> Histórico de Comunicação
+              <IconMessage size={20} className="text-mata-alta" /> Histórico de Comunicação
             </h3>
           </div>
-          <div className="flex-grow space-y-6 overflow-y-auto bg-gray-50 p-6">
+          <div className="flex-grow space-y-6 overflow-y-auto bg-gray-50/50 p-6">
             {/* Message from Fiscal Agent */}
             <div className="flex items-start gap-4">
-              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-cerrado-profundo text-xs font-bold text-white">
+              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-cerrado-profundo text-xs font-bold text-white shadow-sm">
                 AF
               </div>
               <div className="relative rounded-2xl rounded-tl-none border border-gray-200 bg-white p-4 shadow-sm">
                 <div className="mb-1 flex items-baseline justify-between gap-4">
                   <span className="text-sm font-bold text-cerrado-profundo">
-                    Agente Fiscal (Sistema)
+                    Agente Fiscal
                   </span>
-                  <span className="text-xs text-gray-500">Ontem, 14:30</span>
+                  <span className="text-[10px] uppercase text-gray-400">Ontem, 14:30</span>
                 </div>
-                <p className="text-sm text-gray-700">
-                  Identificamos que o número do CAR preenchido na seção 3 difere do documento
-                  anexado. Por favor, verifique e atualize no sistema.
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  Identificamos que o número do CAR preenchido na seção 3 difere do documento anexado. Por favor, verifique e atualize no sistema.
                 </p>
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-bold text-gray-500 shadow-sm">
-                Status alterado para &quot;Em Análise&quot;
+            <div className="flex justify-center my-4">
+              <div className="flex items-center gap-2 rounded-full border border-yellow-200 bg-yellow-50 px-3 py-1 text-xs font-bold text-yellow-700 shadow-sm">
+                Status alterado para &quot;Com Pendência&quot;
               </div>
             </div>
 
             {/* Message from Proponent */}
             <div className="flex flex-row-reverse items-start gap-4">
-              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-mata-alta text-xs font-bold text-white">
+              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-mata-alta text-xs font-bold text-white shadow-sm">
                 VO
               </div>
-              <div className="relative rounded-2xl rounded-tr-none border border-gray-200 bg-white p-4 text-right shadow-sm">
+              <div className="relative rounded-2xl rounded-tr-none border border-mata-alta/20 bg-mata-alta/5 p-4 text-right shadow-sm">
                 <div className="mb-1 flex items-baseline justify-end gap-4">
-                  <span className="text-xs text-gray-500">12/10/2024, 09:15</span>
+                  <span className="text-[10px] uppercase text-gray-400">Hoje, 09:15</span>
                   <span className="text-sm font-bold text-cerrado-profundo">Você</span>
                 </div>
-                <p className="text-sm text-gray-700">
-                  Proposta enviada com todos os anexos obrigatórios.
+                <p className="text-sm text-gray-800 leading-relaxed">
+                  Documento atualizado conforme solicitado.
                 </p>
               </div>
+            </div>
+          </div>
+          {/* Reply Input */}
+          <div className="border-t border-gray-200 bg-white p-4">
+            <div className="flex gap-2">
+              <input type="text" placeholder="Digite sua resposta..." className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-mata-alta focus:outline-none focus:ring-1 focus:ring-mata-alta" />
+              <Button variant="primary" className="px-4 py-2 text-sm bg-mata-alta">Enviar</Button>
             </div>
           </div>
         </Card>

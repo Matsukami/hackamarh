@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -14,13 +15,42 @@ import {
 import { RadialBarChart, RadialBar, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 
 export default function ScorecardPage() {
-  const score = 82;
+  const targetScore = 82;
+  const [score, setScore] = useState(0);
+
+  useEffect(() => {
+    const duration = 1500; // 1.5 seconds
+    const steps = 60;
+    const stepTime = duration / steps;
+    let currentStep = 0;
+
+    const timer = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+      // Easing function (easeOutQuad)
+      const easeOut = 1 - (1 - progress) * (1 - progress);
+      setScore(Math.round(targetScore * easeOut));
+
+      if (currentStep >= steps) clearInterval(timer);
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [targetScore]);
+
+  // Dynamic Color
+  const getColor = (val: number) => {
+    if (val >= 80) return '#C8E063'; // buriti-vivo
+    if (val >= 60) return '#FCD34D'; // amber-300
+    return '#F87171'; // red-400
+  };
+
+  const currentColor = getColor(score);
 
   const data = [
     {
       name: 'Score',
       value: score,
-      fill: '#C8E063', // buriti-vivo
+      fill: currentColor,
     },
   ];
 
@@ -31,45 +61,50 @@ export default function ScorecardPage() {
 
         <CardContent className="relative z-10 p-8 sm:p-12">
           <div className="mb-10 text-center">
-            <p className="mb-2 text-sm font-bold uppercase tracking-wider text-gray-400">
+            <p className="mb-2 text-sm font-bold uppercase tracking-wider text-gray-400 animate-in fade-in zoom-in duration-700">
               Análise Preditiva de Proposta
             </p>
-            <h2 className="font-sora text-3xl font-bold text-white">Scorecard de Viabilidade</h2>
+            <h2 className="font-sora text-3xl font-bold text-white animate-in slide-in-from-bottom-3 duration-500 delay-100">Scorecard de Viabilidade</h2>
           </div>
 
           <div className="mb-12 flex flex-col items-center justify-center gap-12 md:flex-row">
             {/* Radial Chart */}
-            <div className="relative flex h-48 w-48 items-center justify-center">
+            <div className="relative flex h-56 w-56 items-center justify-center animate-in zoom-in duration-1000">
               <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
                   cx="50%"
                   cy="50%"
                   innerRadius="80%"
                   outerRadius="100%"
-                  barSize={10}
+                  barSize={12}
                   data={data}
                   startAngle={90}
                   endAngle={-270}
                 >
                   <PolarAngleAxis type="number" domain={[0, 100]} angleAxisId={0} tick={false} />
                   <RadialBar
-                    background={{ fill: '#396756' }} // surface-tint approximate
+                    background={{ fill: '#396756' }}
                     dataKey="value"
                     cornerRadius={10}
+                    animationDuration={1500}
                   />
                 </RadialBarChart>
               </ResponsiveContainer>
               <div className="absolute flex flex-col items-center justify-center">
-                <span className="font-sora text-5xl font-bold text-buriti-vivo">{score}</span>
+                <span className="font-sora text-6xl font-bold transition-colors duration-500" style={{ color: currentColor }}>
+                  {score}
+                </span>
                 <span className="text-sm font-bold text-gray-400">/ 100</span>
               </div>
             </div>
 
             {/* Score Interpretation */}
-            <div className="max-w-xs text-center md:text-left">
+            <div className="max-w-xs text-center md:text-left animate-in slide-in-from-right-8 duration-700 delay-500 fill-mode-backwards">
               <div className="mb-4 inline-flex items-center rounded-full border border-mata-alta bg-mata-alta/30 px-3 py-1">
-                <span className="mr-2 h-2 w-2 rounded-full bg-buriti-vivo"></span>
-                <span className="text-sm font-bold text-buriti-vivo">Alta Viabilidade</span>
+                <span className="mr-2 h-2 w-2 rounded-full transition-colors duration-500" style={{ backgroundColor: currentColor }}></span>
+                <span className="text-sm font-bold transition-colors duration-500" style={{ color: currentColor }}>
+                  {score >= 80 ? 'Alta Viabilidade' : score >= 60 ? 'Média Viabilidade' : 'Baixa Viabilidade'}
+                </span>
               </div>
               <p className="font-dm-sans text-base text-gray-300">
                 A proposta demonstra um forte alinhamento com os critérios do Fundo Climático.

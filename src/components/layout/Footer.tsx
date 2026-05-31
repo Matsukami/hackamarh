@@ -5,9 +5,16 @@ export function Footer() {
     <footer className="mt-auto border-t border-gray-200 bg-white">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col items-center justify-between gap-4 font-dm-sans text-sm text-gray-600 md:flex-row">
-          <div className="flex flex-col items-center text-center md:items-start md:text-left">
-            <p className="font-semibold text-cerrado-profundo">Governo do Estado do Tocantins</p>
-            <p>Secretaria do Meio Ambiente e Recursos Hídricos</p>
+          <div className="flex items-center gap-4">
+            <img
+              src="/logo-gaia.png"
+              alt="GAIA Logo"
+              className="h-10 w-10 rounded-full object-contain"
+            />
+            <div className="flex flex-col items-center text-center md:items-start md:text-left">
+              <p className="font-semibold text-cerrado-profundo">Governo do Estado do Tocantins</p>
+              <p>Secretaria do Meio Ambiente e Recursos Hídricos</p>
+            </div>
           </div>
           <div className="flex items-center gap-6">
             <Link href="/editais" className="transition-colors hover:text-cerrado-profundo">

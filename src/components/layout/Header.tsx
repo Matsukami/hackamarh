@@ -1,7 +1,24 @@
+'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 
 export function Header() {
+  const pathname = usePathname();
+
+  const getLinkClass = (path: string) => {
+    const cleanPath = path === '/avaliador/entrar' ? '/avaliador' : path;
+    const isActive = pathname === path || (cleanPath !== '/' && pathname?.startsWith(cleanPath));
+    
+    return `rounded px-2 py-1 transition-colors focus:outline-none ${
+      isActive
+        ? 'text-buriti-vivo font-bold'
+        : 'text-white/95 hover:text-buriti-vivo focus:text-buriti-vivo'
+    }`;
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-mata-alta bg-cerrado-profundo text-white">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
@@ -10,42 +27,47 @@ export function Header() {
           href="/"
           className="flex items-center gap-3 rounded focus:outline-none focus:ring-4 focus:ring-mata-alta/25"
         >
-          {/* Logo Ícone (Árvore Geométrica estilizada - placeholder SVG) */}
-          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-sm bg-buriti-vivo">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-5 w-5 text-cerrado-profundo"
-            >
-              <path d="M12 21v-6M9 15c-2.5 0-4-1.5-4-4s1.5-4 4-4v8zM15 15c2.5 0 4-1.5 4-4s-1.5-4-4-4v8zM12 7c-2.5 0-4-1.5-4-4s1.5-4 4-4 4 1.5 4 4-1.5 4-4 4z" />
-            </svg>
-          </div>
+          <Image
+            src="/logo-gaia.png"
+            alt="GAIA Logo"
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full object-contain"
+          />
           <span className="hidden font-sora text-xl font-bold tracking-tight sm:inline-block">
             GAIA
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-8 font-dm-sans text-sm font-medium md:flex">
+        <nav className="hidden items-center gap-6 font-dm-sans text-sm font-medium lg:flex">
           <Link
             href="/editais"
-            className="rounded px-2 py-1 transition-colors hover:text-buriti-vivo focus:text-buriti-vivo focus:outline-none"
+            className={getLinkClass('/editais')}
           >
             Mural de Editais
           </Link>
           <Link
+            href="/painel"
+            className={getLinkClass('/painel')}
+          >
+            Painel do Proponente
+          </Link>
+          <Link
+            href="/descomplicador"
+            className={getLinkClass('/descomplicador')}
+          >
+            Descomplicador
+          </Link>
+          <Link
             href="/avaliador/entrar"
-            className="rounded px-2 py-1 transition-colors hover:text-buriti-vivo focus:text-buriti-vivo focus:outline-none"
+            className={getLinkClass('/avaliador/entrar')}
           >
             Portal do Avaliador
           </Link>
           <Link
             href="/transparencia"
-            className="rounded px-2 py-1 transition-colors hover:text-buriti-vivo focus:text-buriti-vivo focus:outline-none"
+            className={getLinkClass('/transparencia')}
           >
             Portal de Transparência
           </Link>

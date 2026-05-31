@@ -51,8 +51,33 @@ export default function LoginPage() {
     }
   };
 
+  const handleBypassLogin = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: 'proponente@teste.com',
+        password: 'ProponenteJredd2026!',
+      });
+      if (error) throw error;
+      router.push('/painel');
+    } catch (err: any) {
+      setError(err.message || 'Ocorreu um erro ao entrar com a conta de demonstração.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mb-6 flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-white shadow-lg">
+        <img
+          src="/logo-gaia.png"
+          alt="GAIA Logo"
+          className="h-16 w-16 object-contain"
+        />
+      </div>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle>{isLogin ? 'Entrar na Plataforma' : 'Criar Nova Conta'}</CardTitle>
@@ -104,6 +129,29 @@ export default function LoginPage() {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Aguarde...' : isLogin ? 'Entrar' : 'Cadastrar'}
             </Button>
+
+            {isLogin && (
+              <>
+                <div className="relative my-4 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-200"></div>
+                  </div>
+                  <span className="relative bg-white px-2 text-xs font-bold uppercase tracking-wider text-gray-400">
+                    Acesso Rápido
+                  </span>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="w-full border-mata-alta/30 transition-all duration-300 hover:border-mata-alta hover:bg-mata-alta/5"
+                  onClick={handleBypassLogin}
+                  disabled={loading}
+                >
+                  🚀 Entrar como Proponente Demo
+                </Button>
+              </>
+            )}
           </form>
 
           <div className="mt-6 text-center">
