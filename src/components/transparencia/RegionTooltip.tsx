@@ -3,22 +3,27 @@ import React from 'react';
 interface RegionTooltipProps {
   x: number;
   y: number;
-  name: string;
+  municipioNome: string;
+  regiaoNome: string;
   projectsCount: number;
 }
 
-export function RegionTooltip({ x, y, name, projectsCount }: RegionTooltipProps) {
+export function RegionTooltip({ x, y, municipioNome, regiaoNome, projectsCount }: RegionTooltipProps) {
   return (
     <div
-      className="pointer-events-none fixed z-50 flex flex-col gap-1 rounded-lg border border-gray-200 bg-white/95 p-3 text-sm shadow-xl backdrop-blur-sm transition-opacity duration-200"
+      className="pointer-events-none fixed z-50 flex flex-col gap-1 rounded bg-white p-4 shadow-[0_4px_12px_rgba(0,0,0,0.1)] border border-gray-100 backdrop-blur-none transition-opacity duration-200"
       style={{
         left: x + 16,
         top: y + 16,
+        minWidth: '200px'
       }}
     >
-      <span className="font-sora font-bold text-cerrado-profundo">{name}</span>
-      <span className="font-dm-sans text-xs text-gray-600">
-        <span className="font-bold text-mata-alta">{projectsCount}</span> projetos ativos
+      <span className="font-sora text-sm text-gray-700 tracking-wide uppercase">{municipioNome}</span>
+      <span className="font-dm-sans text-[13px] text-gray-500 mt-1">
+        Região: {regiaoNome}
+      </span>
+      <span className="font-dm-sans text-[13px] text-gray-700 mt-1">
+        Projetos: {projectsCount}
       </span>
     </div>
   );

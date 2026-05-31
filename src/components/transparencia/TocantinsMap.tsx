@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { IconArrowLeft } from '@tabler/icons-react';
-import { tocantinsGeoJSON, TOCANTINS_REGIONS, Region } from '@/lib/geo/tocantins-regions';
+import { TOCANTINS_REGIONS, Region } from '@/lib/geo/tocantins-regions';
 import { MOCK_PROJECTS, MockProject } from '@/lib/geo/mock-projects';
 import { useGeoProjection } from '@/lib/geo/useGeoProjection';
 import { RegionPath } from './RegionPath';
@@ -10,10 +10,13 @@ import { RegionTooltip } from './RegionTooltip';
 import { ProjectMarker } from './ProjectMarker';
 import { ProjectCard } from './ProjectCard';
 
+// Using the detailed IBGE malha containing 139 municipalities grouped by their 8 macro-regions
+import tocantinsMalha from '@/lib/geo/tocantins-malha.json';
+
 export function TocantinsMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
-  const [hoveredRegion, setHoveredRegion] = useState<{ id: string; x: number; y: number } | null>(null);
+  const [hoveredFeature, setHoveredFeature] = useState<{ id: string; name: string; regionId: string; regionName: string; x: number; y: number } | null>(null);
   const [selectedRegionId, setSelectedRegionId] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<MockProject | null>(null);
 
@@ -28,10 +31,12 @@ export function TocantinsMap() {
     return () => observer.disconnect();
   }, []);
 
-  const { projection, pathGenerator, getFeatureBounds, getFeatureCentroid } = useGeoProjection({
+  const features = tocantinsMalha.features as any[];
+
+  const { projection, pathGenerator, getFeatureBounds } = useGeoProjection({
     width: dimensions.width,
     height: dimensions.height,
-    features: tocantinsGeoJSON.features,
+    features: features,
   });
 
   // Calculate transform for zoom
@@ -39,15 +44,22 @@ export function TocantinsMap() {
 
   useEffect(() => {
     if (selectedRegionId) {
-      const feature = tocantinsGeoJSON.features.find((f) => f.id === selectedRegionId);
-      if (feature) {
-        const bounds = getFeatureBounds(feature);
+      // Find all municipalities that belong to the selected region
+      const regionFeatures = features.filter(f => f.properties.regionId === selectedRegionId);
+      
+      if (regionFeatures.length > 0) {
+        // Create a temporary FeatureCollection to get the bounding box of the entire region
+        const bounds = getFeatureBounds({
+          type: 'FeatureCollection',
+          features: regionFeatures
+        });
+        
         const dx = bounds[1][0] - bounds[0][0];
         const dy = bounds[1][1] - bounds[0][1];
         const x = (bounds[0][0] + bounds[1][0]) / 2;
         const y = (bounds[0][1] + bounds[1][1]) / 2;
         
-        // Calculate scale to fit the region with some padding
+        // Calculate scale to fit the region with padding
         const scale = Math.max(1, Math.min(8, 0.75 / Math.max(dx / dimensions.width, dy / dimensions.height)));
         const translate = [dimensions.width / 2 - scale * x, dimensions.height / 2 - scale * y];
         
@@ -57,11 +69,11 @@ export function TocantinsMap() {
       setTransform('translate(0,0) scale(1)');
       setSelectedProject(null);
     }
-  }, [selectedRegionId, dimensions, getFeatureBounds]);
+  }, [selectedRegionId, dimensions, getFeatureBounds, features]);
 
-  const handleRegionSelect = (id: string) => {
-    setSelectedRegionId(id);
-    setHoveredRegion(null);
+  const handleRegionSelect = (regionId: string) => {
+    setSelectedRegionId(regionId);
+    setHoveredFeature(null);
   };
 
   const handleBackToState = () => {
@@ -77,7 +89,7 @@ export function TocantinsMap() {
   return (
     <div 
       ref={containerRef} 
-      className="relative h-full w-full overflow-hidden rounded-xl bg-[#F5F0E8] border border-gray-200"
+      className="relative h-full w-full overflow-hidden rounded-xl bg-[#F9F9F9] border border-gray-200"
     >
       {/* Header controls when zoomed in */}
       <div 
@@ -87,18 +99,18 @@ export function TocantinsMap() {
       >
         <button
           onClick={handleBackToState}
-          className="mb-3 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-cerrado-profundo shadow-md transition-colors hover:bg-gray-50"
+          className="mb-3 flex items-center gap-2 rounded bg-white px-4 py-2 text-sm font-bold text-cerrado-profundo shadow-sm border border-gray-200 transition-colors hover:bg-gray-50"
         >
           <IconArrowLeft size={16} />
-          Voltar para o mapa do Tocantins
+          Voltar
         </button>
         
         {activeRegionData && (
-          <div className="rounded-xl bg-white/90 p-4 shadow-lg backdrop-blur-md">
-            <h2 className="font-sora text-2xl font-bold" style={{ color: activeRegionData.cor }}>
-              Região {activeRegionData.nome}
+          <div className="rounded bg-white/95 p-4 shadow-sm border border-gray-200 backdrop-blur-md">
+            <h2 className="font-sora text-xl font-bold uppercase" style={{ color: activeRegionData.cor }}>
+              {activeRegionData.nome}
             </h2>
-            <p className="font-dm-sans text-sm text-gray-600">
+            <p className="font-dm-sans text-sm text-gray-600 mt-1">
               {regionProjects.length} projetos em execução/concluídos
             </p>
           </div>
@@ -120,31 +132,41 @@ export function TocantinsMap() {
             transition: 'transform 750ms cubic-bezier(0.34, 1.56, 0.64, 1)' 
           }}
         >
-          {tocantinsGeoJSON.features.map((feature) => {
-            const id = feature.id as string;
-            const regionData = TOCANTINS_REGIONS[id];
+          {features.map((feature) => {
+            const id = feature.properties.id;
+            const regionId = feature.properties.regionId;
+            const regionData = TOCANTINS_REGIONS[regionId];
+            
             const d = pathGenerator(feature as any) || '';
-            const isSelected = id === selectedRegionId;
-            const isVisible = !selectedRegionId || isSelected;
+            const isSelectedRegion = regionId === selectedRegionId;
+            const isHovered = hoveredFeature?.id === id;
 
             return (
               <RegionPath
                 key={id}
                 d={d}
-                name={regionData?.nome || id}
-                color={regionData?.cor || '#CCC'}
-                isSelected={isSelected}
-                isVisible={isVisible}
-                onSelect={() => handleRegionSelect(id)}
+                name={feature.properties.name}
+                color={regionData?.cor || '#004A8F'}
+                isHovered={isHovered}
+                isSelectedRegion={isSelectedRegion}
+                isAnyRegionSelected={!!selectedRegionId}
+                onSelect={() => handleRegionSelect(regionId)}
                 onMouseEnter={(e) => {
                   if (!selectedRegionId) {
-                    setHoveredRegion({ id, x: e.clientX, y: e.clientY });
+                    setHoveredFeature({
+                      id,
+                      name: feature.properties.name,
+                      regionId,
+                      regionName: feature.properties.regionName,
+                      x: e.clientX,
+                      y: e.clientY
+                    });
                   }
                 }}
-                onMouseLeave={() => setHoveredRegion(null)}
+                onMouseLeave={() => setHoveredFeature(null)}
                 onMouseMove={(e) => {
-                  if (!selectedRegionId && hoveredRegion?.id === id) {
-                    setHoveredRegion({ id, x: e.clientX, y: e.clientY });
+                  if (!selectedRegionId && hoveredFeature?.id === id) {
+                    setHoveredFeature(prev => prev ? { ...prev, x: e.clientX, y: e.clientY } : null);
                   }
                 }}
               />
@@ -156,10 +178,6 @@ export function TocantinsMap() {
             const [x, y] = projection([project.longitude, project.latitude]) || [0, 0];
             const isSelected = selectedProject?.id === project.id;
             
-            // Fix: SVG transform scales everything including strokes. To keep markers consistent size,
-            // we could inverse-scale them, but since we are transforming the <g>, they will grow. 
-            // For a simpler approach without inverse scaling, we'll draw them inside the <g> and 
-            // they will appear larger, which is acceptable for a zoom effect.
             return (
               <ProjectMarker
                 key={project.id}
@@ -175,12 +193,13 @@ export function TocantinsMap() {
       </svg>
 
       {/* Tooltip for hover state */}
-      {hoveredRegion && !selectedRegionId && (
+      {hoveredFeature && !selectedRegionId && (
         <RegionTooltip
-          x={hoveredRegion.x}
-          y={hoveredRegion.y}
-          name={TOCANTINS_REGIONS[hoveredRegion.id]?.nome || hoveredRegion.id}
-          projectsCount={MOCK_PROJECTS.filter(p => p.regiao_id === hoveredRegion.id).length}
+          x={hoveredFeature.x}
+          y={hoveredFeature.y}
+          municipioNome={hoveredFeature.name}
+          regiaoNome={hoveredFeature.regionName}
+          projectsCount={MOCK_PROJECTS.filter(p => p.regiao_id === hoveredFeature.regionId).length}
         />
       )}
 
