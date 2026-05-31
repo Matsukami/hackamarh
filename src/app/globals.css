@@ -1,27 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Paleta Cerrado Tocantinense */
+  --cerrado-profundo: #0B3D2E;
+  --mata-alta: #1A6B4A;
+  --buriti-vivo: #C8E063;
+  --areia-jalapao: #F5F0E8;
+  --ouro-tocantins: #E8A020;
+
+  /* Cores de sistema */
+  --perigo-bg: #FDECEA;
+  --perigo-text: #A32D2D;
+  --ghost-bg: #EAF3DE;
+  --ghost-text: #3B6D11;
+
+  /* Base */
+  --background: #F5F0E8;
+  --foreground: #1A1A1A;
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px rgba(26, 107, 74, 0.25);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--areia-jalapao);
+    color: var(--foreground);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', sans-serif;
+    color: var(--cerrado-profundo);
+  }
+
+  /* Focus ring acessível — flat design */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  /* Áreas de toque mínimas para acessibilidade */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@layer components {
+  /* Botão Primário — Cerrado */
+  .btn-primary {
+    @apply bg-cerrado text-buriti font-display font-semibold 
+           px-6 py-3 rounded-sm 
+           transition-colors duration-200
+           hover:bg-cerrado-light
+           focus-visible:shadow-focus-ring
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Botão Secundário */
+  .btn-secondary {
+    @apply bg-white text-cerrado font-display font-semibold 
+           px-6 py-3 rounded-sm border-2 border-cerrado
+           transition-colors duration-200
+           hover:bg-areia
+           focus-visible:shadow-focus-ring
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Botão Ghost/Soft */
+  .btn-ghost {
+    @apply font-display font-semibold 
+           px-6 py-3 rounded-sm
+           transition-colors duration-200
+           focus-visible:shadow-focus-ring
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--ghost-bg);
+    color: var(--ghost-text);
+  }
+
+  /* Botão Perigo */
+  .btn-danger {
+    @apply font-display font-semibold 
+           px-6 py-3 rounded-sm
+           transition-colors duration-200
+           focus-visible:shadow-focus-ring
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--perigo-bg);
+    color: var(--perigo-text);
+  }
+
+  /* Badge de Status */
+  .badge {
+    @apply font-body font-semibold text-caption 
+           px-3 py-1 rounded-sm 
+           inline-flex items-center gap-1;
+  }
+
+  .badge-aprovado {
+    @apply badge bg-mata text-white;
+  }
+
+  .badge-em-analise {
+    @apply badge bg-ouro text-white;
+  }
+
+  .badge-pendencia {
+    @apply badge border-2 border-ouro text-ouro bg-transparent;
+  }
+
+  .badge-recebido {
+    @apply badge bg-gray-200 text-gray-700;
+  }
+
+  .badge-reprovado {
+    @apply badge;
+    background-color: var(--perigo-bg);
+    color: var(--perigo-text);
+  }
+
+  /* Card base */
+  .card {
+    @apply bg-white rounded-md p-6 
+           border border-areia-dark
+           transition-all duration-200
+           hover:border-mata;
+  }
+
+  /* Input de formulário */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-sm 
+           font-body text-body
+           border-2 border-gray-300
+           bg-white text-foreground
+           transition-colors duration-200
+           focus:border-mata focus:shadow-focus-ring focus:outline-none
+           placeholder:text-gray-400;
+  }
+
+  .input-field-error {
+    @apply input-field border-perigo;
+  }
+
+  .input-field-success {
+    @apply input-field border-mata;
   }
 }
